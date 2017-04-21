@@ -1,0 +1,72 @@
+% chap1.tex {Introductory Chapter}
+
+\chapter{Introduction}
+
+\section{Brief Overview of Deep Neural Networks}
+Deep convolutional neural networks have seen an enormous amount of success on a wide array of application, from
+scene interpretation to self-driving vehicles and art generation[CITE]. Natural language processing tasks are no exception to the
+range of problems deep learning can solve, from sentiment analysis to language modeling. In this work, we focus our efforts to studying
+convolutional and recurrent neural networks for text classification. Especifically, we analyse how well modern neural networks models performed
+using scientific abstract text data from multiple disciplines such as astro-physics and computer science.
+
+\section{Training a Neural Network}
+
+A neural network is a function $f(\bm{x};\bm{\theta})$ that maps its input $\bm{x}$ to some response variable $y$. When we \textit{train} a
+neural network, we \textit{learn} the model parameters, or weights, $\bm{\theta}$ that minimize some cost function $J(\bm{\theta})$.
+For a regression task, where the model's output is a continuous variable, a common cost function is the \textbf{Mean Square Error}:
+\[J(\theta) = \frac{1}{m}\sum_{i=1}^{m}(y_{i} - f(\bm{x}_{i};\bm{\theta}))^{2}\]
+
+For categorical or discrete output variables found in e.g. classification tasks, we use the \textbf{Categorical Cross-Entropy}:
+
+\[J(\bm{\theta}) = -\mathbb{E}_{\bm{x},y \sim \hat p_{data}} \log \textit{p}(y|\bm{x};\bm{\theta})\]
+
+Given a \textit{training} set of observations $\bm{x}_i$ and their true labels $y_i$, we compute weights that minimize the cost, or error, via
+maximum likelihood (ML) estimation:
+
+\[\bm{\theta}_{ML} = \argmax_{\bm{\theta}} \sum_{i}^{m} \log P(y_{i}|\bm{x}_{i};\bm{\theta})\],
+
+which one can see is the equivalent of computing the weights that \textbf{\textit{minimize}} the cross-entropy cost function.
+
+
+%\section{Minimizing Non-Convex Functions: Gradiant-Based Learning}
+%Convex functions are easy to optimize. Their global minimum is guaranteed and any local minimum is a global minimum. This means that when a
+%procedure optimizes a convex function, its solution is truly optimal[CITE]. Said procedure is also guaranteed to converge from any initial point in parameter space[CITE].
+%Due to the non-linearities associated with a neural network, the loss function to be minimized becomes non-convex.
+%[Elaborate (Weight symmetry, model identifiability, etc)]
+
+%Because of the non-convexitivity of neural network optimization, we usually rely on gradient-based methods. This involves iteratively \textit{moving},
+%or updating, the values of our weights in the direction opposite of the cost function's gradient. These updates should be small, scaled by a
+%\textit{learning rate}, and can make learning a lengthy process. Nonetheless, this method is effective and allows for learning of a good
+%set of weights, although in practive it is rarely the optimal[CITE].
+
+\section{Bias-Variance Tradeoff}
+When learning a neural network's weights, we use a \textit{training set} so that we can later generalize
+previously unseen data with high accuracy (or some other determined metric). That means that during training, we
+obtain $\bm{\theta}_{ML}$ by minimizing $J_{train}(\bm{\theta})$, but we care about having low $J_{test}(\bm{\theta})$ i.e. low cost
+on test data points.
+
+\textbf{Overfitting} occurs when a network is able to predict its training set extremely well i.e. very close to zero error, but fails to predict
+unseen data points. This is because the network's weights have been extremely fine-tuned to \textit{fit} its training data, but do not fit or represent
+data points outside of its training sample.
+An overfitted model is said to have large \textbf{variance} and small \textbf{bias}. Conversely, underfitting occurs when the model fails to predict
+the training set because it generalizes too harshly. This model is said to have large bias and small variance.
+
+Because of the commonly large amount of weights in deep convolutional networks, it is easy to overfit even a moderate size training set[CITE].
+Many techniques exist to avoid overfitting in a neural network
+[EXPAND]
+
+In this work, we study the effects of multiple regularization techniques used to avoid overfitting in a neural network[REFER TO CHAPTER].
+
+
+-Describe and cite conv nets for text classification
+-Describe the conv net pipeline
+-Add figure of pipeline
+-Comment that LSTM have made huge progress
+-Describe difficulty with smaller datasets
+Convolutional neural networks obtain state of the art results on image and text processing tasks.
+
+
+\section{Data Augmentation: Increasing Training Sample Size}
+-Describe usual augmentation schemes for vision tasks
+-describe why they work, small changes, same class
+-propose augmentation scheme and refer to corresponding chapter

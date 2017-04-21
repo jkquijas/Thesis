@@ -1,0 +1,89 @@
+% chap2.tex (Definitions)
+
+\chapter{Text Classification with Deep Neural Networks}\label{TXT-CLASS}
+
+\section{Word Embeddings}
+A very common and simple vector respresentation for words is the one-hot representation. The length
+of a one-hot vector is the size of the data vocabulary i.e. how many distinct words are found in our data set. For any
+word, its one-hot vector is zeros everywhere except for a 1 at the word's index. This representation, although simple,
+fails to capture any meaning other than an identifier.
+Neural language models i.e. a language model learned using a network, learn to represent words as continuous, dense vectors.
+These dense, continouos vector representations are commonly called word embeddings. Due to the of the underlying algorithm
+used to learn these word embeddings, similar words tend to lie closer to each other on embedding space.
+Because of this, word embeddings are said to capture semantic relations, and thus encode more information than just a word identifier.
+
+[SHOW EMBEDDING PROJECTION]
+
+
+\section{Convolutional Neural Networks}
+Convolutional neural networks are known for their abilities to learn high-level features from raw data. As input signals advance
+forward through the network, they produce latent signals as linear conbinations with learned parameters, have non-linearities applied
+to them, and have a pooling or selection mechanism based on simple functions such as the average or maximum operations.
+
+When dealing with image data, images are convolved with multiple filters, each convolution applied to overlapping subimages called as receptive fields.
+This localized convolution process leads to discovery of low level features of images in the training set such as edges. As data
+flows forward through the model, higher level features are discovered e.g. wheels or headlights in a vehicle image dataset.
+
+These networks are comprised of \textit{feature maps}. A feature map is a \textbf{convolution} layer paired with a
+\textbf{pooling} layer afterwards. The convolution stage creates \textit{activations}, whereas the pooling stage
+reduces dimensionality and creates translation invariance[CITE].
+
+[INCLUDE IMAGE]
+
+We can take advantage of word embeddings and apply convolutions to text in a fashion akin to convolutions with
+image data. In a similar manner, we apply convolutions to sub-regions of the input text i.e. bi-grams, tri-grams, etc.
+This
+
+
+[DEVELOP]
+
+\section{Input Representation: Integer Sequences to Word Embeddings}
+Given a set of texts $\bm{w_1},...,\bm{w_m}$, we build a vocabulary $\mathbb{V}$ and a bag-of-words model from $\mathbb{V}$ to create a mapping $BoW:\mathbb{V} \mapsto \{1,...,|\mathbb{V}|\}$.
+We represent a training text $\bm{w_i}$ as a sequence of integers, each integer being simply a word index
+in $\mathbb{V}$. Of course, the training texts will be of variable length. In order to enforce uniform input size for our neural networks, we apply \textbf{zero-padding}.
+For any arbitrary training instance $BoW(\bm{w})=$ $\bm{x} = x_1,...,x_k$, we enforce that $k = n$, for the specified input size
+$n$. Thus, if $k \textless n$, we transform it into $\bm{x}_{pad} = x_1,...,x_k, 0_{k+1}, ..., 0_{n}$. Conversely, if
+$k \textgreater n$, we simply truncate $\bm{x}$ to be of size $n$.
+
+Having converted a text into a sequence of word indexes i.e. integers, we then convert this sequence into an embedding matrix.
+In order to convert a word into a dense, real-valued vector, we use a token-to-embedding dictionary to map a token to its corresponding embedding form.
+
+Thus, for an input text $\bm{w}$, we transform it into a sequence of integers $\bm{x}$, and from there into $\mathbf{E} \in \mathbb{R}^{n \times d}$, where $d$ is
+the embedding size.
+
+\begin{algorithm}[H]
+\caption{Extract a keyword noun phrase from input sentence}
+\begin{algorithmic}[1]
+\Procedure{CSO}{$\{\{np^{1}_{1}, ...,np^{1}_{|np^{1}|}\}, ..., \{np^{n}_{1}, ...,np^{n}_{|np^{n}|}\}\}$}
+\For {$k$ = 1 to $n$}
+\State$ \bm{C^k} = \begin{bmatrix}
+         np^{k}_{1} \\
+         \vdots \\
+         np^{k}_{|np_k|} \\
+        \end{bmatrix} \times  \begin{bmatrix}
+         np^{k}_{1} \\
+         \vdots \\
+         np^{k}_{|np_k|} \\
+        \end{bmatrix}^{T}$
+
+\State$c_{k} = \frac{1}{|np_i|^2} \sum^{|np_i|}_{i=1} \sum^{|np_i|}_{j=1} \bm{C^{k}_{(i,j)}}$
+\EndFor
+
+\Return $\argmin\limits_{k} c$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+The procedure \textit{CSO} receives as input a set of noun phrases
+$ \mathbf{np^i} = \{np^i_1, ..., np^i_{ | \mathbf{np^i}|} \}$ corresponding to the \textit{i}th sentence. Each noun phrase $np^i_1$
+is comprised of one or more word embedding vectors, corresponding to the noun phrase's tokens mapped to their vector representations.
+For each noun phrase $np^i_1$, we compute the average cosine similarity between all the noun phrase's tokens. The algorithm returns the noun phrase which
+minimizes its average cosine similarity metric. The reasoning behind this noun phrase selection algorithm is as follows. A noun phrase with a very informative
+token i.e. word embedding will contain a token which will stand out from the rest of the tokens in the noun phrase. We assume that this can be measured
+by low cosine similarity between an informative token and all its other noun phrase tokens. We therefore compute, for all noun phrases in a sentence,
+the mean \textit{within-noun-phrase} average cosine similarity, as described in algorithm 1.
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "thesis"
+%%% End:

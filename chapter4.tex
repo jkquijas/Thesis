@@ -1,0 +1,53 @@
+% chap4.tex (Definitions and Theorem)
+
+\chapter{Model, Dataset, and Final Pipeline Description}
+
+In this chapter we describe our model architecture. We start by describing our choice of layers, followed by
+our network's final architecture.
+We conclude the chapter by
+describing our dataset.
+
+\section{Layer Descriptions}
+\subsection{Embedding Layer}
+This layer maps an word index, or integer, into its corresponding embedding. This is a layer in the
+neural network because the embeddings can be further fine-tuned during training. Because of the large number of
+parameters in this layer (number of words allowed times embedding size), we add a $L_2$ regularization.
+
+\subsection{Feature Maps: Convolution + Pooling}
+
+We refer to a pair of convolutional layer followed by a pooling layer as a feature map[CITE].
+
+\subsection{Gated Recurrent Unit Layer}
+
+\section{Model Description}
+The network's general architecture is as follows:
+\begin{itemize}
+  \item Input layer: word index vector
+  \item Embedding layer: maps word index vector to embedding matrix
+  \item Dropout layer
+  \item Feature Map 1:
+      \begin{itemize}
+        \item Convolution layer: number of kernels:32, activation: rectified linear
+        \item MaxPooling layer
+      \end{itemize}
+\item Dropout layer
+\item Feature Map 2:
+    \begin{itemize}
+      \item Convolution layer: number of kernels:32, activation: rectified linear
+      \item MaxPooling layer
+    \end{itemize}
+\item Dropout layer
+\item Gated Recurrent Unit layer
+\item Dropout layer
+\item Dense layer: output size: number of classes, activation: softmax
+\end{itemize}
+[IMAGE OF ARCHITECTURE]
+
+\section{Dataset Description}
+[DESCRIBE AND CITE EMBEDDINGS]
+
+We gathered scientific paper abstracts from the online repository Arxiv.org.
+We scraped papers for 5 departments: computer science, mathematics, astrophysics, physics, quantitative biology, and quantititative finance.
+
+\section{Final Pipeline}
+[INCLUDE PIPELINE DIAGRAM]

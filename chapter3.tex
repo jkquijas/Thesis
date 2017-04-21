@@ -1,0 +1,41 @@
+% chap3.tex (Definitions and Theorem)
+
+\chapter{Improving Model Performance via Regularization and Data Augmentation}
+
+In this chapter we will introduce the regularization and data augmentation methods
+we use for our tests.
+
+
+\section{Dropout}
+Dropout is one of the most popular regularization mechanism used in deep networks today.
+Simply put, dropout \textit{deactivates} a unit with probability $p_{drop}$. This forces the network to not rely on certain
+activations, since any unit will only be \textit{active} with probability $1-p_{drop}$[CITE].
+
+[IMAGE]
+
+\section{Keyword Extraction: Cosine Similarity Optimization (CSO)}
+As described in [CITE SECTION], in order to convert a word into a word embedding, we use a token-to-embedding dictionary to map a token to its corresponding embedding form.
+This dictionary is typically obtained after learning a language model using a neural network. One property of this word embedding space is that
+words can now be represented as points in embedding space. Another property and perhaps the most important is that semantic relationships are captured
+in this embedding space and can be measured between any two words using the cosine similarity metric. This is an attractive property that
+allows for term comparison by semantic relationships. These relationships can range from complete similarity i.e. the same term, to term orthogonality
+i.e. unrelated words, and even capture the direction of the relation e.g. negative values of cosine similarity.
+
+The cosine similarity between two vectors can be computed as follows:
+
+\[
+  \frac{\mathbf{x} \cdot \mathbf{y}}{\lVert \mathbf{x} \rVert \lVert \mathbf{y} \rVert}
+\]
+
+If we normalize all embeddings to have unit norm, then the cosine similarity between two words is simply a dot product computation.
+
+
+
+\section{Dataset Augmentation: Padding with Extracted Keywords}
+As described in [CSO SECTION], can use a cosine similarity-based metric to extract keywords from text.
+Consider a text that yields keyword indexes $WordToIndex(CSO(text)) = {w_1,...,w_j}$ and input $\bm{x}_{pad} = x_1,...,x_k, 0_{k+1}, ..., 0_{n}$, we concatenate the non-zero entries $x_1,...,x_k$
+with the indexes of the keywords extracted from the text corresponding to $\bm{x}_{pad}$.
+
+
+\section{Dataset Augmentation: Padding with Similar Keywords}
+[LSH]
