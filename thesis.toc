@@ -1,7 +1,7 @@
 \hfill {\bf Page}
 \contentsline {chapter}{Acknowledgements}{v}
 \contentsline {chapter}{Abstract}{vi}
-\contentsline {chapter}{Table of Contents}{viii}
+\contentsline {chapter}{Table of Contents}{vii}
 \noindent {\bf Chapter}
 \contentsline {chapter}{\numberline {1}Introduction}{1}
 \contentsline {section}{\numberline {1.1}Brief Overview of Deep Neural Networks}{1}
@@ -12,30 +12,29 @@
 \contentsline {section}{\numberline {2.1}Word Embeddings}{4}
 \contentsline {section}{\numberline {2.2}Convolutional Neural Networks}{4}
 \contentsline {section}{\numberline {2.3}Input Representation: Integer Sequences to Word Embeddings}{5}
-\contentsline {chapter}{\numberline {3}Improving Model Performance via Regularization and Data Augmentation}{7}
-\contentsline {section}{\numberline {3.1}Dropout}{7}
-\contentsline {section}{\numberline {3.2}Keyword Extraction: Cosine Similarity Optimization (CSO)}{7}
-\contentsline {section}{\numberline {3.3}Dataset Augmentation: Padding with Extracted Keywords}{8}
-\contentsline {section}{\numberline {3.4}Dataset Augmentation: Padding with Similar Keywords}{8}
-\contentsline {chapter}{\numberline {4}Model, Dataset, and Final Pipeline Description}{9}
-\contentsline {section}{\numberline {4.1}Layer Descriptions}{9}
-\contentsline {subsection}{\numberline {4.1.1}Embedding Layer}{9}
-\contentsline {subsection}{\numberline {4.1.2}Feature Maps: Convolution + Pooling}{9}
-\contentsline {subsection}{\numberline {4.1.3}Gated Recurrent Unit Layer}{9}
-\contentsline {section}{\numberline {4.2}Model Description}{9}
-\contentsline {section}{\numberline {4.3}Dataset Description}{10}
-\contentsline {section}{\numberline {4.4}Final Pipeline}{11}
-\contentsline {chapter}{\numberline {5}Solving Narrow-Interval Linear Systems Is NP-Hard: New Result}{12}
-\contentsline {section}{\numberline {5.1}Definitions}{12}
-\contentsline {section}{\numberline {5.2}Theorem}{13}
-\contentsline {section}{\numberline {5.3}Proof}{14}
-\contentsline {subsection}{\numberline {5.3.1}Part I: Reduction of Interval Linear System to Narrow-Interval Linear System}{14}
-\contentsline {subsection}{\numberline {5.3.2}Part II: The Two Systems Are ``Equivalent''}{17}
-\contentsline {subsubsection}{Proof of Claim 1}{17}
-\contentsline {subsubsection}{Proof of Claim 2}{22}
-\contentsline {subsection}{\numberline {5.3.3}Conclusion}{25}
-\contentsline {chapter}{\numberline {6}Concluding Remarks}{26}
-\contentsline {section}{\numberline {6.1}Significance of the Result}{26}
-\contentsline {section}{\numberline {6.2}Future Work}{26}
-\contentsline {chapter}{References}{27}
-\contentsline {chapter}{Curriculum Vitae}{29}
+\contentsline {chapter}{\numberline {3}Model Performance with Regularization and Data Augmentation}{7}
+\contentsline {section}{\numberline {3.1}Dropout}{8}
+\contentsline {section}{\numberline {3.2}Dataset Augmentation}{8}
+\contentsline {subsection}{\numberline {3.2.1}Zero-Padding: Uniform Input Length}{8}
+\contentsline {subsection}{\numberline {3.2.2}Padding with Informative Values}{8}
+\contentsline {section}{\numberline {3.3}Keyword Extraction: Cosine Similarity Optimization (CSO)}{9}
+\contentsline {subsection}{\numberline {3.3.1}Extracting Keywords: Pipeline}{10}
+\contentsline {subsection}{\numberline {3.3.2}Extracting Keywords: Algorithm}{11}
+\contentsline {subsection}{\numberline {3.3.3}Proposed Padding Scheme}{11}
+\contentsline {section}{\numberline {3.4}Dataset Augmentation: Padding with Similar Keywords}{12}
+\contentsline {chapter}{\numberline {4}Model, Dataset, and Final Pipeline Description}{13}
+\contentsline {section}{\numberline {4.1}Layer Descriptions}{13}
+\contentsline {subsection}{\numberline {4.1.1}Embedding Layer}{13}
+\contentsline {subsection}{\numberline {4.1.2}Feature Maps: Convolution + Pooling}{13}
+\contentsline {subsection}{\numberline {4.1.3}Gated Recurrent Unit Layer}{13}
+\contentsline {section}{\numberline {4.2}Model Description}{13}
+\contentsline {section}{\numberline {4.3}Dataset Description}{14}
+\contentsline {section}{\numberline {4.4}Final Pipeline}{15}
+\contentsline {chapter}{\numberline {5}Experimental Results}{16}
+\contentsline {section}{\numberline {5.1}Dataset Descriptions}{16}
+\contentsline {section}{\numberline {5.2}Results}{16}
+\contentsline {chapter}{\numberline {6}Concluding Remarks}{17}
+\contentsline {section}{\numberline {6.1}Significance of the Result}{17}
+\contentsline {section}{\numberline {6.2}Future Work}{17}
+\contentsline {chapter}{References}{18}
+\contentsline {chapter}{Curriculum Vitae}{20}

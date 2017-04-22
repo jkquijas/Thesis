@@ -1,9 +1,24 @@
 % chap3.tex (Definitions and Theorem)
 
-\chapter{Improving Model Performance via Regularization and Data Augmentation}
+\chapter{Model Performance with Regularization and Data Augmentation}
 
-In this chapter we will introduce the regularization and data augmentation methods
-we use for our tests.
+Regularization is any approach used to reduce test error but not training error. One way
+to regularize a model is to introduce bias and reduce variance by imposing any constraint on
+its weights. By adding a penalty term to the cost function, we can shrink weights to avoid
+them from blowing up in magnitude and overfitting to the training set. L2 regularization
+adds the L2 norm of the weights to the cost function:
+
+\[J(\bm{\theta}) = -\mathbb{E}_{\bm{x},y \sim \hat p_{data}} \log \textit{p}(y|\bm{x};\bm{\theta}) + \lambda \lVert \bm{\theta} \rVert_{2}\]
+
+where $\lambda$ is the regularization control parameter. Higher values of $\lambda$ penalize more, where
+a value of 0 degenerates to no regularization.
+A more recent and highly effective way to regularize a neural network is via \textbf{dropout}.
+Dropout "deactivates" a neuron or hidden unit with probability $p_{drop}$. In practice, a unit’s
+output is set to 0 with probability $p_{drop}$.
+
+Another approach that has received much recent attention is to augment the data set.
+\textbf{Data augmentation} refers to applying transformations to the input data in a way that
+the label value does not change.
 
 
 \section{Dropout}
@@ -13,13 +28,64 @@ activations, since any unit will only be \textit{active} with probability $1-p_{
 
 [IMAGE]
 
+\section{Dataset Augmentation}
+Data augmentation is ubiquitous in computer vision tasks. Example transformations include
+small translations, rotations, and even color intensity jitters via Pricipal Component
+Analysis[CITE]. In our work, we use sequence data i.e. scientific publication abstract texts.
+
+\subsection{Zero-Padding: Uniform Input Length}
+Although more complex neural models are designed to cope with variable length input,
+in practice a more common and simple approach is to pad data to be of some specified
+length as described in chapter [CITE CHAPTER]. The input length is a hyperparameter
+that should be fine-tuned, but a reasonable approach is to pad enough to fully accomodate
+the length of most input sequences i.e. it’s preferrable to pad than truncate and lose
+information.
+
+\subsection{Padding with Informative Values}
+When we pad our input sequence with 0’s, we don’t add any additional information; we
+simply create a constant input length. If instead we add values that characterize or help
+describe the input sequence more thoroughly, we increase the amount of useful information
+available during neural network training.
+
+Consider a very simple input sequence, and assume its true label can be determined
+from a single word:
+
+\[\text{"This paper is about computer graphics"}\]
+
+where the label is "Graphics" i.e. a publication about computer graphics.
+In this simple case, the label is determined by the word "graphics". A single, \textbf{very
+informative} word is enough for the classifier to predict the label correctly. This very
+informative word however is only 1/6 of the entire text.
+
+Now consider a the padded version, where we enfore an input length of 10:
+
+\[\text{"This paper is about computer graphics PAD PAD PAD PAD"}\]
+
+In the padded version, the word graphics is now only 1/10 of the entire text. If we
+could find this very informative word from within the text and pad using it instead of some
+meaningless token e.g. 0's, we could increase the information of this word over the entire
+input sequence by making it comprise a larger amount of the input sequence. In other
+words, make important words be present more frequently.
+
+We propose to pad input sequences with \textbf{meaningful} values found already within the
+input text sequence instead of 0's only. In the following section, we will develop on how to
+extract these meaningful words via a cosine similarity-based metric and apply them to pad
+our data.
+
+
 \section{Keyword Extraction: Cosine Similarity Optimization (CSO)}
-As described in [CITE SECTION], in order to convert a word into a word embedding, we use a token-to-embedding dictionary to map a token to its corresponding embedding form.
-This dictionary is typically obtained after learning a language model using a neural network. One property of this word embedding space is that
-words can now be represented as points in embedding space. Another property and perhaps the most important is that semantic relationships are captured
-in this embedding space and can be measured between any two words using the cosine similarity metric. This is an attractive property that
-allows for term comparison by semantic relationships. These relationships can range from complete similarity i.e. the same term, to term orthogonality
-i.e. unrelated words, and even capture the direction of the relation e.g. negative values of cosine similarity.
+As described in [CITE SECTION], we use a token-to-embedding dictionary to map an
+input sequence of word index i.e. integers into an embedding matrix i.e. a sequence of
+embedding vectors.
+This vectorial represention of words can be obtained after learning a language model
+using a neural network[CITE]. One property of this word embedding space is that words
+can now be represented as dense, continuous vectors of dimensionality much smaller than
+vocabulary size. Another important property is that semantic relationships are captured
+in this embedding space and can be measured between any two words using the cosine
+similarity metric[CITE]. This is an attractive property that allows for term comparison
+by semantic relationships. These relationships can range from complete similarity i.e. the
+same term, to term orthogonality i.e. unrelated words, and even capture the direction of
+the relation e.g. negative values of cosine similarity.
 
 The cosine similarity between two vectors can be computed as follows:
 
@@ -27,15 +93,60 @@ The cosine similarity between two vectors can be computed as follows:
   \frac{\mathbf{x} \cdot \mathbf{y}}{\lVert \mathbf{x} \rVert \lVert \mathbf{y} \rVert}
 \]
 
-If we normalize all embeddings to have unit norm, then the cosine similarity between two words is simply a dot product computation.
+We can therefore quantify similarity between words in a sentece as a function of their
+cosine similarity with respect to each other. We refer to this measure as the \textit{within-sentence}
+cosine similarity. Similarly, we can measure this similarity for words within a noun phrase
+in a sentence. We call this the \textit{within-noun-phrase} cosine similarity.
 
+\subsection{Extracting Keywords: Pipeline}
+Given input text sequence: Given a document, our keyword extraction algorithm works as
+follows:
+\begin{itemize}
+  \item{Remove non-alphanumeric characters and convert to lowercase}
+  \item{Tokenize each sentence into a list of words}
+  \item{Perform Part of Speech tagging on each list of words i.e. sentence}
+  \item{Chunk each sentence into a set of noun phrases}
+  \item{Map each word in each noun phrase to its corresponding word embedding vector}
+  \item{Perform Cosine Similarity Optimization (CSO) to extract a keyword noun phrase for each sentence}
+\end{itemize}
 
+\subsection{Extracting Keywords: Algorithm}
 
-\section{Dataset Augmentation: Padding with Extracted Keywords}
-As described in [CSO SECTION], can use a cosine similarity-based metric to extract keywords from text.
-Consider a text that yields keyword indexes $WordToIndex(CSO(text)) = {w_1,...,w_j}$ and input $\bm{x}_{pad} = x_1,...,x_k, 0_{k+1}, ..., 0_{n}$, we concatenate the non-zero entries $x_1,...,x_k$
-with the indexes of the keywords extracted from the text corresponding to $\bm{x}_{pad}$.
+The procedure CSO receives as input a set of noun phrases $np^i = \{np^{i}_{1}, ..., np^i_{|\bm{np}^i|}\}$ corresponding
+to a sentence, where $np^{i}_{k}$ is the $k$th word embedding in the sentence’s $i$th noun phrase.
+
+Given an input chunked sentence, CSO computes the average cosine similarity between
+all words in a noun phrase, for all noun phrases in the sentence. The algorithm returns the
+noun phrase which \textbf{optimizes} its average cosine similarity metric.
+
+The reasoning behind the cosine similarity minimization is as follows: An informative
+noun phrase within a sentence will contain a word which will stand out from the rest of the
+words in the noun phrase. We quantify this notion of \textit{standing out from the rest} using the
+mean within-noun-phrase cosine similarity. We therefore compute, for all noun phrases in a
+sentence, the mean \textit{within-noun-phrase} average cosine similarity, as described in [REFER TO ALGORITHM].
+We select the noun phrase that minimizes this measure.
+
+In practice, we find both maximization and minimization of the mean \textit{within-nounphrase}
+average cosine similarity leads to interesting results i.e. reasonable words to be
+considered keywords, so we include them both for padding.
+[INCLUDE SNAPSHOT OF CSO OUTPUT]
+
+\subsection{Proposed Padding Scheme}
+As described in [CSO SECTION], can use a cosine similarity-based metric to extract
+keywords from text. Consider an input text sequence $S$ that yields keyword indexes
+$BoW(CSO(S)) = x_{key^1}, ..., x_{key^j}$ and input $\bm{x}_{pad} = x_1, ..., x_k, 0_{k+1}, ..., 0_n$, we concatenate
+the non-zero entries $x_1, ..., x_k$ with the extracted keyword indexes:
+
+\[\bm{x}_{cso} = x_1, ..., x_k, x_{key^1}, ..., x_{key^j}, 0_{k+j+1}, ..., 0_n\]
 
 
 \section{Dataset Augmentation: Padding with Similar Keywords}
-[LSH]
+Our CSO padding scheme can only pad with words already present in the input
+text sequence. It could prove beneficial to further pad the input with words that are \textit{similar}
+to its keywords i.e. words extracted via CSO. We therefore further pad the input sequence
+with the nearest neighbor of each keyword. In this context, we consider the nearest neighbor
+of a word embeddings $\bm{w}$ as:
+
+\[\argmin_{\bm{w}_i} 1 - \frac{\bm{w} \cdot \bm{w_i}}{\lVert \bm{w} \rVert \lVert \bm{w_i} \rVert}\]
+
+We use a Locality Sensitive Hashing forest for our approximate nearest neighbor search[CITE].
