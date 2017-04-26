@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2017.4.19)  21 APR 2017 17:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2017.4.19)  25 APR 2017 21:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -356,46 +356,47 @@ Missing character: There is no ™ in font cmr12!
 
 
 
-]
+] [8]
+Missing character: There is no â in font cmr12!
+Missing character: There is no € in font cmr12!
+Missing character: There is no ™ in font cmr12!
+ [9]
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
+ [10] [11]
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
- [8] [9]
-Missing character: There is no â in font cmr12!
-Missing character: There is no € in font cmr12!
-Missing character: There is no ™ in font cmr12!
- [10]
-Overfull \hbox (7.4002pt too wide) in paragraph at lines 143--143
+ [12]
+Overfull \hbox (7.4002pt too wide) in paragraph at lines 184--184
 []\OT1/cmr/bx/n/17.28 Dataset Aug-men-ta-tion: Padding with Sim-i-lar Key-
  []
 
-[11])
-Overfull \hbox (28.40486pt too wide) in paragraph at lines 152--103
+)
+Overfull \hbox (28.40486pt too wide) in paragraph at lines 193--103
 []\OT1/cmr/m/n/12 We use a Lo-cal-ity Sen-si-tive Hash-ing for-est for our ap-p
 rox-i-mate near-est neigh-bor search[CITE]. 
  []
 
-[12]
+[13]
 \openout2 = `chapter4.aux'.
 
  (./chapter4.tex
 Chapter 4.
-[13
+[14
 
 
 
-]) [14] [15]
+]) [15] [16]
 \openout2 = `chapter5.aux'.
 
  (./chapter5.tex
 Chapter 5.
-) [16
+) [17
 
 
 
@@ -404,21 +405,21 @@ Chapter 5.
 
  (./chapter6.tex
 Chapter 6.
-) [17
+) [18
 
 
 
 ]
 \openout2 = `ref.aux'.
 
- (./ref.tex [18
+ (./ref.tex [19
 
 
 
-]) [19]
+]) [20]
 \openout2 = `vitae.aux'.
 
- (./vitae.tex) [20
+ (./vitae.tex) [21
 
 
 
@@ -427,13 +428,13 @@ Chapter 6.
 ) (./chapter4.aux) (./chapter5.aux) (./chapter6.aux) (./ref.aux) (./vitae.aux))
  ) 
 Here is how much of TeX's memory you used:
- 3030 strings out of 493013
- 40620 string characters out of 6136993
+ 3037 strings out of 493013
+ 40725 string characters out of 6136993
  111297 words of memory out of 5000000
- 6434 multiletter control sequences out of 15000+600000
+ 6441 multiletter control sequences out of 15000+600000
  14579 words of font info for 52 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,10n,25p,252b,312s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 39i,10n,25p,252b,319s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/tex
 live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx6.pfb><c:/texlive/2016/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><c:/texlive/2016/texmf-dist
@@ -451,10 +452,10 @@ ic/amsfonts/cm/cmr8.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmsy10.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8
 .pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/
 texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on thesis.pdf (28 pages, 227864 bytes).
+Output written on thesis.pdf (29 pages, 237523 bytes).
 PDF statistics:
- 171 PDF objects out of 1000 (max. 8388607)
- 120 compressed objects within 2 object streams
+ 174 PDF objects out of 1000 (max. 8388607)
+ 122 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

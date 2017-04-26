@@ -27,8 +27,49 @@ Simply put, dropout \textit{deactivates} a unit with probability $p_{drop}$. Thi
 activations, since any unit will only be \textit{active} with probability $1-p_{drop}$[CITE].
 
 [IMAGE]
+\section{Dataset Augmentation: Shuffling and Noise Injection}
+In order to introduce more variance into our dataset, we propose to \textbf{shuffle} and \textbf{add noise} to the input sequences.
+We shuffle by randomly permuting non-overlapping neighborhoods in the input text sequence i.e.\textbf{context windows}.
+We further propose to add small amounts of
+noise to the input sequence by randomly replacing words with words taken from the training vocabulary.
 
-\section{Dataset Augmentation}
+\subsection{Shuffling}
+We propose to augment our dataset by making small \textit{context} changes that don't change the global structure
+of the input sequences. Concretely, we move a non-overlapping \textit{context window} along the input sequence, randomly
+shuffling the words indexes inside it. For example a context window of size 2 i.e. \textit{bi-gram}, an input sequence
+\[\bm{x} = x_1, x_2, x_3, x_4, x_5, x_6\]
+
+ could be shuffled to:
+\[\bm{x}\prime = x_2, x_1, x_3, x_4, \underbrace{x_6, x_5}_\text{bi-gram}\]
+In the first pass, the first two indexes get shuffled. The second pass led to no changes in ordering. The third and
+final pass shuffles the last two indexes.
+
+The motivation for this dataset augmentation technique is that small changes in the ordering of the words will
+simulate a larger training sample; a training input sequence has a low chance of being repeated as its
+length increases. Smaller context windows preserve the most structure. This method will preserve
+most of the original context structure in the sequence, as long as the shuffling is not to harsh e.g.
+a complete random permutation of the sequence.
+
+\subsection{Noise Injection}
+We propose to augment our dataset by injecting small amounts of noise to each training sample. Again, we aim to simulate
+a larger training sample while avoiding harsh changes to the original inputs.
+\begin{algorithm}[H]
+\caption{Add noise to input sequence}
+\begin{algorithmic}[1]
+\Procedure{NoiseInjection}{$\bm{x}=[x_1,...,x_n], \mathbb{V}, p_{noise}$}
+\For {$k$ = 1 to $n$}
+\If{$p_k \sim \textit{U}(0,1) \leq p_{noise}$}
+\State$x_k \gets x^{\prime}_k \in \mathbb{V}$
+\EndIf
+\EndFor
+
+\Return $\bm{x}$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+
+\section{Dataset Augmentation: Padding}
 Data augmentation is ubiquitous in computer vision tasks. Example transformations include
 small translations, rotations, and even color intensity jitters via Pricipal Component
 Analysis[CITE]. In our work, we use sequence data i.e. scientific publication abstract texts.
