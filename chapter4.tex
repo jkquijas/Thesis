@@ -8,10 +8,15 @@ We conclude the chapter by
 describing our dataset.
 
 \section{Layer Descriptions}
+
 \subsection{Embedding Layer}
 This layer maps an word index, or integer, into its corresponding embedding. This is a layer in the
 neural network because the embeddings can be further fine-tuned during training. Because of the large number of
 parameters in this layer (number of words allowed times embedding size), we add a $L_2$ regularization.
+Given input text $s$, this layer receives as input a sequence of word indexes $BoW(\bm{s})=$ $\bm{x} = x_1,...,x_k$
+and maps each word into an embedding.
+Thus, for an input text $\bm{s}$, we transform it into a sequence of integers $\bm{x}$, and from there into $\mathbf{E} \in \mathbb{R}^{n \times d}$, where $d$ is
+the embedding size.
 
 \subsection{Feature Maps: Convolution + Pooling}
 
@@ -42,6 +47,19 @@ The network's general architecture is as follows:
 \item Dense layer: output size: number of classes, activation: softmax
 \end{itemize}
 [IMAGE OF ARCHITECTURE]
+
+\section{Model Hyper-Parameters}
+\begin{itemize}
+  \item number of training words
+  \item number of kernels
+  \item kernel size
+  \item pool size
+  \item learning rate
+  \item regularization rate
+  \item dropout rate
+  \item maximum sequence length
+
+\end{itemize}
 
 \section{Dataset Description}
 [DESCRIBE AND CITE EMBEDDINGS]

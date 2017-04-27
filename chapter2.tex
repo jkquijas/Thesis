@@ -30,58 +30,17 @@ reduces dimensionality and creates translation invariance[CITE].
 
 [INCLUDE IMAGE]
 
-We can take advantage of word embeddings and apply convolutions to text in a fashion akin to convolutions with
-image data. In a similar manner, we apply convolutions to sub-regions of the input text i.e. bi-grams, tri-grams, etc.
-This
-
+We can take advantage of word embeddings to apply convolutions to text in a fashion similar to convolutions with
+image data. We apply the convolutions to overlapping sub-regions of the input text i.e. bi-grams, tri-grams, etc.
+After convolving these individual and overlapping subregions, we apply a non-linear function and reduce data dimensionality
+by pooling.
 
 [DEVELOP]
 
 \section{Input Representation: Integer Sequences to Word Embeddings}
-Given a set of texts $\bm{w_1},...,\bm{w_m}$, we build a vocabulary $\mathbb{V}$ and a bag-of-words model from $\mathbb{V}$ to create a mapping $BoW:\mathbb{V} \mapsto \{1,...,|\mathbb{V}|\}$.
-We represent a training text $\bm{w_i}$ as a sequence of integers, each integer being simply a word index
-in $\mathbb{V}$. Of course, the training texts will be of variable length. In order to enforce uniform input size for our neural networks, we apply \textbf{zero-padding}.
-For any arbitrary training instance $BoW(\bm{w})=$ $\bm{x} = x_1,...,x_k$, we enforce that $k = n$, for the specified input size
-$n$. Thus, if $k \textless n$, we transform it into $\bm{x}_{pad} = x_1,...,x_k, 0_{k+1}, ..., 0_{n}$. Conversely, if
-$k \textgreater n$, we simply truncate $\bm{x}$ to be of size $n$.
-
-Having converted a text into a sequence of word indexes i.e. integers, we then convert this sequence into an embedding matrix.
-In order to convert a word into a dense, real-valued vector, we use a token-to-embedding dictionary to map a token to its corresponding embedding form.
-
-Thus, for an input text $\bm{w}$, we transform it into a sequence of integers $\bm{x}$, and from there into $\mathbf{E} \in \mathbb{R}^{n \times d}$, where $d$ is
-the embedding size.
-
-\begin{algorithm}[H]
-\caption{Extract a keyword noun phrase from input sentence}
-\begin{algorithmic}[1]
-\Procedure{CSO}{$\{\{np^{1}_{1}, ...,np^{1}_{|np^{1}|}\}, ..., \{np^{n}_{1}, ...,np^{n}_{|np^{n}|}\}\}$}
-\For {$k$ = 1 to $n$}
-\State$ \bm{C^k} = \begin{bmatrix}
-         np^{k}_{1} \\
-         \vdots \\
-         np^{k}_{|np_k|} \\
-        \end{bmatrix} \times  \begin{bmatrix}
-         np^{k}_{1} \\
-         \vdots \\
-         np^{k}_{|np_k|} \\
-        \end{bmatrix}^{T}$
-
-\State$c_{k} = \frac{1}{|np_i|^2} \sum^{|np_i|}_{i=1} \sum^{|np_i|}_{j=1} \bm{C^{k}_{(i,j)}}$
-\EndFor
-
-\Return $\argmin\limits_{k} c$
-\EndProcedure
-\end{algorithmic}
-\end{algorithm}
-
-The procedure \textit{CSO} receives as input a set of noun phrases
-$ \mathbf{np^i} = \{np^i_1, ..., np^i_{ | \mathbf{np^i}|} \}$ corresponding to the \textit{i}th sentence. Each noun phrase $np^i_1$
-is comprised of one or more word embedding vectors, corresponding to the noun phrase's tokens mapped to their vector representations.
-For each noun phrase $np^i_1$, we compute the average cosine similarity between all the noun phrase's tokens. The algorithm returns the noun phrase which
-minimizes its average cosine similarity metric. The reasoning behind this noun phrase selection algorithm is as follows. A noun phrase with a very informative
-token i.e. word embedding will contain a token which will stand out from the rest of the tokens in the noun phrase. We assume that this can be measured
-by low cosine similarity between an informative token and all its other noun phrase tokens. We therefore compute, for all noun phrases in a sentence,
-the mean \textit{within-noun-phrase} average cosine similarity, as described in algorithm 1.
+Given a set of texts $\bm{s_1},...,\bm{s_m}$, we build a vocabulary $\mathbb{V}$ and a bag-of-words model from $\mathbb{V}$ to create a mapping $BoW:\mathbb{V} \mapsto \{1,...,|\mathbb{V}|\}$.
+We represent a training text $\bm{s_i}$ as a sequence of integers $BoW(\bm{s})=$ $\bm{x} = x_1,...,x_k$, each integer being simply a word index
+in $\mathbb{V}$.
 
 %%% Local Variables:
 %%% mode: latex

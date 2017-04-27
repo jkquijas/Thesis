@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2017.4.19)  26 APR 2017 19:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2017.4.19)  26 APR 2017 21:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -315,104 +315,112 @@ Chapter 1.
 
 
 
-] [2]) [3]
+]) [2]
 \openout2 = `chapter2.aux'.
 
  (./chapter2.tex
 Chapter 2.
-[4
+[3
 
 
 
-]
-
-LaTeX Warning: Command \textless invalid in math mode on input line 45.
-
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 45.
-(c:/texlive/2016/texmf-dist/tex/latex/base/omlcmr.fd
-File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 45.
-
-
-LaTeX Warning: Command \textless invalid in math mode on input line 45.
-
-
-LaTeX Warning: Command \textgreater invalid in math mode on input line 46.
-
-
-LaTeX Warning: Command \textgreater invalid in math mode on input line 46.
-
-[5]) [6]
+]) [4]
 \openout2 = `chapter3.aux'.
 
  (./chapter3.tex
 Chapter 3.
-[7
+[5
 
 
 
-] [8]
+] [6] [7]
+
+LaTeX Warning: Command \textless invalid in math mode on input line 84.
+
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 84.
+(c:/texlive/2016/texmf-dist/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 84.
+
+
+LaTeX Warning: Command \textless invalid in math mode on input line 84.
+
+
+LaTeX Warning: Command \textgreater invalid in math mode on input line 85.
+
+
+LaTeX Warning: Command \textgreater invalid in math mode on input line 85.
+
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
- [9]
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
- [10] [11] [12]
-Overfull \hbox (7.4002pt too wide) in paragraph at lines 197--197
+[8] [9] [10] [11]
+Overfull \hbox (7.4002pt too wide) in paragraph at lines 202--202
 []\OT1/cmr/bx/n/17.28 Dataset Aug-men-ta-tion: Padding with Sim-i-lar Key-
  []
 
-[13]
-Overfull \hbox (28.40486pt too wide) in paragraph at lines 206--208
+
+Overfull \hbox (28.40486pt too wide) in paragraph at lines 211--213
 []\OT1/cmr/m/n/12 We use a Lo-cal-ity Sen-si-tive Hash-ing for-est for our ap-p
 rox-i-mate near-est neigh-bor search[CITE].
  []
 
-) [14]
+) [12] [13]
 \openout2 = `chapter4.aux'.
 
  (./chapter4.tex
 Chapter 4.
-[15
+[14
 
 
 
-]) [16] [17]
+] [15]) [16]
 \openout2 = `chapter5.aux'.
 
  (./chapter5.tex
 Chapter 5.
-) [18
+[17
 
 
 
 ]
+Overfull \hbox (23.16063pt too wide) in paragraph at lines 61--74
+ [] 
+ []
+
+[18]
+Overfull \hbox (23.16063pt too wide) in paragraph at lines 120--133
+ [] 
+ []
+
+[19]) [20]
 \openout2 = `chapter6.aux'.
 
  (./chapter6.tex
 Chapter 6.
-) [19
+) [21
 
 
 
 ]
 \openout2 = `ref.aux'.
 
- (./ref.tex [20
+ (./ref.tex [22
 
 
 
-]) [21]
+]) [23]
 \openout2 = `vitae.aux'.
 
- (./vitae.tex) [22
+ (./vitae.tex) [24
 
 
 
@@ -421,35 +429,34 @@ Chapter 6.
 ) (./chapter4.aux) (./chapter5.aux) (./chapter6.aux) (./ref.aux) (./vitae.aux))
  ) 
 Here is how much of TeX's memory you used:
- 3042 strings out of 493013
- 40779 string characters out of 6136993
- 112297 words of memory out of 5000000
- 6444 multiletter control sequences out of 15000+600000
+ 3039 strings out of 493013
+ 40733 string characters out of 6136993
+ 113297 words of memory out of 5000000
+ 6441 multiletter control sequences out of 15000+600000
  15486 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,10n,25p,257b,319s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 39i,8n,25p,257b,319s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/tex
-live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx6.pfb><c:/texlive/2016/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><c:/texlive/2016/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><c:/texlive/2016/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2016/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmex10.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmmi12.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mmi6.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><
-c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb><c:/texli
-ve/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb><c:/texlive/2
-016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2016/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2016/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2016/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmr8.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmss8.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10
-.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/t
-exlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/texlive/20
-16/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on thesis.pdf (30 pages, 246212 bytes).
+live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><c:/texlive/2016/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><c:/texlive/2016/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2016/texmf-dist/font
+s/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2016/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmmi12.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmmi6.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mmi8.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb
+><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb><c:
+/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2
+016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2016/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2016/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2016/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmss8.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmsy10.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8
+.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/
+texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on thesis.pdf (32 pages, 237396 bytes).
 PDF statistics:
- 181 PDF objects out of 1000 (max. 8388607)
- 127 compressed objects within 2 object streams
+ 184 PDF objects out of 1000 (max. 8388607)
+ 129 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

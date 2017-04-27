@@ -4,6 +4,7 @@
 
 \section{Model Regularization}
 Regularization is any approach used to reduce test error but not training error.
+[ELABORATE]
 
 \subsection{Weight Regularization}
 One way to regularize a model to impose a constraint on its weights. By adding a penalty term to the cost function, we can shrink weights to avoid
@@ -77,7 +78,11 @@ a larger training sample while avoiding harsh changes to the original inputs.
 
 Although more complex neural models are designed to cope with variable length input,
 in practice a more common and simple approach is to pad data to be of some specified
-length as described in chapter [CITE CHAPTER]. The input length introduces another model hyper-parameter
+length as described in chapter [CITE CHAPTER].
+In order to enforce uniform input size for our neural networks,
+we apply \textbf{zero-padding}.For any arbitrary training instance $BoW(\bm{s})=$ $\bm{x} = x_1,...,x_k$, we enforce that $k = n$, for the specified input size
+$n$. Thus, if $k \textless n$, we transform it into $\bm{x}_{pad} = x_1,...,x_k, 0_{k+1}, ..., 0_{n}$. Conversely, if
+$k \textgreater n$, we simply truncate $\bm{x}$ to be of size $n$. The input length introduces another model hyper-parameter
 that should be fine-tuned, but a reasonable approach is to pad enough to fully accomodate
 the length of most input sequences i.e. it’s preferrable to pad than truncate and lose
 information.
@@ -210,3 +215,5 @@ After having computed the nearest neighbor of each keyword, we pad as follows:
 
 \section{Reducing Data Granularity: From Abstract to Sentences}
 Our last proposed dataset augmentation scheme is to consider the data as a set of sentences rather than abstracts.
+\subsection{Voting Schemes}
+Here we introduce our proposed voting schemes

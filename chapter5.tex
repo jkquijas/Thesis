@@ -16,3 +16,133 @@ Figures]
 
 \section{Results}
 In this section we show our experimental results. [Add tables and most relevant plots]
+
+%
+%%%%%%%%%%% ASTROPHYSICS
+%
+\section{AstroPhysics}
+[Distribution]
+\subsection{Sentence Split}
+\subsubsection{Mean Vote}
+\begin{center}\begin{tabular}{||c c c c c c c c c ||}
+ \hline
+ NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ &  & Acc\\ [0.5ex]
+ \hline\hline
+ 30000 & 512 & 50 & 0.395 & 3 & 3 & 1e-5 & 1e-4 & 0.730\\
+ \hline
+ 60000 & 512 & 40 & 0.051 & 4 & 4 & 1e-5 & 1e-6 & 0.7152\\
+ \hline
+ 20000 & 512 & 40 & 0.062 & 5 & 5 & 1e-4 & 1e-6 & 0.685\\
+ \hline
+ 20000 & 512 & 60 & 0.247 & 3 & 5 & 1e-3 & 1e-5 & 0.710\\
+ \hline
+ 10000 & 512 & 60 & 0.121 & 5 & 3 & 1e-3 & 1e-5 &  0.712\\
+ \hline
+ 70000 & 512 & 40 & 0.223 & 4 & 5 & 1e-5 & 1e-5 &  0.690\\
+ [1ex]\hline\end{tabular}\end{center}
+\subsection{Padding}
+\subsubsection{Wrap Padding}
+\begin{center}\begin{tabular}{||c c c c c c c c c c ||}
+ \hline
+ NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ &  Loss & Acc\\ [0.5ex]
+ \hline\hline
+ 80000 & 64 & 250 & 0.548 & 4 & 5 & 1e-4 & 1e-5 & 1.818 & 0.537\\
+ \hline
+ 2 & 7 & 78 & 5415 \\
+ [1ex]\hline\end{tabular}\end{center}
+
+\subsubsection{CSO Padding}
+\begin{center}\begin{tabular}{||c c c c c c c c c c ||}
+ \hline
+ NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ &  Loss & Acc\\ [0.5ex]
+ \hline\hline
+ 80000 & 64 & 250 & 0.548 & 4 & 5 & 1e-4 & 1e-5 & 1.818 & 0.537\\
+ \hline
+ 2 & 7 & 78 & 5415 \\
+ [1ex]\hline\end{tabular}\end{center}
+\subsubsection{LSH Padding}
+\begin{center}\begin{tabular}{||c c c c c c c c c c ||}
+ \hline
+ NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ &  Loss & Acc\\ [0.5ex]
+ \hline\hline
+ 80000 & 64 & 250 & 0.548 & 4 & 5 & 1e-4 & 1e-5 & 1.818 & 0.537\\
+ \hline
+ 2 & 7 & 78 & 5415 \\
+ [1ex]\hline\end{tabular}\end{center}
+
+
+\subsection{Noise Injection}
+\begin{center}
+ \begin{tabular}{||c c c c c c c c c c c||}
+ \hline
+ NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ & $p_{aug}$ & $p_{noise}$ & Acc\\ [0.5ex]
+ \hline\hline
+ 80000 & 64 & 250 & 0.548 & 4 & 5 & 1e-4 & 1e-5 & 0.653 & 0.195 & 0.537\\
+ \hline
+ 70000 & 64 & 300 & 0.423 & 5 & 4 & 1e-5 & 1e-3 & 0.107 & .004 & 0.665\\
+ \hline
+ 70000 & 32 & 200 & 0.512 & 3 & 4 & 1e-3 & 1e-5 & 0.179 & .373 &  0.764\\
+ \hline
+ 4 & 545 & 18744 & 7560 \\[1ex]
+ \hline
+\end{tabular}
+\end{center}
+
+
+
+
+%
+%%%%%%%%%%% MATH
+%
+\section{Math}
+[Distribution]
+[Distribution]
+\subsection{Sentence Split}
+\subsubsection{Mean Vote}
+
+\subsection{Padding}
+\subsubsection{Wrap Padding}
+\begin{center}\begin{tabular}{||c c c c c c c c c c ||}
+ \hline
+ NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ &  Loss & Acc\\ [0.5ex]
+ \hline\hline
+ 80000 & 64 & 250 & 0.548 & 4 & 5 & 1e-4 & 1e-5 & 1.818 & 0.537\\
+ \hline
+ 2 & 7 & 78 & 5415 \\
+ [1ex]\hline\end{tabular}\end{center}
+
+\subsubsection{CSO Padding}
+\begin{center}\begin{tabular}{||c c c c c c c c c c ||}
+ \hline
+ NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ &  Loss & Acc\\ [0.5ex]
+ \hline\hline
+ 80000 & 64 & 250 & 0.548 & 4 & 5 & 1e-4 & 1e-5 & 1.818 & 0.537\\
+ \hline
+ 2 & 7 & 78 & 5415 \\
+ [1ex]\hline\end{tabular}\end{center}
+\subsubsection{LSH Padding}
+\begin{center}\begin{tabular}{||c c c c c c c c c c ||}
+ \hline
+ NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ &  Loss & Acc\\ [0.5ex]
+ \hline\hline
+ 80000 & 64 & 250 & 0.548 & 4 & 5 & 1e-4 & 1e-5 & 1.818 & 0.537\\
+ \hline
+ 2 & 7 & 78 & 5415 \\
+ [1ex]\hline\end{tabular}\end{center}
+
+\subsection{Noise Injection}
+\begin{center}
+ \begin{tabular}{||c c c c c c c c c c c c||}
+ \hline
+ NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ & $p_{aug}$ & $p_{noise}$ & Loss & Acc\\ [0.5ex]
+ \hline\hline
+ 80000 & 64 & 250 & 0.548 & 4 & 5 & 1e-4 & 1e-5 & 0.653 & 0.195 & 1.818 & 0.537\\
+ \hline
+ 2 & 7 & 78 & 5415 \\
+ \hline
+ 3 & 545 & 778 & 7507 \\
+ \hline
+ 4 & 545 & 18744 & 7560 \\[1ex]
+ \hline
+\end{tabular}
+\end{center}
