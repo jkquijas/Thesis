@@ -12,32 +12,32 @@
 \contentsline {section}{\numberline {2.1}Word Embeddings}{4}
 \contentsline {section}{\numberline {2.2}Convolutional Neural Networks}{4}
 \contentsline {section}{\numberline {2.3}Input Representation: Integer Sequences to Word Embeddings}{5}
-\contentsline {chapter}{\numberline {3}Model Performance with Regularization and Data Augmentation}{7}
-\contentsline {section}{\numberline {3.1}Dropout}{8}
+\contentsline {chapter}{\numberline {3}Towards Improving Model Performance: Regularization and Data Augmentation}{7}
+\contentsline {section}{\numberline {3.1}Model Regularization}{7}
+\contentsline {subsection}{\numberline {3.1.1}Weight Regularization}{7}
+\contentsline {subsection}{\numberline {3.1.2}Dropout}{8}
 \contentsline {section}{\numberline {3.2}Dataset Augmentation: Shuffling and Noise Injection}{8}
 \contentsline {subsection}{\numberline {3.2.1}Shuffling}{8}
 \contentsline {subsection}{\numberline {3.2.2}Noise Injection}{9}
-\contentsline {section}{\numberline {3.3}Dataset Augmentation: Padding}{9}
-\contentsline {subsection}{\numberline {3.3.1}Zero-Padding: Uniform Input Length}{10}
-\contentsline {subsection}{\numberline {3.3.2}Padding with Informative Values}{10}
-\contentsline {section}{\numberline {3.4}Keyword Extraction: Cosine Similarity Optimization (CSO)}{11}
-\contentsline {subsection}{\numberline {3.4.1}Extracting Keywords: Pipeline}{12}
-\contentsline {subsection}{\numberline {3.4.2}Extracting Keywords: Algorithm}{12}
-\contentsline {subsection}{\numberline {3.4.3}Proposed Padding Scheme}{13}
-\contentsline {section}{\numberline {3.5}Dataset Augmentation: Padding with Similar Keywords}{13}
-\contentsline {chapter}{\numberline {4}Model, Dataset, and Final Pipeline Description}{14}
-\contentsline {section}{\numberline {4.1}Layer Descriptions}{14}
-\contentsline {subsection}{\numberline {4.1.1}Embedding Layer}{14}
-\contentsline {subsection}{\numberline {4.1.2}Feature Maps: Convolution + Pooling}{14}
-\contentsline {subsection}{\numberline {4.1.3}Gated Recurrent Unit Layer}{14}
-\contentsline {section}{\numberline {4.2}Model Description}{14}
-\contentsline {section}{\numberline {4.3}Dataset Description}{15}
-\contentsline {section}{\numberline {4.4}Final Pipeline}{16}
-\contentsline {chapter}{\numberline {5}Experimental Results}{17}
-\contentsline {section}{\numberline {5.1}Dataset Descriptions}{17}
-\contentsline {section}{\numberline {5.2}Results}{17}
-\contentsline {chapter}{\numberline {6}Concluding Remarks}{18}
-\contentsline {section}{\numberline {6.1}Significance of the Result}{18}
-\contentsline {section}{\numberline {6.2}Future Work}{18}
-\contentsline {chapter}{References}{19}
-\contentsline {chapter}{Curriculum Vitae}{21}
+\contentsline {section}{\numberline {3.3}Dataset Augmentation: Padding}{10}
+\contentsline {subsection}{\numberline {3.3.1}Wrap Padding}{11}
+\contentsline {subsection}{\numberline {3.3.2}Keyword Padding}{11}
+\contentsline {subsection}{\numberline {3.3.3}Proposed Padding Scheme}{13}
+\contentsline {section}{\numberline {3.4}Dataset Augmentation: Padding with Similar Keywords}{14}
+\contentsline {section}{\numberline {3.5}Reducing Data Granularity: From Abstract to Sentences}{14}
+\contentsline {chapter}{\numberline {4}Model, Dataset, and Final Pipeline Description}{15}
+\contentsline {section}{\numberline {4.1}Layer Descriptions}{15}
+\contentsline {subsection}{\numberline {4.1.1}Embedding Layer}{15}
+\contentsline {subsection}{\numberline {4.1.2}Feature Maps: Convolution + Pooling}{15}
+\contentsline {subsection}{\numberline {4.1.3}Gated Recurrent Unit Layer}{15}
+\contentsline {section}{\numberline {4.2}Model Description}{15}
+\contentsline {section}{\numberline {4.3}Dataset Description}{16}
+\contentsline {section}{\numberline {4.4}Final Pipeline}{17}
+\contentsline {chapter}{\numberline {5}Experimental Results}{18}
+\contentsline {section}{\numberline {5.1}Dataset Descriptions}{18}
+\contentsline {section}{\numberline {5.2}Results}{18}
+\contentsline {chapter}{\numberline {6}Concluding Remarks}{19}
+\contentsline {section}{\numberline {6.1}Significance of the Result}{19}
+\contentsline {section}{\numberline {6.2}Future Work}{19}
+\contentsline {chapter}{References}{20}
+\contentsline {chapter}{Curriculum Vitae}{22}

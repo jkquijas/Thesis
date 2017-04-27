@@ -1,33 +1,37 @@
 % chap3.tex (Definitions and Theorem)
 
-\chapter{Model Performance with Regularization and Data Augmentation}
+\chapter{Towards Improving Model Performance: Regularization and Data Augmentation}
 
-Regularization is any approach used to reduce test error but not training error. One way
-to regularize a model is to introduce bias and reduce variance by imposing any constraint on
-its weights. By adding a penalty term to the cost function, we can shrink weights to avoid
+\section{Model Regularization}
+Regularization is any approach used to reduce test error but not training error.
+
+\subsection{Weight Regularization}
+One way to regularize a model to impose a constraint on its weights. By adding a penalty term to the cost function, we can shrink weights to avoid
 them from blowing up in magnitude and overfitting to the training set. L2 regularization
 adds the L2 norm of the weights to the cost function:
 
 \[J(\bm{\theta}) = -\mathbb{E}_{\bm{x},y \sim \hat p_{data}} \log \textit{p}(y|\bm{x};\bm{\theta}) + \lambda \lVert \bm{\theta} \rVert_{2}\]
 
-where $\lambda$ is the regularization control parameter. Higher values of $\lambda$ penalize more, where
-a value of 0 degenerates to no regularization.
+where $\lambda$ is the regularization control parameter. Higher values of $\lambda$ penalize more and a value of 0 leads to no regularization.
+
+If the embedding layer's weights are allowed to be fine-tuned during training, it is
+important to regularize them. Because of the large amount of parameters in our model's embedding layer (number of words times embedding size),
+overfitting occurs quite rapidly if the weights are allowed to grow without constraint.
+
+\subsection{Dropout}
 A more recent and highly effective way to regularize a neural network is via \textbf{dropout}.
-Dropout "deactivates" a neuron or hidden unit with probability $p_{drop}$. In practice, a unit’s
-output is set to 0 with probability $p_{drop}$.
-
-Another approach that has received much recent attention is to augment the data set.
-\textbf{Data augmentation} refers to applying transformations to the input data in a way that
-the label value does not change.
-
-
-\section{Dropout}
-Dropout is one of the most popular regularization mechanism used in deep networks today.
-Simply put, dropout \textit{deactivates} a unit with probability $p_{drop}$. This forces the network to not rely on certain
+Dropout "deactivates" a neuron or unit with probability $p_{drop}$. We deactivate a unit
+by setting its output to 0. This forces the network to not rely on certain
 activations, since any unit will only be \textit{active} with probability $1-p_{drop}$[CITE].
 
 [IMAGE]
 \section{Dataset Augmentation: Shuffling and Noise Injection}
+Another way to improve model performance is to \textbf{augment} the dataset.
+Data augmentation refers to any transformation of the input data in a way that
+the label value does not change. Data augmentation is ubiquitous in computer vision tasks. Example transformations include translations, rotations, and even color intensity jitters via Pricipal Component
+Analysis[CITE]. All these tranformations should be are subtle enough that the overall structure is preserved, but
+allow for the model to process more distinct training data points.
+
 In order to introduce more variance into our dataset, we propose to \textbf{shuffle} and \textbf{add noise} to the input sequences.
 We shuffle by randomly permuting non-overlapping neighborhoods in the input text sequence i.e.\textbf{context windows}.
 We further propose to add small amounts of
@@ -70,22 +74,19 @@ a larger training sample while avoiding harsh changes to the original inputs.
 
 
 \section{Dataset Augmentation: Padding}
-Data augmentation is ubiquitous in computer vision tasks. Example transformations include
-small translations, rotations, and even color intensity jitters via Pricipal Component
-Analysis[CITE]. In our work, we use sequence data i.e. scientific publication abstract texts.
 
-\subsection{Zero-Padding: Uniform Input Length}
 Although more complex neural models are designed to cope with variable length input,
 in practice a more common and simple approach is to pad data to be of some specified
-length as described in chapter [CITE CHAPTER]. The input length is a hyperparameter
+length as described in chapter [CITE CHAPTER]. The input length introduces another model hyper-parameter
 that should be fine-tuned, but a reasonable approach is to pad enough to fully accomodate
 the length of most input sequences i.e. it’s preferrable to pad than truncate and lose
 information.
 
-\subsection{Padding with Informative Values}
+Our network's input is a sequence of integers, each integer being a word index: a number representing a word in our vocabulary $\mathbb{V}$.
+Word indexes range from 1 to $|\mathbb{V}|$, and the index 0 being left for out-of-vocabulary words.
 When we pad our input sequence with 0’s, we don’t add any additional information; we
-simply create a constant input length. If instead we add values that characterize or help
-describe the input sequence more thoroughly, we increase the amount of useful information
+simply create a constant input length. We propose that if instead we add values that characterize or help
+describe the input sequence more thoroughly, we may increase the amount of useful information
 available during neural network training.
 
 Consider a very simple input sequence, and assume its true label can be determined
@@ -111,17 +112,28 @@ words, make important words be present more frequently.
 We propose to pad input sequences with \textbf{meaningful} values found already within the
 input text sequence instead of 0's only. In the following section, we will develop on how to
 extract these meaningful words via a cosine similarity-based metric and apply them to pad
-our data.
+our data. In the following subsections, we propose several padding schemes in order reduce the amount of non-informative
+when training.
 
+\subsection{Wrap Padding}
+Our first padding scheme is to \textit{wrap around} the text, repeating words once we reach the padding portion.
+Refering back to the first example, the input sequence:
+\[\text{"This paper is about computer graphics PAD PAD PAD PAD"}\]
 
-\section{Keyword Extraction: Cosine Similarity Optimization (CSO)}
-As described in [CITE SECTION], we use a token-to-embedding dictionary to map an
-input sequence of word index i.e. integers into an embedding matrix i.e. a sequence of
-embedding vectors.
-This vectorial represention of words can be obtained after learning a language model
-using a neural network[CITE]. One property of this word embedding space is that words
-can now be represented as dense, continuous vectors of dimensionality much smaller than
-vocabulary size. Another important property is that semantic relationships are captured
+would then be
+\[\text{"This paper is about computer graphics This paper is about"}\]
+
+One thing to observe is that using this simple scheme, we remove all 0's i.e. non-informative padding indexes
+from the text sequence, but we also don't have selection mechanism and can miss useful words such as missing the
+word "\textit{graphics}" in this example. Nonetheless, it is a simple first approach to pad our data.
+
+\subsection{Keyword Padding}
+One characteristic of the wrap padding scheme described above is that there is no selection mechanism. Words are not selected based on some metric,
+but rather just \textit{wrapped}. We now propose a simple algorithm to select \textit{keywords} from within the input text sequence
+based on a cosine similarity based metric, as well as a padding scheme using those keywords.
+
+Using word embeddings, word tokens i.e. strings can now be represented as dense, continuous vectors of dimensionality much smaller than
+vocabulary size. Another useful property of embeddings is that semantic relationships are captured
 in this embedding space and can be measured between any two words using the cosine
 similarity metric[CITE]. This is an attractive property that allows for term comparison
 by semantic relationships. These relationships can range from complete similarity i.e. the
@@ -129,36 +141,38 @@ same term, to term orthogonality i.e. unrelated words, and even capture the dire
 the relation e.g. negative values of cosine similarity.
 
 The cosine similarity between two vectors can be computed as follows:
-
 \[
   \frac{\mathbf{x} \cdot \mathbf{y}}{\lVert \mathbf{x} \rVert \lVert \mathbf{y} \rVert}
 \]
-
 We can therefore quantify similarity between words in a sentece as a function of their
 cosine similarity with respect to each other. We refer to this measure as the \textit{within-sentence}
 cosine similarity. Similarly, we can measure this similarity for words within a noun phrase
 in a sentence. We call this the \textit{within-noun-phrase} cosine similarity.
+We represent a noun phrase $\mathbf{np}$ as a matrix composed of horizontally stacked vectors of size $d$, each vector a word in the noun phrase:
 
-\subsection{Extracting Keywords: Pipeline}
-Given input text sequence: Given a document, our keyword extraction algorithm works as
-follows:
-\begin{itemize}
-  \item{Remove non-alphanumeric characters and convert to lowercase}
-  \item{Tokenize each sentence into a list of words}
-  \item{Perform Part of Speech tagging on each list of words i.e. sentence}
-  \item{Chunk each sentence into a set of noun phrases}
-  \item{Map each word in each noun phrase to its corresponding word embedding vector}
-  \item{Perform Cosine Similarity Optimization (CSO) to extract a keyword noun phrase for each sentence}
-\end{itemize}
+\[\mathbf{np} = \begin{bmatrix}
+    \bm{np}_{1}   \\
+    \vdots \\
+    \bm{np}_{n}
+  \end{bmatrix},
+\bm{np}_{i} \in \mathbb{R}^{1 \times d}\]
 
-\subsection{Extracting Keywords: Algorithm}
+Given a noun phrase $\mathbf{np}$ comprised of $n$ unit norm embeddings $\bm{np}_i$, we can compute its \textit{within noun phrase} cosine similarity by:
 
-The procedure CSO receives as input a set of noun phrases $np^i = \{np^{i}_{1}, ..., np^i_{|\bm{np}^i|}\}$ corresponding
-to a sentence, where $np^{i}_{k}$ is the $k$th word embedding in the sentence’s $i$th noun phrase.
+\[c = \frac{1}{{n^2}} \sum_{i=1}^{n} \sum_{j=1}^{n} \begin{bmatrix}
+    \bm{np}_{1}   \\
+    \vdots \\
+    \bm{np}_{n}
+  \end{bmatrix} \times \begin{bmatrix}
+      \bm{np}_{1}   \\
+      \vdots \\
+      \bm{np}_{n}
+    \end{bmatrix}^\mathsf{T}\]
 
-Given an input chunked sentence, CSO computes the average cosine similarity between
-all words in a noun phrase, for all noun phrases in the sentence. The algorithm returns the
-noun phrase which \textbf{optimizes} its average cosine similarity metric.
+Thus, given a set of noun phrases $\{\mathbf{np}^{(1)}, \dots \mathbf{np}^{(m)}\}$ from a sentence, we compute the corresponding set of
+\textit{within noun phrase} cosine similarities $\bm{c} = \{c_1 \dots c_m\}$, and we select the noun phrase which corresponds to minimum
+
+\[\mathbf{np}^{(j)}, j = \argmin{\bm{c}}\].
 
 The reasoning behind the cosine similarity minimization is as follows: An informative
 noun phrase within a sentence will contain a word which will stand out from the rest of the
@@ -173,9 +187,8 @@ considered keywords, so we include them both for padding.
 [INCLUDE SNAPSHOT OF CSO OUTPUT]
 
 \subsection{Proposed Padding Scheme}
-As described in [CSO SECTION], can use a cosine similarity-based metric to extract
-keywords from text. Consider an input text sequence $S$ that yields keyword indexes
-$BoW(CSO(S)) = x_{key^1}, ..., x_{key^j}$ and input $\bm{x}_{pad} = x_1, ..., x_k, 0_{k+1}, ..., 0_n$, we concatenate
+We propose to pad an input sequence $\bm{x}_{pad} = x_1, ..., x_k, 0_{k+1}, ..., 0_n$ using
+the indexes of extracted keywords $x_{key^1}, ..., x_{key^j}$ by concatenating
 the non-zero entries $x_1, ..., x_k$ with the extracted keyword indexes:
 
 \[\bm{x}_{cso} = x_1, ..., x_k, x_{key^1}, ..., x_{key^j}, 0_{k+j+1}, ..., 0_n\]
@@ -188,6 +201,12 @@ to its keywords i.e. words extracted via CSO. We therefore further pad the input
 with the nearest neighbor of each keyword. In this context, we consider the nearest neighbor
 of a word embeddings $\bm{w}$ as:
 
-\[\argmin_{\bm{w}_i} 1 - \frac{\bm{w} \cdot \bm{w_i}}{\lVert \bm{w} \rVert \lVert \bm{w_i} \rVert}\]
+\[\min_{\bm{w}_i} 1 - \frac{\bm{w} \cdot \bm{w}_i}{\lVert \bm{w} \rVert \lVert \bm{w}_i \rVert}, \bm{w} \neq \bm{w}_i\]
 
 We use a Locality Sensitive Hashing forest for our approximate nearest neighbor search[CITE].
+After having computed the nearest neighbor of each keyword, we pad as follows:
+
+\[\bm{x}_{lsh} = x_1, ..., x_k, x_{key^1}, ..., x_{key^j},x_{lsh^1}, ..., x_{lsh^j}, 0_{k+j+1}, ..., 0_n\]
+
+\section{Reducing Data Granularity: From Abstract to Sentences}
+Our last proposed dataset augmentation scheme is to consider the data as a set of sentences rather than abstracts.
