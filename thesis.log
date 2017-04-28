@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2017.4.19)  26 APR 2017 21:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2017.4.19)  28 APR 2017 02:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -335,23 +335,23 @@ Chapter 3.
 
 ] [6] [7]
 
-LaTeX Warning: Command \textless invalid in math mode on input line 84.
+LaTeX Warning: Command \textless invalid in math mode on input line 88.
 
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 84.
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 88.
 (c:/texlive/2016/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 84.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 88.
 
 
-LaTeX Warning: Command \textless invalid in math mode on input line 84.
+LaTeX Warning: Command \textless invalid in math mode on input line 88.
 
 
-LaTeX Warning: Command \textgreater invalid in math mode on input line 85.
+LaTeX Warning: Command \textgreater invalid in math mode on input line 89.
 
 
-LaTeX Warning: Command \textgreater invalid in math mode on input line 85.
+LaTeX Warning: Command \textgreater invalid in math mode on input line 89.
 
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
@@ -363,12 +363,12 @@ Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
 [8] [9] [10] [11]
-Overfull \hbox (7.4002pt too wide) in paragraph at lines 202--202
+Overfull \hbox (7.4002pt too wide) in paragraph at lines 206--206
 []\OT1/cmr/bx/n/17.28 Dataset Aug-men-ta-tion: Padding with Sim-i-lar Key-
  []
 
 
-Overfull \hbox (28.40486pt too wide) in paragraph at lines 211--213
+Overfull \hbox (28.40486pt too wide) in paragraph at lines 215--217
 []\OT1/cmr/m/n/12 We use a Lo-cal-ity Sen-si-tive Hash-ing for-est for our ap-p
 rox-i-mate near-est neigh-bor search[CITE].
  []
@@ -391,17 +391,12 @@ Chapter 5.
 
 
 
-]
-Overfull \hbox (23.16063pt too wide) in paragraph at lines 61--74
+] [18] [19]
+Overfull \hbox (23.16063pt too wide) in paragraph at lines 159--164
  [] 
  []
 
-[18]
-Overfull \hbox (23.16063pt too wide) in paragraph at lines 120--133
- [] 
- []
-
-[19]) [20]
+) [20]
 \openout2 = `chapter6.aux'.
 
  (./chapter6.tex
@@ -429,10 +424,10 @@ Chapter 6.
 ) (./chapter4.aux) (./chapter5.aux) (./chapter6.aux) (./ref.aux) (./vitae.aux))
  ) 
 Here is how much of TeX's memory you used:
- 3039 strings out of 493013
- 40733 string characters out of 6136993
- 113297 words of memory out of 5000000
- 6441 multiletter control sequences out of 15000+600000
+ 3037 strings out of 493013
+ 40717 string characters out of 6136993
+ 120297 words of memory out of 5000000
+ 6439 multiletter control sequences out of 15000+600000
  15486 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  39i,8n,25p,257b,319s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -453,7 +448,7 @@ c/amsfonts/cm/cmss8.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmsy10.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8
 .pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/
 texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on thesis.pdf (32 pages, 237396 bytes).
+Output written on thesis.pdf (32 pages, 237594 bytes).
 PDF statistics:
  184 PDF objects out of 1000 (max. 8388607)
  129 compressed objects within 2 object streams

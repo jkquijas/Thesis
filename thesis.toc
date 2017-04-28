@@ -38,21 +38,22 @@
 \contentsline {section}{\numberline {5.1}Dataset Descriptions}{17}
 \contentsline {section}{\numberline {5.2}Results}{17}
 \contentsline {section}{\numberline {5.3}AstroPhysics}{17}
-\contentsline {subsection}{\numberline {5.3.1}Sentence Split}{18}
-\contentsline {subsubsection}{Mean Vote}{18}
+\contentsline {subsection}{\numberline {5.3.1}Baseline}{18}
 \contentsline {subsection}{\numberline {5.3.2}Padding}{18}
 \contentsline {subsubsection}{Wrap Padding}{18}
 \contentsline {subsubsection}{CSO Padding}{18}
 \contentsline {subsubsection}{LSH Padding}{18}
-\contentsline {subsection}{\numberline {5.3.3}Noise Injection}{18}
-\contentsline {section}{\numberline {5.4}Math}{19}
-\contentsline {subsection}{\numberline {5.4.1}Sentence Split}{19}
+\contentsline {subsection}{\numberline {5.3.3}Sentence Split}{19}
 \contentsline {subsubsection}{Mean Vote}{19}
-\contentsline {subsection}{\numberline {5.4.2}Padding}{19}
-\contentsline {subsubsection}{Wrap Padding}{19}
-\contentsline {subsubsection}{CSO Padding}{19}
-\contentsline {subsubsection}{LSH Padding}{19}
-\contentsline {subsection}{\numberline {5.4.3}Noise Injection}{19}
+\contentsline {subsection}{\numberline {5.3.4}Noise Injection}{19}
+\contentsline {section}{\numberline {5.4}Math}{19}
+\contentsline {subsection}{\numberline {5.4.1}Sentence Split}{20}
+\contentsline {subsubsection}{Mean Vote}{20}
+\contentsline {subsection}{\numberline {5.4.2}Padding}{20}
+\contentsline {subsubsection}{Wrap Padding}{20}
+\contentsline {subsubsection}{CSO Padding}{20}
+\contentsline {subsubsection}{LSH Padding}{20}
+\contentsline {subsection}{\numberline {5.4.3}Noise Injection}{20}
 \contentsline {chapter}{\numberline {6}Concluding Remarks}{21}
 \contentsline {section}{\numberline {6.1}Significance of the Result}{21}
 \contentsline {section}{\numberline {6.2}Future Work}{21}

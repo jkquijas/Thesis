@@ -22,11 +22,61 @@ In this section we show our experimental results. [Add tables and most relevant 
 %
 \section{AstroPhysics}
 [Distribution]
+\subsection{Baseline}
+\begin{center}\begin{tabular}{||c c c c c c c c c||}
+ \hline
+ NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ & Acc\\ [0.5ex]
+ \hline\hline
+ 30000 & 64 & 200 & 0.442 & 3 & 5 & 1e-3 & 1e-4 & 0.773\\
+ \hline
+ 80000 & 64 & 250 & 0.059 & 3 & 2 & 1e-4 & 1e-5 & 0.760\\
+ \hline
+ 80000 & 64 & 250 & 0.056 & 2 & 2 & 1e-3 & 1e-4 & 0.759\\
+ [1ex]\hline\end{tabular}\end{center}
+
+\subsection{Padding}
+\subsubsection{Wrap Padding}
+\begin{center}\begin{tabular}{||c c c c c c c c c ||}
+ \hline
+ NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ & Acc\\ [0.5ex]
+ \hline\hline
+ 30000 & 64 & 200 & 0.442 & 3 & 5 & 1e-3 & 1e-4 & 0.773\\
+ \hline
+ 80000 & 64 & 250 & 0.059 & 3 & 2 & 1e-4 & 1e-5 & 0.761\\
+ \hline
+ 80000 & 64 & 250 & 0.056 & 2 & 2 & 1e-3 & 1e-4 & 0.760\\
+ [1ex]\hline\end{tabular}\end{center}
+
+\subsubsection{CSO Padding}
+\begin{center}\begin{tabular}{||c c c c c c c c c ||}
+ \hline
+ NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ & Acc\\ [0.5ex]
+ \hline\hline
+30000 & 64 & 200 & 0.442 & 3 & 5 & 1e-3 & 1e-4 & 0.774\\
+\hline
+80000 & 64 & 250 & 0.059 & 3 & 2 & 1e-4 & 1e-5 & 0.752\\
+\hline
+80000 & 64 & 250 & 0.056 & 2 & 2 & 1e-3 & 1e-4 & 0.761\\
+ [1ex]\hline\end{tabular}\end{center}
+
+\subsubsection{LSH Padding}
+\begin{center}\begin{tabular}{||c c c c c c c c c ||}
+ \hline
+ NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ & Acc\\ [0.5ex]
+ \hline\hline
+ 30000 & 64 & 200 & 0.442 & 3 & 5 & 1e-3 & 1e-4 & 0.768\\
+ \hline
+ 80000 & 64 & 250 & 0.059 & 3 & 2 & 1e-4 & 1e-5 & 0.752\\
+ \hline
+ 80000 & 64 & 250 & 0.056 & 2 & 2 & 1e-3 & 1e-4 & 0.755\\
+ [1ex]\hline\end{tabular}\end{center}
+
+
 \subsection{Sentence Split}
 \subsubsection{Mean Vote}
 \begin{center}\begin{tabular}{||c c c c c c c c c ||}
  \hline
- NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ &  & Acc\\ [0.5ex]
+ NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ & Acc\\ [0.5ex]
  \hline\hline
  30000 & 512 & 50 & 0.395 & 3 & 3 & 1e-5 & 1e-4 & 0.730\\
  \hline
@@ -39,37 +89,13 @@ In this section we show our experimental results. [Add tables and most relevant 
  10000 & 512 & 60 & 0.121 & 5 & 3 & 1e-3 & 1e-5 &  0.712\\
  \hline
  70000 & 512 & 40 & 0.223 & 4 & 5 & 1e-5 & 1e-5 &  0.690\\
+ \hline
+ 40000 & 128 & 50 & 0.225 & 5 & 3 & 1e-5 & 1e-4 &  0.734\\
+ \hline
+ 30000 & 64 & 40 & 0.132 & 3 & 4 & 1e-3 & 1e-4 &  0.711\\
+ \hline
+ 40000 & 1024 & 50 & 0.225 & 5 & 3 & 1e-4 & 1e-4 &  0.689\\
  [1ex]\hline\end{tabular}\end{center}
-\subsection{Padding}
-\subsubsection{Wrap Padding}
-\begin{center}\begin{tabular}{||c c c c c c c c c c ||}
- \hline
- NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ &  Loss & Acc\\ [0.5ex]
- \hline\hline
- 80000 & 64 & 250 & 0.548 & 4 & 5 & 1e-4 & 1e-5 & 1.818 & 0.537\\
- \hline
- 2 & 7 & 78 & 5415 \\
- [1ex]\hline\end{tabular}\end{center}
-
-\subsubsection{CSO Padding}
-\begin{center}\begin{tabular}{||c c c c c c c c c c ||}
- \hline
- NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ &  Loss & Acc\\ [0.5ex]
- \hline\hline
- 80000 & 64 & 250 & 0.548 & 4 & 5 & 1e-4 & 1e-5 & 1.818 & 0.537\\
- \hline
- 2 & 7 & 78 & 5415 \\
- [1ex]\hline\end{tabular}\end{center}
-\subsubsection{LSH Padding}
-\begin{center}\begin{tabular}{||c c c c c c c c c c ||}
- \hline
- NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ &  Loss & Acc\\ [0.5ex]
- \hline\hline
- 80000 & 64 & 250 & 0.548 & 4 & 5 & 1e-4 & 1e-5 & 1.818 & 0.537\\
- \hline
- 2 & 7 & 78 & 5415 \\
- [1ex]\hline\end{tabular}\end{center}
-
 
 \subsection{Noise Injection}
 \begin{center}
@@ -83,10 +109,10 @@ In this section we show our experimental results. [Add tables and most relevant 
  \hline
  70000 & 32 & 200 & 0.512 & 3 & 4 & 1e-3 & 1e-5 & 0.179 & .373 &  0.764\\
  \hline
- 4 & 545 & 18744 & 7560 \\[1ex]
+ 80000 & 128 & 200 & 0.185 & 4 & 4 & 1e-5 & 1e-6 & 0.973 & 0.128 &  0.680\\
  \hline
-\end{tabular}
-\end{center}
+ 50000 & 32 & 250 & 0.167 & 4 & 4 & 1e-4 & 1e-4 & 0.866 & 0.364 & 0.761\\
+ [1ex]\hline\end{tabular}\end{center}
 
 
 
@@ -126,23 +152,13 @@ In this section we show our experimental results. [Add tables and most relevant 
  NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ &  Loss & Acc\\ [0.5ex]
  \hline\hline
  80000 & 64 & 250 & 0.548 & 4 & 5 & 1e-4 & 1e-5 & 1.818 & 0.537\\
- \hline
- 2 & 7 & 78 & 5415 \\
  [1ex]\hline\end{tabular}\end{center}
 
 \subsection{Noise Injection}
 \begin{center}
  \begin{tabular}{||c c c c c c c c c c c c||}
  \hline
- NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ & $p_{aug}$ & $p_{noise}$ & Loss & Acc\\ [0.5ex]
+ NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ & $p_{aug}$ & $p_{noise}$ & Acc\\ [0.5ex]
  \hline\hline
  80000 & 64 & 250 & 0.548 & 4 & 5 & 1e-4 & 1e-5 & 0.653 & 0.195 & 1.818 & 0.537\\
- \hline
- 2 & 7 & 78 & 5415 \\
- \hline
- 3 & 545 & 778 & 7507 \\
- \hline
- 4 & 545 & 18744 & 7560 \\[1ex]
- \hline
-\end{tabular}
-\end{center}
+[1ex]\hline\end{tabular}\end{center}
