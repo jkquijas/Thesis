@@ -3,10 +3,15 @@
 \addcontentsline{toc}{chapter}{Abstract}
 
 \chapter*{Abstract}
-Convolutional neural networks have seen much success in computer vision natural language processing tasks.
-Because of the large number of parameters in these model's, they are prone to overfitting
+Convolutional neural networks have seen much success in computer vision and natural language processing tasks.
+Recent convolutional network architectures employ word embeddings, or words represented as dense vectors, to
+transform a given input sequence of words into a dense matrix of continuous values akin to image data.
+This allows for the well known convolution/pooling operations to be applied to text data in a manner similar to
+convolution and pooling operations on image data. These embeddings may incorporated into the neural
+network itself as a trainable layer to allow fine-tuning their values to better fit the data.
+Because of the large number of parameters in these models', they are prone to overfitting
 if not regularized appropriately or trained on a sufficiently large dataset.
-In this work, we study the performance of convolutional neural models when the available training datasets
-are of moderate size. We quantify the effects of model hyperparameters on classification performance
-and propose several data augmentation techniques designed for text datasets.
-Finally, we provide discussion on our empirical results.
+In this work, we study the performance of convolutional neural networks when the available training datasets
+are of moderate size and propose several data augmentation techniques designed for text datasets in an attempt
+to mitigate overfitting and improve model generalization.
+Finally, we provide discussion on our empirical results as well as future work.

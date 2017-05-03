@@ -1,21 +1,18 @@
 \relax 
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Towards Improving Model Performance: Regularization and Data Augmentation}{5}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Model, Dataset, and Final Pipeline Description}{9}}
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}Model Regularization}{5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Weight Regularization}{5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Dropout}{6}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Dataset Augmentation: Shuffling and Noise Injection}{6}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Shuffling}{6}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2.2}Noise Injection}{7}}
-\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Add noise to input sequence}}{8}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Dataset Augmentation: Padding}{8}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Wrap Padding}{9}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Keyword Padding}{10}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}Proposed Padding Scheme}{12}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.4}Dataset Augmentation: Padding with Similar Keywords}{12}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.5}Reducing Data Granularity: From Abstract to Sentences}{12}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5.1}Voting Schemes}{13}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Layer Descriptions}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Embedding Layer}{9}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Visualization of an embedding layer. Word indexes are mapped to word embeddings. This layer outputs a matrix comprised of stacked embeddings, one for each index.}}{10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Feature Maps: Convolution + Pooling}{10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3}Gated Recurrent Unit Layer}{10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.4}Dense Layer}{10}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Model Description}{11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Model Architecture: embedding layer, followed by two feature maps, and a recurrent layer. At the end, we have a fully connected layer with a softmax activation, which will output class probabilities.}}{11}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Model Hyper-Parameters}{12}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Dataset Description}{13}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.5}Final Pipeline}{13}}
 \@setckpt{chapter3}{
 \setcounter{page}{14}
 \setcounter{equation}{0}
@@ -28,17 +25,17 @@
 \setcounter{part}{0}
 \setcounter{chapter}{3}
 \setcounter{section}{5}
-\setcounter{subsection}{1}
+\setcounter{subsection}{0}
 \setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
 \setcounter{subparagraph}{0}
-\setcounter{figure}{0}
+\setcounter{figure}{2}
 \setcounter{table}{0}
 \setcounter{definition}{0}
 \setcounter{theorem}{0}
 \setcounter{corollary}{0}
 \setcounter{parentequation}{0}
-\setcounter{ALG@line}{7}
+\setcounter{ALG@line}{0}
 \setcounter{ALG@rem}{0}
 \setcounter{ALG@nested}{0}
 \setcounter{ALG@Lnr}{2}
@@ -46,5 +43,5 @@
 \setcounter{ALG@storecount}{0}
 \setcounter{ALG@tmpcounter}{0}
 \setcounter{float@type}{8}
-\setcounter{algorithm}{1}
+\setcounter{algorithm}{0}
 }

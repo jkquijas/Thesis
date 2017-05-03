@@ -2,60 +2,68 @@
 \contentsline {chapter}{Acknowledgements}{v}
 \contentsline {chapter}{Abstract}{vi}
 \contentsline {chapter}{Table of Contents}{vii}
+\contentsline {chapter}{List of Figures}{x}
 \noindent {\bf Chapter}
 \contentsline {chapter}{\numberline {1}Introduction}{1}
 \contentsline {section}{\numberline {1.1}Brief Overview of Deep Neural Networks}{1}
 \contentsline {section}{\numberline {1.2}Training a Neural Network}{1}
 \contentsline {section}{\numberline {1.3}Bias-Variance Tradeoff}{2}
-\contentsline {chapter}{\numberline {2}Text Classification with Deep Neural Networks}{3}
-\contentsline {section}{\numberline {2.1}Word Embeddings}{3}
-\contentsline {section}{\numberline {2.2}Convolutional Neural Networks}{3}
-\contentsline {section}{\numberline {2.3}Input Representation: Integer Sequences to Word Embeddings}{4}
-\contentsline {chapter}{\numberline {3}Towards Improving Model Performance: Regularization and Data Augmentation}{5}
-\contentsline {section}{\numberline {3.1}Model Regularization}{5}
-\contentsline {subsection}{\numberline {3.1.1}Weight Regularization}{5}
-\contentsline {subsection}{\numberline {3.1.2}Dropout}{6}
-\contentsline {section}{\numberline {3.2}Dataset Augmentation: Shuffling and Noise Injection}{6}
-\contentsline {subsection}{\numberline {3.2.1}Shuffling}{6}
-\contentsline {subsection}{\numberline {3.2.2}Noise Injection}{7}
-\contentsline {section}{\numberline {3.3}Dataset Augmentation: Padding}{8}
-\contentsline {subsection}{\numberline {3.3.1}Wrap Padding}{9}
-\contentsline {subsection}{\numberline {3.3.2}Keyword Padding}{10}
-\contentsline {subsection}{\numberline {3.3.3}Proposed Padding Scheme}{12}
-\contentsline {section}{\numberline {3.4}Dataset Augmentation: Padding with Similar Keywords}{12}
-\contentsline {section}{\numberline {3.5}Reducing Data Granularity: From Abstract to Sentences}{12}
-\contentsline {subsection}{\numberline {3.5.1}Voting Schemes}{13}
-\contentsline {chapter}{\numberline {4}Model, Dataset, and Final Pipeline Description}{14}
-\contentsline {section}{\numberline {4.1}Layer Descriptions}{14}
-\contentsline {subsection}{\numberline {4.1.1}Embedding Layer}{14}
-\contentsline {subsection}{\numberline {4.1.2}Feature Maps: Convolution + Pooling}{14}
-\contentsline {subsection}{\numberline {4.1.3}Gated Recurrent Unit Layer}{15}
-\contentsline {section}{\numberline {4.2}Model Description}{15}
-\contentsline {section}{\numberline {4.3}Model Hyper-Parameters}{16}
-\contentsline {section}{\numberline {4.4}Dataset Description}{16}
-\contentsline {section}{\numberline {4.5}Final Pipeline}{16}
-\contentsline {chapter}{\numberline {5}Experimental Results}{17}
-\contentsline {section}{\numberline {5.1}Dataset Descriptions}{17}
-\contentsline {section}{\numberline {5.2}Results}{17}
-\contentsline {section}{\numberline {5.3}AstroPhysics}{17}
-\contentsline {subsection}{\numberline {5.3.1}Baseline}{18}
-\contentsline {subsection}{\numberline {5.3.2}Padding}{18}
-\contentsline {subsubsection}{Wrap Padding}{18}
-\contentsline {subsubsection}{CSO Padding}{18}
-\contentsline {subsubsection}{LSH Padding}{18}
-\contentsline {subsection}{\numberline {5.3.3}Sentence Split}{19}
-\contentsline {subsubsection}{Mean Vote}{19}
-\contentsline {subsection}{\numberline {5.3.4}Noise Injection}{19}
-\contentsline {section}{\numberline {5.4}Math}{19}
-\contentsline {subsection}{\numberline {5.4.1}Sentence Split}{20}
-\contentsline {subsubsection}{Mean Vote}{20}
-\contentsline {subsection}{\numberline {5.4.2}Padding}{20}
-\contentsline {subsubsection}{Wrap Padding}{20}
-\contentsline {subsubsection}{CSO Padding}{20}
-\contentsline {subsubsection}{LSH Padding}{20}
-\contentsline {subsection}{\numberline {5.4.3}Noise Injection}{20}
-\contentsline {chapter}{\numberline {6}Concluding Remarks}{21}
-\contentsline {section}{\numberline {6.1}Significance of the Result}{21}
-\contentsline {section}{\numberline {6.2}Future Work}{21}
-\contentsline {chapter}{References}{22}
-\contentsline {chapter}{Curriculum Vitae}{24}
+\contentsline {section}{\numberline {1.4}Weight Regularization}{3}
+\contentsline {subsection}{\numberline {1.4.1}Dropout}{4}
+\contentsline {chapter}{\numberline {2}Text Classification with Deep Neural Networks}{5}
+\contentsline {section}{\numberline {2.1}Word Embeddings}{5}
+\contentsline {section}{\numberline {2.2}Convolutional Neural Networks}{6}
+\contentsline {section}{\numberline {2.3}Input Representation: Integer Sequences to Word Embeddings}{7}
+\contentsline {chapter}{\numberline {3}Model, Dataset, and Final Pipeline Description}{9}
+\contentsline {section}{\numberline {3.1}Layer Descriptions}{9}
+\contentsline {subsection}{\numberline {3.1.1}Embedding Layer}{9}
+\contentsline {subsection}{\numberline {3.1.2}Feature Maps: Convolution + Pooling}{10}
+\contentsline {subsection}{\numberline {3.1.3}Gated Recurrent Unit Layer}{10}
+\contentsline {subsection}{\numberline {3.1.4}Dense Layer}{10}
+\contentsline {section}{\numberline {3.2}Model Description}{11}
+\contentsline {section}{\numberline {3.3}Model Hyper-Parameters}{12}
+\contentsline {section}{\numberline {3.4}Dataset Description}{13}
+\contentsline {section}{\numberline {3.5}Final Pipeline}{13}
+\contentsline {chapter}{\numberline {4}Towards Improving Model Performance: Regularization and Data Augmentation}{14}
+\contentsline {section}{\numberline {4.1}Model Regularization}{14}
+\contentsline {subsection}{\numberline {4.1.1}Freezing the Embedding Layer}{14}
+\contentsline {subsection}{\numberline {4.1.2}Frozen Embeddings}{14}
+\contentsline {subsection}{\numberline {4.1.3}Freeze-Unfreeze}{15}
+\contentsline {subsection}{\numberline {4.1.4}Flash-Freeze}{15}
+\contentsline {subsection}{\numberline {4.1.5}Unfrozen Embeddings}{15}
+\contentsline {section}{\numberline {4.2}Dataset Augmentation: Shuffling and Noise Injection}{15}
+\contentsline {subsection}{\numberline {4.2.1}Shuffling}{16}
+\contentsline {subsection}{\numberline {4.2.2}Noise Injection}{16}
+\contentsline {section}{\numberline {4.3}Dataset Augmentation: Padding}{17}
+\contentsline {subsection}{\numberline {4.3.1}Wrap Padding}{19}
+\contentsline {subsection}{\numberline {4.3.2}Keyword Padding}{19}
+\contentsline {subsection}{\numberline {4.3.3}Proposed Padding Scheme}{21}
+\contentsline {section}{\numberline {4.4}Dataset Augmentation: Padding with Similar Keywords}{21}
+\contentsline {section}{\numberline {4.5}Reducing Data Granularity: From Abstract to Sentences}{22}
+\contentsline {section}{\numberline {4.6}Embedding Matrix: Avoiding Overfitting}{22}
+\contentsline {chapter}{\numberline {5}Experimental Results}{23}
+\contentsline {section}{\numberline {5.1}Dataset Descriptions}{23}
+\contentsline {section}{\numberline {5.2}Results}{23}
+\contentsline {section}{\numberline {5.3}Model Hyper-Parameters}{23}
+\contentsline {section}{\numberline {5.4}AstroPhysics}{24}
+\contentsline {subsection}{\numberline {5.4.1}Baseline}{24}
+\contentsline {subsection}{\numberline {5.4.2}Padding}{24}
+\contentsline {subsubsection}{Wrap Padding}{24}
+\contentsline {subsubsection}{CSO Padding}{25}
+\contentsline {subsubsection}{LSH Padding}{25}
+\contentsline {subsection}{\numberline {5.4.3}Sentence Split}{25}
+\contentsline {subsubsection}{Mean Vote}{25}
+\contentsline {subsection}{\numberline {5.4.4}Noise Injection}{26}
+\contentsline {section}{\numberline {5.5}Math}{26}
+\contentsline {subsection}{\numberline {5.5.1}Sentence Split}{26}
+\contentsline {subsubsection}{Mean Vote}{26}
+\contentsline {subsection}{\numberline {5.5.2}Padding}{26}
+\contentsline {subsubsection}{Wrap Padding}{26}
+\contentsline {subsubsection}{CSO Padding}{26}
+\contentsline {subsubsection}{LSH Padding}{27}
+\contentsline {subsection}{\numberline {5.5.3}Noise Injection}{27}
+\contentsline {chapter}{\numberline {6}Concluding Remarks}{28}
+\contentsline {section}{\numberline {6.1}Significance of the Result}{28}
+\contentsline {section}{\numberline {6.2}Future Work}{28}
+\contentsline {chapter}{References}{29}
+\contentsline {chapter}{Curriculum Vitae}{30}

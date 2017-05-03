@@ -1,0 +1,11 @@
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Visualization of overfitting. Training error decreases as epochs progress, eventually reaching zero. Validation error starts increasing, indicating overfitting. The best model is shown at the dotted line, where validation error reached its minimum.}}{3}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Visualization of embeddings using T-SNE. Words with similar or related meanings tend to lie close to each other in embedding space.}}{5}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Visualization of a feature map with a single kernel. In this example, the kernel convolves tri-grams, or windows of three words. After convolution with all possible trigram context windows, max pooling is applied to reduce dimensionality. Here, the pool size is 3. This process is repeated for as many filters in the layer e.g. 100 and their outputs are concatenated horizantally to yield a matrix of size \textit {num filters} $\times $ (\textit {input length - pool size + 1}).}}{7}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Visualization of an embedding layer. Word indexes are mapped to word embeddings. This layer outputs a matrix comprised of stacked embeddings, one for each index.}}{10}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Model Architecture: embedding layer, followed by two feature maps, and a recurrent layer. At the end, we have a fully connected layer with a softmax activation, which will output class probabilities.}}{11}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }

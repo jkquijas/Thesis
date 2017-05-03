@@ -1,71 +1,234 @@
-% chap4.tex (Definitions and Theorem)
+% chap3.tex (Definitions and Theorem)
 
-\chapter{Model, Dataset, and Final Pipeline Description}
+\chapter{Towards Improving Model Performance: Regularization and Data Augmentation}
 
-In this chapter we describe our model architecture. We start by describing our choice of layers, followed by
-our network's final architecture.
-We conclude the chapter by
-describing our dataset.
+\section{Model Regularization}
+Regularization is any approach used to reduce test error but not training error.
 
-\section{Layer Descriptions}
 
-\subsection{Embedding Layer}
-This layer maps an word index, or integer, into its corresponding embedding. This is a layer in the
-neural network because the embeddings can be further fine-tuned during training. Because of the large number of
-parameters in this layer (number of words allowed times embedding size), we add a $L_2$ regularization.
-Given input text $s$, this layer receives as input a sequence of word indexes $BoW(\bm{s})=$ $\bm{x} = x_1,...,x_k$
-and maps each word into an embedding.
-Thus, for an input text $\bm{s}$, we transform it into a sequence of integers $\bm{x}$, and from there into $\mathbf{E} \in \mathbb{R}^{n \times d}$, where $d$ is
-the embedding size.
+\subsection{Freezing the Embedding Layer}
+When we make our model's embeddings trainable, its number of parameters highly increases. The embedding matrix
+adds a number of weights equal to the maximum input sequence length times the embedding size.
+While we observe that finetuning the embeddings yields better model accuracy, it also leads to rapid overfitting
+of when the dataset is of moderate size. We therefore try to answer the question: can we finetune the embeddings
+in such a way that we can avoid overfitting but retain the performance boost that comes along with it?
+In the following subsections, we present some proposed training schemes that change the embedding layer \textit{trainability}.
 
-\subsection{Feature Maps: Convolution + Pooling}
+\subsection{Frozen Embeddings}
+With this scheme, we \textit{freeze} the embedding layer altogether. Not once during training do we update
+the embedding vectors, so the model relies completely on its other layers' parameters.
 
-We refer to a pair of convolutional layer followed by a pooling layer as a feature map[CITE].
+\subsection{Freeze-Unfreeze}
+With the \textit{freeze-unfreeze} scheme, we train the model with its embedding layer frozen until some
+stopping criterion is met e.g. early stopping due to validation error increase. After this, we make the
+embedding layer trainable.
 
-\subsection{Gated Recurrent Unit Layer}
+\subsection{Flash-Freeze}
+In the \textit{flash-freeze} scheme, we allow the embedding layer to be trainable for a small number of
+epochs e.g. two, then freeze it or make it non-trainable.
 
-\section{Model Description}
-The network's general architecture is as follows:
-\begin{itemize}
-  \item Input layer: word index vector
-  \item Embedding layer: maps word index vector to embedding matrix
-  \item Dropout layer
-  \item Feature Map 1:
-      \begin{itemize}
-        \item Convolution layer: number of kernels:32, activation: rectified linear
-        \item MaxPooling layer
-      \end{itemize}
-\item Dropout layer
-\item Feature Map 2:
-    \begin{itemize}
-      \item Convolution layer: number of kernels:32, activation: rectified linear
-      \item MaxPooling layer
-    \end{itemize}
-\item Dropout layer
-\item Gated Recurrent Unit layer
-\item Dropout layer
-\item Dense layer: output size: number of classes, activation: softmax
-\end{itemize}
-[IMAGE OF ARCHITECTURE]
+\subsection{Unfrozen Embeddings}
+On the other extreme of the spectrum, we allow the embeddings layer to be trainable from the very beggining.
+This scheme makes the model converge in a small number of iterations but quickly starts to overfit the data.
 
-\section{Model Hyper-Parameters}
-\begin{itemize}
-  \item number of training words
-  \item number of kernels
-  \item kernel size
-  \item pool size
-  \item learning rate
-  \item regularization rate
-  \item dropout rate
-  \item maximum sequence length
+[IMAGE]
+\section{Dataset Augmentation: Shuffling and Noise Injection}
+Another way to improve model performance is to \textbf{augment} the dataset.
+Data augmentation refers to any transformation of the input data in a way that
+the label value does not change. Data augmentation is ubiquitous in computer vision tasks. Example transformations include translations, rotations, and even color intensity jitters via Pricipal Component
+Analysis[CITE]. All these tranformations should be are subtle enough that the overall structure is preserved, but
+allow for the model to process more distinct training data points.
 
-\end{itemize}
+In order to introduce more variance into our dataset, we propose to \textbf{shuffle} and \textbf{add noise} to the input sequences.
+We shuffle by randomly permuting non-overlapping neighborhoods in the input text sequence i.e.\textbf{context windows}.
+We further propose to add small amounts of
+noise to the input sequence by randomly replacing words with words taken from the training vocabulary.
 
-\section{Dataset Description}
-[DESCRIBE AND CITE EMBEDDINGS]
+\subsection{Shuffling}
+We propose to augment our dataset by making small \textit{context} changes that don't change the global structure
+of the input sequences. Concretely, we move a non-overlapping \textit{context window} along the input sequence, randomly
+shuffling the words indexes inside it. For example using a context window of size 2 i.e. \textit{bi-gram}, an input sequence
+\[\bm{x} = x_1, x_2, x_3, x_4, x_5, x_6\]
 
-We gathered scientific paper abstracts from the online repository Arxiv.org.
-We scraped papers for 5 departments: computer science, mathematics, astrophysics, physics, quantitative biology, and quantititative finance.
+ could be shuffled to:
+\[\bm{x}^{\prime} = x_2, x_1, x_3, x_4, \underbrace{x_6, x_5}_\text{bi-gram}\]
+In the first pass, the first two indexes get shuffled. The second pass led to no changes in ordering. The third and
+final pass shuffles the last two indexes.
 
-\section{Final Pipeline}
-[INCLUDE PIPELINE DIAGRAM]
+The motivation for this dataset augmentation technique is that small changes in the ordering of the words will
+simulate a larger training sample; a training input sequence has a low chance of being repeated as its
+length increases. Smaller context windows preserve the most structure. This method will preserve
+most of the original context structure in the sequence, as long as the shuffling is not to harsh e.g.
+a complete random permutation of the sequence.
+
+\subsection{Noise Injection}
+One common augmentation technique for image datasets is to add small amount of noise. By replacing a relatively small
+amount of pixel values with noise, the model gets to process and train on a different but similar instance. The noise should be subtle
+enough as to not distort the image too much, otherwise we could potentially train the model using mostly noise.
+We propose to augment our dataset by injecting small amounts of noise to each training sample. Again, we aim to simulate
+a larger training sample while avoiding harsh changes to the original inputs. Concretely, each word in a text sequence gets replaced
+with a specified probability with a word randomly chosen from our training vocabulary.
+\begin{algorithm}[H]
+\caption{Add noise to input sequence}
+\begin{algorithmic}[1]
+\Procedure{NoiseInjection}{$\bm{x}=[x_1,...,x_n], \mathbb{V}, p_{noise}$}
+\For {$k$ = 1 to $n$}
+\If{$p_k \sim \textit{U}(0,1) \leq p_{noise}$}
+\State$x_k \gets x^{\prime}_k \in \mathbb{V}$
+\EndIf
+\EndFor
+
+\Return $\bm{x}$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+
+\section{Dataset Augmentation: Padding}
+
+Although more complex neural models are designed to cope with variable length input,
+in practice a more common and simple approach is to pad data to be of some specified
+length as described in chapter [CITE CHAPTER].
+In order to enforce uniform input size for our neural networks,
+we apply \textbf{zero-padding}.For any arbitrary training instance $BoW(\bm{s})=$ $\bm{x} = x_1,...,x_k$, we enforce that $k = n$, for the specified input size
+$n$. Thus, if $k \textless n$, we transform it into $\bm{x}_{pad} = x_1,...,x_k, 0_{k+1}, ..., 0_{n}$. Conversely, if
+$k \textgreater n$, we simply truncate $\bm{x}$ to be of size $n$. The input length introduces another model hyper-parameter
+that should be fine-tuned, but a reasonable approach is to pad enough to fully accomodate
+the length of most input sequences i.e. it’s preferrable to pad than truncate and lose
+information.
+
+Our network's input is a sequence of integers, each integer being a word index: a number representing a word in our vocabulary $\mathbb{V}$.
+Word indexes range from 1 to $|\mathbb{V}|$, and the index 0 being left for out-of-vocabulary words.
+When we pad our input sequence with 0’s, we don’t add any additional information; we
+simply create a constant input length. We propose that if instead we add values that characterize or help
+describe the input sequence more thoroughly, we may increase the amount of useful information
+available during neural network training.
+
+Consider a very simple input sequence, and assume its true label can be determined
+from a single word:
+
+\[\text{"This paper is about computer graphics"}\]
+
+where the label is "Graphics" i.e. a publication about computer graphics.
+In this simple case, the label is determined by the word "graphics". A single, \textbf{very
+informative} word is enough for the classifier to predict the label correctly. This very
+informative word however is only 1/6 of the entire text.
+
+Now consider a the padded version, where we enfore an input length of 10:
+
+\[\text{"This paper is about computer graphics PAD PAD PAD PAD"}\]
+
+In the padded version, the word graphics is now only 1/10 of the entire text. If we
+could find this very informative word from within the text and pad using it instead of some
+meaningless token e.g. 0's, we could increase the information of this word over the entire
+input sequence by making it comprise a larger amount of the input sequence. In other
+words, make important words be present more frequently.
+
+We propose to pad input sequences with \textbf{meaningful} values found already within the
+input text sequence instead of 0's only. In the following section, we will develop on how to
+extract these meaningful words via a cosine similarity-based metric and apply them to pad
+our data. In the following subsections, we propose several padding schemes in order reduce the amount of non-informative
+when training.
+
+\subsection{Wrap Padding}
+Our first padding scheme is to \textit{wrap around} the text, repeating words once we reach the padding portion.
+Refering back to the first example, the input sequence:
+\[\text{"This paper is about computer graphics PAD PAD PAD PAD"}\]
+
+would then be
+\[\text{"This paper is about computer graphics This paper is about"}\]
+
+One thing to observe is that using this simple scheme, we remove all 0's i.e. non-informative padding indexes
+from the text sequence, but we also don't have selection mechanism and can miss useful words such as missing the
+word "\textit{graphics}" in this example. Nonetheless, it is a simple first approach to pad our data.
+
+\subsection{Keyword Padding}
+One characteristic of the wrap padding scheme described above is that there is no selection mechanism. Words are not selected based on some metric,
+but rather just \textit{wrapped}. We now propose a simple algorithm to select \textit{keywords} from within the input text sequence
+based on a cosine similarity based metric, as well as a padding scheme using those keywords.
+
+Using word embeddings, word tokens i.e. strings can now be represented as dense, continuous vectors of dimensionality much smaller than
+vocabulary size. Another useful property of embeddings is that semantic relationships are captured
+in this embedding space and can be measured between any two words using the cosine
+similarity metric[CITE]. This is an attractive property that allows for term comparison
+by semantic relationships. These relationships can range from complete similarity i.e. the
+same term, to term orthogonality i.e. unrelated words, and even capture the direction of
+the relation e.g. negative values of cosine similarity.
+
+The cosine similarity between two vectors can be computed as follows:
+\[
+  \frac{\mathbf{x} \cdot \mathbf{y}}{\lVert \mathbf{x} \rVert \lVert \mathbf{y} \rVert}
+\]
+We can therefore quantify similarity between words in a sentece as a function of their
+cosine similarity with respect to each other. We refer to this measure as the \textit{within-sentence}
+cosine similarity. Similarly, we can measure this similarity for words within a noun phrase
+in a sentence. We call this the \textit{within-noun-phrase} cosine similarity.
+We represent a noun phrase $\mathbf{np}$ as a matrix composed of horizontally stacked vectors of size $d$, each vector a word in the noun phrase:
+
+\[\mathbf{np} = \begin{bmatrix}
+    \bm{np}_{1}   \\
+    \vdots \\
+    \bm{np}_{n}
+  \end{bmatrix},
+\bm{np}_{i} \in \mathbb{R}^{1 \times d}\]
+
+Given a noun phrase $\mathbf{np}$ comprised of $n$ unit norm embeddings $\bm{np}_i$, we can compute its \textit{within noun phrase} cosine similarity by:
+
+\[c = \frac{1}{{n^2}} \sum_{i=1}^{n} \sum_{j=1}^{n} \begin{bmatrix}
+    \bm{np}_{1}   \\
+    \vdots \\
+    \bm{np}_{n}
+  \end{bmatrix} \times \begin{bmatrix}
+      \bm{np}_{1}   \\
+      \vdots \\
+      \bm{np}_{n}
+    \end{bmatrix}^\mathsf{T}\]
+
+Thus, given a set of noun phrases $\{\mathbf{np}^{(1)}, \dots \mathbf{np}^{(m)}\}$ from a sentence, we compute the corresponding set of
+\textit{within noun phrase} cosine similarities $\bm{c} = \{c_1 \dots c_m\}$, and we select the noun phrase which corresponds to minimum
+
+\[\mathbf{np}^{(j)}, j = \argmin{\bm{c}}\].
+
+The reasoning behind the cosine similarity minimization is as follows: An informative
+noun phrase within a sentence will contain a word which will stand out from the rest of the
+words in the noun phrase. We quantify this notion of \textit{standing out from the rest} using the
+mean within-noun-phrase cosine similarity. We therefore compute, for all noun phrases in a
+sentence, the mean \textit{within-noun-phrase} average cosine similarity, as described in [REFER TO ALGORITHM].
+We select the noun phrase that minimizes this measure.
+
+In practice, we find both maximization and minimization of the mean \textit{within-nounphrase}
+average cosine similarity leads to interesting results i.e. reasonable words to be
+considered keywords, so we include them both for padding.
+[INCLUDE SNAPSHOT OF CSO OUTPUT]
+
+\subsection{Proposed Padding Scheme}
+We propose to pad an input sequence $\bm{x}_{pad} = x_1, ..., x_k, 0_{k+1}, ..., 0_n$ using
+the indexes of extracted keywords $x_{key^1}, ..., x_{key^j}$ by concatenating
+the non-zero entries $x_1, ..., x_k$ with the extracted keyword indexes:
+
+\[\bm{x}_{cso} = x_1, ..., x_k, x_{key^1}, ..., x_{key^j}, 0_{k+j+1}, ..., 0_n\]
+
+
+\section{Dataset Augmentation: Padding with Similar Keywords}
+Our CSO padding scheme can only pad with words already present in the input
+text sequence. It could prove beneficial to further pad the input with words that are \textit{similar}
+to its keywords i.e. words extracted via CSO. We therefore further pad the input sequence
+with the nearest neighbor of each keyword. In this context, we consider the nearest neighbor
+of a word embeddings $\bm{w}$ as:
+
+\[\min_{\bm{w}_i} 1 - \frac{\bm{w} \cdot \bm{w}_i}{\lVert \bm{w} \rVert \lVert \bm{w}_i \rVert}, \bm{w} \neq \bm{w}_i\]
+
+We use a Locality Sensitive Hashing forest for our approximate nearest neighbor search[CITE].
+After having computed the nearest neighbor of each keyword, we pad as follows:
+
+\[\bm{x}_{lsh} = x_1, ..., x_k, x_{key^1}, ..., x_{key^j},x_{lsh^1}, ..., x_{lsh^j}, 0_{k+j+1}, ..., 0_n\]
+
+\section{Reducing Data Granularity: From Abstract to Sentences}
+Our last proposed dataset augmentation scheme is break each training abtract into a set of sentences, and trained
+the network using this finer text granularity. For example, training a model using single sentences, another using sentence pairs,
+and another using sentence triplets.
+
+During testing, we break a test abstract into sentence sets and classify each set individually. We then assign
+the class with the largest mean.
+
+\section{Embedding Matrix: Avoiding Overfitting}

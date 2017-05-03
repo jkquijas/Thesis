@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2017.4.19)  28 APR 2017 02:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2017.4.19)  2 MAY 2017 20:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -28,6 +28,13 @@ File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \c@theorem=\count89
 \c@corollary=\count90
 )
+(c:/texlive/2016/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+(c:/texlive/2016/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
 (c:/texlive/2016/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2016/10/09 v1.0u Standard LaTeX Graphics (DPC,SPQR)
 
@@ -50,6 +57,9 @@ Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
 )
 \Gread@gobject=\count91
 ))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
 (c:/texlive/2016/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2016/11/05 v2.16a AMS math features
 \@mathmargin=\skip43
@@ -60,12 +70,12 @@ Package: amstext 2000/06/29 v2.01 AMS text
 
 (c:/texlive/2016/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks14
-\ex@=\dimen103
+\@emptytoks=\toks15
+\ex@=\dimen105
 ))
 (c:/texlive/2016/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen104
+\pmbraise@=\dimen106
 )
 (c:/texlive/2016/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
@@ -82,7 +92,7 @@ LaTeX Info: Redefining \dots on input line 475.
 LaTeX Info: Redefining \cdots on input line 596.
 \Mathstrutbox@=\box26
 \strutbox@=\box27
-\big@size=\dimen105
+\big@size=\dimen107
 LaTeX Font Info:    Redeclaring font encoding OML on input line 712.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
 \macc@depth=\count97
@@ -90,21 +100,21 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
 \dotsspace@=\muskip10
 \c@parentequation=\count99
 \dspbrk@lvl=\count100
-\tag@help=\toks15
+\tag@help=\toks16
 \row@=\count101
 \column@=\count102
 \maxfields@=\count103
-\andhelp@=\toks16
-\eqnshift@=\dimen106
-\alignsep@=\dimen107
-\tagshift@=\dimen108
-\tagwidth@=\dimen109
-\totwidth@=\dimen110
-\lineht@=\dimen111
-\@envbody=\toks17
+\andhelp@=\toks17
+\eqnshift@=\dimen108
+\alignsep@=\dimen109
+\tagshift@=\dimen110
+\tagwidth@=\dimen111
+\totwidth@=\dimen112
+\lineht@=\dimen113
+\@envbody=\toks18
 \multlinegap=\skip44
 \multlinetaggap=\skip45
-\mathdisplay@stack=\toks18
+\mathdisplay@stack=\toks19
 LaTeX Info: Redefining \[ on input line 2817.
 LaTeX Info: Redefining \] on input line 2818.
 )
@@ -147,12 +157,12 @@ nment
 (c:/texlive/2016/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count111
-\float@exts=\toks19
+\float@exts=\toks20
 \float@box=\box28
-\@float@everytoks=\toks20
+\@float@everytoks=\toks21
 \@floatcapt=\box29
 )
-\@float@every@algorithm=\toks21
+\@float@every@algorithm=\toks22
 \c@algorithm=\count112
 )
 (c:/texlive/2016/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
@@ -164,32 +174,32 @@ Document Style - pseudocode environments for use with the `algorithmicx' style
 (./chapter6.aux) (./ref.aux) (./vitae.aux))
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
 
 (c:/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count113
-\scratchdimen=\dimen112
+\scratchdimen=\dimen114
 \scratchbox=\box30
 \nofMPsegments=\count114
 \nofMParguments=\count115
-\everyMPshowfont=\toks22
+\everyMPshowfont=\toks23
 \MPscratchCnt=\count116
-\MPscratchDim=\dimen113
+\MPscratchDim=\dimen115
 \MPnumerator=\count117
 \makeMPintoPDFobject=\count118
-\everyMPtoPDFconversion=\toks23
+\everyMPtoPDFconversion=\toks24
 ) (c:/texlive/2016/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2017/03/19 v0.25 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -218,10 +228,6 @@ Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
 (c:/texlive/2016/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
 
-(c:/texlive/2016/texmf-dist/tex/latex/graphics/keyval.sty
-Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks24
-)
 (c:/texlive/2016/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
 Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
 
@@ -243,43 +249,43 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Underfull \hbox (badness 10000) in paragraph at lines 59--59
+Underfull \hbox (badness 10000) in paragraph at lines 61--61
 
  []
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 59.
+LaTeX Font Info:    Try loading font information for U+msa on input line 61.
 (c:/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 59.
+LaTeX Font Info:    Try loading font information for U+msb on input line 61.
 
 (c:/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 10000) in paragraph at lines 59--59
+Underfull \hbox (badness 10000) in paragraph at lines 61--61
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 59--59
+Underfull \hbox (badness 10000) in paragraph at lines 61--61
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 59--59
+Underfull \hbox (badness 10000) in paragraph at lines 61--61
 
  []
 
 [1
 
 {c:/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 63.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 65.
 
 (c:/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 63.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 65.
  [2] [3] [4]
 \openout2 = `acknowl.aux'.
 
@@ -297,83 +303,88 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 ] (./thesis.toc [7
 
 
-])
+] [8])
 \tf@toc=\write3
 \openout3 = `thesis.toc'.
 
- [8]
+ [9]
+(./thesis.lof)
+\tf@lof=\write4
+\openout4 = `thesis.lof'.
+
+ [10
+
+]
 \openout2 = `null.aux'.
 
-
-(c:/texlive/2016/texmf-dist/tex/generic/knuth-lib/null.tex)
+ (c:/texlive/2016/texmf-dist/tex/generic/knuth-lib/null.tex)
 \openout2 = `chapter1.aux'.
 
- (./chapter1.tex
+(./chapter1.tex
 Chapter 1.
 [1
 
 
 
 
-]) [2]
+] <Diagrams/OverfittingLossPlot.png, id=46, 873.2625pt x 563.85657pt>
+File: Diagrams/OverfittingLossPlot.png Graphic file (type png)
+
+<use Diagrams/OverfittingLossPlot.png>
+Package pdftex.def Info: Diagrams/OverfittingLossPlot.png used on input line 57
+.
+(pdftex.def)             Requested size: 231.26378pt x 149.31802pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[2]) [3 <./Diagrams/OverfittingLossPlot.png>] [4]
 \openout2 = `chapter2.aux'.
 
  (./chapter2.tex
 Chapter 2.
-[3
+<Diagrams/EmbeddingViz.png, id=63, 886.81313pt x 453.94594pt>
+File: Diagrams/EmbeddingViz.png Graphic file (type png)
+
+<use Diagrams/EmbeddingViz.png>
+Package pdftex.def Info: Diagrams/EmbeddingViz.png used on input line 16.
+(pdftex.def)             Requested size: 231.26378pt x 118.37642pt.
+ [5
 
 
 
-]) [4]
+ <./Diagrams/EmbeddingViz.png>]
+<Diagrams/FeatureMap.png, id=67, 683.55376pt x 576.65437pt>
+File: Diagrams/FeatureMap.png Graphic file (type png)
+
+<use Diagrams/FeatureMap.png>
+Package pdftex.def Info: Diagrams/FeatureMap.png used on input line 38.
+(pdftex.def)             Requested size: 231.26378pt x 195.092pt.
+ [6] [7 <./Diagrams/FeatureMap.png>]) [8]
 \openout2 = `chapter3.aux'.
 
- (./chapter3.tex
+
+(./chapter3.tex
 Chapter 3.
-[5
+<Diagrams/EmbeddingLayer.png, id=77, 911.65594pt x 470.50781pt>
+File: Diagrams/EmbeddingLayer.png Graphic file (type png)
+
+<use Diagrams/EmbeddingLayer.png>
+Package pdftex.def Info: Diagrams/EmbeddingLayer.png used on input line 19.
+(pdftex.def)             Requested size: 231.26378pt x 119.35689pt.
+ [9
 
 
 
-] [6] [7]
+] [10 <./Diagrams/EmbeddingLayer.png>]
+<Diagrams/ModelPipeline.png, id=85, 924.45375pt x 357.58594pt>
+File: Diagrams/ModelPipeline.png Graphic file (type png)
 
-LaTeX Warning: Command \textless invalid in math mode on input line 88.
-
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 88.
-(c:/texlive/2016/texmf-dist/tex/latex/base/omlcmr.fd
-File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 88.
-
-
-LaTeX Warning: Command \textless invalid in math mode on input line 88.
-
-
-LaTeX Warning: Command \textgreater invalid in math mode on input line 89.
-
-
-LaTeX Warning: Command \textgreater invalid in math mode on input line 89.
-
-Missing character: There is no â in font cmr12!
-Missing character: There is no € in font cmr12!
-Missing character: There is no ™ in font cmr12!
-Missing character: There is no â in font cmr12!
-Missing character: There is no € in font cmr12!
-Missing character: There is no ™ in font cmr12!
-Missing character: There is no â in font cmr12!
-Missing character: There is no € in font cmr12!
-Missing character: There is no ™ in font cmr12!
-[8] [9] [10] [11]
-Overfull \hbox (7.4002pt too wide) in paragraph at lines 206--206
-[]\OT1/cmr/bx/n/17.28 Dataset Aug-men-ta-tion: Padding with Sim-i-lar Key-
- []
-
-
-Overfull \hbox (28.40486pt too wide) in paragraph at lines 215--217
-[]\OT1/cmr/m/n/12 We use a Lo-cal-ity Sen-si-tive Hash-ing for-est for our ap-p
-rox-i-mate near-est neigh-bor search[CITE].
- []
-
-) [12] [13]
+<use Diagrams/ModelPipeline.png>
+Package pdftex.def Info: Diagrams/ModelPipeline.png used on input line 57.
+(pdftex.def)             Requested size: 231.26378pt x 89.45082pt.
+ [11 <./Diagrams/ModelPipeline.png>] [12])
+[13]
 \openout2 = `chapter4.aux'.
 
  (./chapter4.tex
@@ -382,40 +393,80 @@ Chapter 4.
 
 
 
-] [15]) [16]
+] [15] [16]
+
+LaTeX Warning: Command \textless invalid in math mode on input line 94.
+
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 94.
+(c:/texlive/2016/texmf-dist/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 94.
+
+
+LaTeX Warning: Command \textless invalid in math mode on input line 94.
+
+
+LaTeX Warning: Command \textgreater invalid in math mode on input line 95.
+
+
+LaTeX Warning: Command \textgreater invalid in math mode on input line 95.
+
+Missing character: There is no â in font cmr12!
+Missing character: There is no € in font cmr12!
+Missing character: There is no ™ in font cmr12!
+Missing character: There is no â in font cmr12!
+Missing character: There is no € in font cmr12!
+Missing character: There is no ™ in font cmr12!
+Missing character: There is no â in font cmr12!
+Missing character: There is no € in font cmr12!
+Missing character: There is no ™ in font cmr12!
+[17] [18] [19] [20]
+Overfull \hbox (7.4002pt too wide) in paragraph at lines 212--212
+[]\OT1/cmr/bx/n/17.28 Dataset Aug-men-ta-tion: Padding with Sim-i-lar Key-
+ []
+
+
+Overfull \hbox (28.40486pt too wide) in paragraph at lines 221--223
+[]\OT1/cmr/m/n/12 We use a Lo-cal-ity Sen-si-tive Hash-ing for-est for our ap-p
+rox-i-mate near-est neigh-bor search[CITE].
+ []
+
+[21]) [22]
 \openout2 = `chapter5.aux'.
 
  (./chapter5.tex
 Chapter 5.
-[17
+[23
 
 
 
-] [18] [19]
-Overfull \hbox (23.16063pt too wide) in paragraph at lines 159--164
+] [24] [25] [26]
+Overfull \hbox (23.16063pt too wide) in paragraph at lines 173--178
  [] 
  []
 
-) [20]
+) [27]
 \openout2 = `chapter6.aux'.
 
  (./chapter6.tex
 Chapter 6.
-) [21
+) [28
 
 
 
 ]
 \openout2 = `ref.aux'.
 
- (./ref.tex [22
+ (./ref.tex) [29
 
 
 
-]) [23]
+]
 \openout2 = `vitae.aux'.
 
- (./vitae.tex) [24
+ (./vitae.tex) [30
 
 
 
@@ -424,13 +475,13 @@ Chapter 6.
 ) (./chapter4.aux) (./chapter5.aux) (./chapter6.aux) (./ref.aux) (./vitae.aux))
  ) 
 Here is how much of TeX's memory you used:
- 3037 strings out of 493013
- 40717 string characters out of 6136993
- 120297 words of memory out of 5000000
- 6439 multiletter control sequences out of 15000+600000
+ 3130 strings out of 493013
+ 42447 string characters out of 6136993
+ 119808 words of memory out of 5000000
+ 6519 multiletter control sequences out of 15000+600000
  15486 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 39i,8n,25p,257b,319s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 39i,8n,25p,618b,319s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/tex
 live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><c:/texlive/2016/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><c:/texlive/2016/texmf-d
@@ -448,10 +499,10 @@ c/amsfonts/cm/cmss8.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
 /cm/cmsy10.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8
 .pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/
 texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on thesis.pdf (32 pages, 237594 bytes).
+Output written on thesis.pdf (40 pages, 565651 bytes).
 PDF statistics:
- 184 PDF objects out of 1000 (max. 8388607)
- 129 compressed objects within 2 object streams
+ 216 PDF objects out of 1000 (max. 8388607)
+ 148 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 26 words of extra memory for PDF output out of 10000 (max. 10000000)
 

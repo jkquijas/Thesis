@@ -15,7 +15,21 @@ characters, and converting to lower case characters. [Overlap Figure] [Class Dis
 Figures]
 
 \section{Results}
-In this section we show our experimental results. [Add tables and most relevant plots]
+In this section we show our experimental results. Because of the large number of hyper-parameters we vary, we
+used a random search procedure. During each test, we randomly sample each hyper-parameter from s corresponding
+range.
+\section{Model Hyper-Parameters}
+\begin{itemize}
+  \item number of training words: 10000-100000
+  \item kernel size: 2-6
+  \item pool size: 2-6
+  \item learning rate: 10e-6 - 10e-2
+  \item regularization rate 10e-6 - 10e-1
+  \item dropout rate 0.0-0.5
+  \item maximum sequence length
+\end{itemize}
+
+
 
 %
 %%%%%%%%%%% ASTROPHYSICS
