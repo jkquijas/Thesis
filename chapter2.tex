@@ -19,7 +19,7 @@ tend to lie close to each other in embedding space.}
 \section{Convolutional Neural Networks}
 Convolutional neural networks are known for their abilities to learn high-level features from raw data. As input signals advance
 forward through the network, they produce latent signals as linear conbinations with learned parameters, have non-linearities applied
-to them, and have a pooling or selection mechanism based on simple functions such as the average or maximum operations.
+to them, and have a pooling or selection mechanism based on simple functions such as the average or maximum operations [CITE ZHOU AND CHELLAPA 1988].
 
 When dealing with image data, images are convolved with multiple filters, each convolution applied to overlapping subimages called as receptive fields.
 This localized convolution process leads to discovery of low level features of images in the training set such as edges. As data
@@ -27,7 +27,7 @@ flows forward through the model, higher level features are discovered e.g. wheel
 
 These convolutional neural networks are comprised of \textit{feature maps}. A feature map is a \textbf{convolution} layer paired with a
 \textbf{pooling} layer afterwards. The convolution stage creates \textit{activations}, whereas the pooling stage
-reduces dimensionality and creates translation invariance[CITE].
+reduces dimensionality and creates translation invariance.
 
 \begin{figure}[H]
 \caption{Visualization of a feature map with a single kernel. In this example, the kernel convolves tri-grams, or windows of three words.

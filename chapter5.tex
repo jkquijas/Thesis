@@ -11,25 +11,51 @@ and quantitative finance departments. For each department, we considered each \t
 class. For example, when considering computer science publications, we considered the
 "computational complexity" topic as one class, "artificial intelligence" as another class,
 and so on. We apply simple preprocessing to the texts by removing non-alphanumeric
-characters, and converting to lower case characters. [Overlap Figure] [Class Distribution
-Figures]
+characters, and converting to lower case characters.
 
-\section{Results}
-In this section we show our experimental results. Because of the large number of hyper-parameters we vary, we
-used a random search procedure. During each test, we randomly sample each hyper-parameter from s corresponding
-range.
-\section{Model Hyper-Parameters}
-\begin{itemize}
-  \item number of training words: 10000-100000
-  \item kernel size: 2-6
-  \item pool size: 2-6
-  \item learning rate: 10e-6 - 10e-2
-  \item regularization rate 10e-6 - 10e-1
-  \item dropout rate 0.0-0.5
-  \item maximum sequence length
-\end{itemize}
+\begin{center}\begin{tabular}{||c c||}
+ \hline
+ Department & Number of Labels\\ [0.5ex]
+ \hline\hline
+AstroPhysics & 5\\
+Physics & 13\\
+Computer Science & 20\\
+Mathematics & 26\\
+Quant. Bio & 0\\
+ [1ex]\hline\end{tabular}\end{center}
 
+For our pretrained embeddgins, we used the GloVe embedding set [CITE GLOVE]. This set consists of six billion tokens, each represented
+as a vector of size 100.
 
+\section{Freezing the Embeddings: Results}
+We tested the four different proposed embedding training approaches.
+The first is to leave the embeddings frozen throughout training i.e. non-trainable parameters.
+The second approach is to freeze the embeddings until convergeance, then retrain with the embeddings unfrozen.
+The thid approach is to train with the embeddings unfrozen for a small amount of epochs e.g. three, then
+freeze the embeddings and retrain the model.
+The last approach is to simply train with the embeddings as trainable parameters from the very beggining.
+
+We now present our results
+\begin{center}\begin{table}[H]\begin{tabular}{||c c c c c c ||}
+ \hline
+ Dataset & Training Set Size & Frozen & Not-Frozen & Freeze-Unfreeze & Flash-Freeze\\ [0.5ex]
+ \hline\hline
+AstroPhysics & 17500 & .755(6) & .770(8) & 0.769(14) & \textbf{.775(6)}\\
+Physics &  45000 & .715(9) & \textbf{.781}(10) & .777(39) & .780\textbf{(8)}\\
+Computer Science & 63400 & .621\textbf{(9)} & .693(12) & 0.695(56) & \textbf{.701}(10)\\
+Mathematics & 87700 & .590(22) & \textbf{.685}(21) & .678(72) & .684\textbf{(11)}\\
+Quant. Bio & 11000 & .834(15) & .835(6) & 0.836(21) & \textbf{.841(5)}\\
+ [1ex]\hline\end{tabular}\caption{Accuracy results on all datasets with proposed embedding training schemes.
+ The numbers in parenthesis represent the number of epochs until the model converged.}
+\end{table}\end{center}
+
+We observe that the Flash-Freeze method achieves relatively faster convergence, with accuracy competent or better than
+the accuracy of all other methods.
+
+\section{Data Augmentation Results}
+In this section we show our experimental results when using our proposed data augmentation techniques. Our model hyper-parameters are as follows:
+number of training words=20000, kernel size=3, learning rate=0.001, regularization rate=0.00001,
+dropout rate = 0.2, maximum sequence length = 250.
 
 %
 %%%%%%%%%%% ASTROPHYSICS

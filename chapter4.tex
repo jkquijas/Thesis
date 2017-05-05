@@ -2,41 +2,46 @@
 
 \chapter{Towards Improving Model Performance: Regularization and Data Augmentation}
 
-\section{Model Regularization}
-Regularization is any approach used to reduce test error but not training error.
-
-
-\subsection{Freezing the Embedding Layer}
+\section{Freezing the Embedding Layer}
 When we make our model's embeddings trainable, its number of parameters highly increases. The embedding matrix
 adds a number of weights equal to the maximum input sequence length times the embedding size.
-While we observe that finetuning the embeddings yields better model accuracy, it also leads to rapid overfitting
+While we observe that finetuning the embeddings yields good model accuracy, it also leads to rapid overfitting
 of when the dataset is of moderate size. We therefore try to answer the question: can we finetune the embeddings
 in such a way that we can avoid overfitting but retain the performance boost that comes along with it?
-In the following subsections, we present some proposed training schemes that change the embedding layer \textit{trainability}.
+We propose some embedding layer training schemes.
 
-\subsection{Frozen Embeddings}
-With this scheme, we \textit{freeze} the embedding layer altogether. Not once during training do we update
-the embedding vectors, so the model relies completely on its other layers' parameters.
+\begin{itemize}
+  \item{Frozen Embeddings}
+  \begin{itemize}
+    \item{With this scheme, we \textit{freeze} the embedding layer altogether. Not once during training do we update
+    the embedding vectors, so the model relies completely on its other layers' parameters.}
+  \end{itemize}
+  \item{Freeze-Unfreeze}
+  \begin{itemize}
+    \item{With the \textit{freeze-unfreeze} scheme, we train the model with its embedding layer frozen until some
+    stopping criterion is met e.g. early stopping due to validation error increase. After this, we make the
+    embedding layer trainable.}
+  \end{itemize}
+  \item{Flash-Freeze}
+  \begin{itemize}
+    \item{In the \textit{flash-freeze} scheme, we allow the embedding layer to be trainable for a small number of
+    epochs e.g. two, then freeze it or make it non-trainable.}
+  \end{itemize}
+  \item{Unfrozen Embeddings}
+  \begin{itemize}
+    \item{On the other extreme of the spectrum, we allow the embeddings layer to be trainable from the very beggining.
+    This scheme makes the model converge in a small number of iterations but quickly starts to overfit the data.}
+  \end{itemize}
+\end{itemize}
 
-\subsection{Freeze-Unfreeze}
-With the \textit{freeze-unfreeze} scheme, we train the model with its embedding layer frozen until some
-stopping criterion is met e.g. early stopping due to validation error increase. After this, we make the
-embedding layer trainable.
+Enabling the embedding layer to be trainable drastically increases the amount of parameters in the model. We observe that
+although fine-tuning the embeddings generally increases accuracy on the test set, the model quickly overfits the training data.
 
-\subsection{Flash-Freeze}
-In the \textit{flash-freeze} scheme, we allow the embedding layer to be trainable for a small number of
-epochs e.g. two, then freeze it or make it non-trainable.
-
-\subsection{Unfrozen Embeddings}
-On the other extreme of the spectrum, we allow the embeddings layer to be trainable from the very beggining.
-This scheme makes the model converge in a small number of iterations but quickly starts to overfit the data.
-
-[IMAGE]
 \section{Dataset Augmentation: Shuffling and Noise Injection}
 Another way to improve model performance is to \textbf{augment} the dataset.
 Data augmentation refers to any transformation of the input data in a way that
 the label value does not change. Data augmentation is ubiquitous in computer vision tasks. Example transformations include translations, rotations, and even color intensity jitters via Pricipal Component
-Analysis[CITE]. All these tranformations should be are subtle enough that the overall structure is preserved, but
+Analysis[CITE]. All thesse tranformations should be are subtle enough that the overall structure is preserved, but
 allow for the model to process more distinct training data points.
 
 In order to introduce more variance into our dataset, we propose to \textbf{shuffle} and \textbf{add noise} to the input sequences.
