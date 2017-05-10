@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2017.4.19)  5 MAY 2017 00:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2017.4.19)  9 MAY 2017 22:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -169,9 +169,7 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 Package: algpseudocode 
 
 Document Style - pseudocode environments for use with the `algorithmicx' style
-) (./thesis.aux (./acknowl.aux) (./abstract.aux) (./null.aux) (./chapter1.aux)
-(./chapter2.aux) (./chapter3.aux) (./chapter4.aux) (./chapter5.aux)
-(./chapter6.aux) (./ref.aux) (./vitae.aux))
+) (./thesis.aux)
 \openout1 = `thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
@@ -300,19 +298,19 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 
 
 
-] (./thesis.toc [7
-
-
-] [8])
+] [7] (./thesis.toc)
 \tf@toc=\write3
 \openout3 = `thesis.toc'.
 
- [9]
-(./thesis.lof)
+ [8
+
+
+] (./thesis.lof)
 \tf@lof=\write4
 \openout4 = `thesis.lof'.
 
- [10
+
+[9
 
 ]
 \openout2 = `null.aux'.
@@ -320,202 +318,68 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
  (c:/texlive/2016/texmf-dist/tex/generic/knuth-lib/null.tex)
 \openout2 = `chapter1.aux'.
 
-(./chapter1.tex
+ (./chapter1.tex
 Chapter 1.
+
+Overfull \hbox (19.83815pt too wide) in paragraph at lines 22--22
+[]\OT1/cmr/bx/n/17.28 Minimizing Non-Convex Func-tions: Gradiant-Based
+ []
+
 [1
 
 
 
 
-] <Diagrams/OverfittingLossPlot.png, id=47, 873.2625pt x 563.85657pt>
+] [2] <Diagrams/OverfittingLossPlot.png, id=51, 873.2625pt x 563.85657pt>
 File: Diagrams/OverfittingLossPlot.png Graphic file (type png)
 
 <use Diagrams/OverfittingLossPlot.png>
-Package pdftex.def Info: Diagrams/OverfittingLossPlot.png used on input line 57
+Package pdftex.def Info: Diagrams/OverfittingLossPlot.png used on input line 70
 .
 (pdftex.def)             Requested size: 231.26378pt x 149.31802pt.
+ [3 <./Diagrams/OverfittingLossPlot.png>])
+Overfull \hbox (71.19112pt too wide) in paragraph at lines 95--104
+\OT1/cmr/m/n/12 A re-cently pro-posed and highly ef-fec-tive way to reg-u-lar-i
+ze a neu-ral net-work is via \OT1/cmr/bx/n/12 dropout\OT1/cmr/m/n/12 CITE[HINTO
+N
+ []
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[2]) [3 <./Diagrams/OverfittingLossPlot.png>] [4]
+[4]
 \openout2 = `chapter2.aux'.
 
  (./chapter2.tex
 Chapter 2.
-<Diagrams/EmbeddingViz.png, id=64, 886.81313pt x 453.94594pt>
+Missing character: There is no Ã in font cmr12!
+Missing character: There is no ¼ in font cmr12!
+[5
+
+
+
+] <Diagrams/EmbeddingViz.png, id=63, 886.81313pt x 453.94594pt>
 File: Diagrams/EmbeddingViz.png Graphic file (type png)
 
 <use Diagrams/EmbeddingViz.png>
-Package pdftex.def Info: Diagrams/EmbeddingViz.png used on input line 16.
+Package pdftex.def Info: Diagrams/EmbeddingViz.png used on input line 50.
 (pdftex.def)             Requested size: 231.26378pt x 118.37642pt.
- [5
+ [6]
+Overfull \hbox (2.00186pt too wide) in paragraph at lines 67--67
+[]\OT1/cmr/bx/n/14.4 Input Rep-re-sen-ta-tion: Word Em-bed-dings for Con-vo-lu-
+tional
+ []
 
-
-
- <./Diagrams/EmbeddingViz.png>]
-<Diagrams/FeatureMap.png, id=68, 683.55376pt x 576.65437pt>
+[7 <./Diagrams/EmbeddingViz.png>]
+<Diagrams/FeatureMap.png, id=70, 683.55376pt x 576.65437pt>
 File: Diagrams/FeatureMap.png Graphic file (type png)
 
 <use Diagrams/FeatureMap.png>
-Package pdftex.def Info: Diagrams/FeatureMap.png used on input line 38.
+Package pdftex.def Info: Diagrams/FeatureMap.png used on input line 82.
 (pdftex.def)             Requested size: 231.26378pt x 195.092pt.
- [6] [7 <./Diagrams/FeatureMap.png>]) [8]
+) [8 <./Diagrams/FeatureMap.png>]
 \openout2 = `chapter3.aux'.
 
-
-(./chapter3.tex
+ (./chapter3.tex
 Chapter 3.
-<Diagrams/EmbeddingLayer.png, id=78, 1028.34187pt x 578.16pt>
+<Diagrams/EmbeddingLayer.png, id=74, 1028.34187pt x 578.16pt>
 File: Diagrams/EmbeddingLayer.png Graphic file (type png)
 
-<use Diagrams/EmbeddingLayer.png>
-Package pdftex.def Info: Diagrams/EmbeddingLayer.png used on input line 19.
-(pdftex.def)             Requested size: 231.26378pt x 130.01863pt.
- [9
-
-
-
-] [10 <./Diagrams/EmbeddingLayer.png>]
-<Diagrams/RecurrentNet.png, id=86, 858.20625pt x 489.32813pt>
-File: Diagrams/RecurrentNet.png Graphic file (type png)
-
-<use Diagrams/RecurrentNet.png>
-Package pdftex.def Info: Diagrams/RecurrentNet.png used on input line 48.
-(pdftex.def)             Requested size: 231.26378pt x 131.85902pt.
- [11 <./Diagrams/RecurrentNet.png>]
-<Diagrams/ModelPipeline.png, id=90, 924.45375pt x 357.58594pt>
-File: Diagrams/ModelPipeline.png Graphic file (type png)
-
-<use Diagrams/ModelPipeline.png>
-Package pdftex.def Info: Diagrams/ModelPipeline.png used on input line 85.
-(pdftex.def)             Requested size: 231.26378pt x 89.45082pt.
- [12 <./Diagrams/ModelPipeline.png>] [13])
-[14]
-\openout2 = `chapter4.aux'.
-
- (./chapter4.tex
-Chapter 4.
-[15
-
-
-
-] [16] [17]
-
-LaTeX Warning: Command \textless invalid in math mode on input line 99.
-
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 99.
-(c:/texlive/2016/texmf-dist/tex/latex/base/omlcmr.fd
-File: omlcmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 99.
-
-
-LaTeX Warning: Command \textless invalid in math mode on input line 99.
-
-
-LaTeX Warning: Command \textgreater invalid in math mode on input line 100.
-
-
-LaTeX Warning: Command \textgreater invalid in math mode on input line 100.
-
-Missing character: There is no â in font cmr12!
-Missing character: There is no € in font cmr12!
-Missing character: There is no ™ in font cmr12!
-Missing character: There is no â in font cmr12!
-Missing character: There is no € in font cmr12!
-Missing character: There is no ™ in font cmr12!
-Missing character: There is no â in font cmr12!
-Missing character: There is no € in font cmr12!
-Missing character: There is no ™ in font cmr12!
-[18] [19] [20] [21]
-Overfull \hbox (7.4002pt too wide) in paragraph at lines 217--217
-[]\OT1/cmr/bx/n/17.28 Dataset Aug-men-ta-tion: Padding with Sim-i-lar Key-
- []
-
-
-Overfull \hbox (28.40486pt too wide) in paragraph at lines 226--228
-[]\OT1/cmr/m/n/12 We use a Lo-cal-ity Sen-si-tive Hash-ing for-est for our ap-p
-rox-i-mate near-est neigh-bor search[CITE].
- []
-
-[22]) [23]
-\openout2 = `chapter5.aux'.
-
- (./chapter5.tex
-Chapter 5.
-[24
-
-
-
-]
-Overfull \hbox (37.49585pt too wide) in paragraph at lines 39--49
-[][] 
- []
-
-[25] [26] [27]
-Overfull \hbox (23.16063pt too wide) in paragraph at lines 199--204
- [] 
- []
-
-) [28]
-\openout2 = `chapter6.aux'.
-
- (./chapter6.tex
-Chapter 6.
-) [29
-
-
-
-]
-\openout2 = `ref.aux'.
-
- (./ref.tex) [30
-
-
-
-]
-\openout2 = `vitae.aux'.
-
- (./vitae.tex) [31
-
-
-
-] (./thesis.aux (./acknowl.aux)
-(./abstract.aux) (./null.aux) (./chapter1.aux) (./chapter2.aux) (./chapter3.aux
-) (./chapter4.aux) (./chapter5.aux) (./chapter6.aux) (./ref.aux) (./vitae.aux))
- ) 
-Here is how much of TeX's memory you used:
- 3137 strings out of 493013
- 42605 string characters out of 6136993
- 117808 words of memory out of 5000000
- 6525 multiletter control sequences out of 15000+600000
- 15486 words of font info for 55 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 39i,8n,25p,618b,338s stack positions out of 5000i,500n,10000p,200000b,80000s
-<c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/tex
-live/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb><c:/texlive/2016/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><c:/texlive/2016/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2016/texmf-dist/font
-s/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2016/texmf-dist/fonts/type1/p
-ublic/amsfonts/cm/cmmi12.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmmi6.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mmi8.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb
-><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb><c:
-/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2
-016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2016/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2016/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2016/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmss8.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmsy10.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8
-.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb><c:/
-texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb><c:/texlive/20
-16/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on thesis.pdf (41 pages, 619495 bytes).
-PDF statistics:
- 224 PDF objects out of 1000 (max. 8388607)
- 153 compressed objects within 2 object streams
- 0 named destinations out of 1000 (max. 500000)
- 31 words of extra memory for PDF output out of 10000 (max. 10000000)
-
+<use Dia

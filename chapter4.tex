@@ -1,57 +1,80 @@
 % chap3.tex (Definitions and Theorem)
 
-\chapter{Towards Improving Model Performance: Regularization and Data Augmentation}
+\chapter{Towards Improving Model Performance: Embeddings and Data Augmentation}
+As mentioned in [REFER TO SECTION], we can fine-tune the word embeddings via back-propagation and gradient descent (or some other
+gradient-based optimizer), just as any other weights in the neural network. In this case, the number of parameters in our model increases drastically.
+With more free parameters to learn from the data, it is easier to overfit. This is especially true if the amount of training data is limited, as is the case
+with our particular task. Another important aspect to consider when fine-tuning the embeddings is whether we lose the semantic information originally
+present in them. It is therefore a good idea to quantify the effect of training the embeddings. In the following sections, we propose different ways
+treat the embedding layer in our neural network in order to mitigate overfitting. We also consider reducing the dimensionality of the embeddings
+via Principal Component Analysis (PCA). Finally, we propose data augmentation techniques inspired from computer vision tasks but designed for
+text data with temporal structure, as is the case with our data.
 
 \section{Freezing the Embedding Layer}
-When we make our model's embeddings trainable, its number of parameters highly increases. The embedding matrix
-adds a number of weights equal to the maximum input sequence length times the embedding size.
-While we observe that finetuning the embeddings yields good model accuracy, it also leads to rapid overfitting
-of when the dataset is of moderate size. We therefore try to answer the question: can we finetune the embeddings
-in such a way that we can avoid overfitting but retain the performance boost that comes along with it?
-We propose some embedding layer training schemes.
+When we make our model's embeddings trainable, its number of parameters highly increases. With inputs of size $n$,
+and embeddings of size $d$, we introduce $n \times d$ new parameters into the model.
+We therefore propose multiple embedding \textit{trainability} schemes to quantify how much the embeddings help increase (or decrease) test
+accuracy and overfitting.
 
 \begin{itemize}
   \item{Frozen Embeddings}
   \begin{itemize}
     \item{With this scheme, we \textit{freeze} the embedding layer altogether. Not once during training do we update
-    the embedding vectors, so the model relies completely on its other layers' parameters.}
+    the embedding vectors, so the model relies completely on its other parameters to fit the data.}
   \end{itemize}
   \item{Freeze-Unfreeze}
   \begin{itemize}
     \item{With the \textit{freeze-unfreeze} scheme, we train the model with its embedding layer frozen until some
-    stopping criterion is met e.g. early stopping due to validation error increase. After this, we make the
-    embedding layer trainable.}
+    stopping criterion is met e.g. early stopping due to validation error increase. After this, we \textit{unfreeze}, or make the
+    embedding layer trainable, and retrain the model.}
   \end{itemize}
   \item{Flash-Freeze}
   \begin{itemize}
     \item{In the \textit{flash-freeze} scheme, we allow the embedding layer to be trainable for a small number of
-    epochs e.g. two, then freeze it or make it non-trainable.}
+    epochs e.g. two, then freeze it and retrain the model.}
   \end{itemize}
   \item{Unfrozen Embeddings}
   \begin{itemize}
-    \item{On the other extreme of the spectrum, we allow the embeddings layer to be trainable from the very beggining.
-    This scheme makes the model converge in a small number of iterations but quickly starts to overfit the data.}
+    \item{We allow the embeddings layer to be trainable from the very beggining. We consider this training scheme as our \textbf{baseline}.}
   \end{itemize}
 \end{itemize}
 
-Enabling the embedding layer to be trainable drastically increases the amount of parameters in the model. We observe that
-although fine-tuning the embeddings generally increases accuracy on the test set, the model quickly overfits the training data.
+\section{Principal Component Analysis and Dimensionality Reduction of the Embeddings}
+Principal Component Analysis (PCA) is a very popular linear transformation commonly used to reduce dimensionality of a dataset CITE[Shlens 2005].
+It projects the data to a representation where each variable is linearly uncorrelated. Concretely, PCA rotates the data onto new axes called principal
+components. Given a data matrix $\bm{X}$ with $n$ dimensions, its principal components are the eigenvectors of the covariance matrix $\bm{X}^T\bm{X}$. The first principal component is the direction of most variation. The second principal component is the direction with the next largest amount
+of variation, and so on. We can then choose to retain only the $k<n$ principal components that contain the most amount of variation in the data.
+
+We propose to apply PCA to the word embeddings in order to linearly decorrelate their dimensions and reduce their dimensionality.
+By reducing the dimensionality while preserving the majority of the variance in them (e.g. 95\%), we will reduce the amount of parameters introduced
+to the model while retaining most of the information from the original embeddings.
+
+
 
 \section{Dataset Augmentation: Shuffling and Noise Injection}
-Another way to improve model performance is to \textbf{augment} the dataset.
+Another common practice aimed to reducing overfitting is to \textbf{augment} the dataset.
 Data augmentation refers to any transformation of the input data in a way that
-the label value does not change. Data augmentation is ubiquitous in computer vision tasks. Example transformations include translations, rotations, and even color intensity jitters via Pricipal Component
-Analysis[CITE]. All thesse tranformations should be are subtle enough that the overall structure is preserved, but
+the label value does not change. Data augmentation is ubiquitous in computer vision tasks. Example transformations include translations,
+rotations, and color intensity jitters via Pricipal Component Analysis CITE[krizhevsky 2012]. All these tranformations should be subtle enough that the overall structure is preserved, but
 allow for the model to process more distinct training data points.
 
-In order to introduce more variance into our dataset, we propose to \textbf{shuffle} and \textbf{add noise} to the input sequences.
-We shuffle by randomly permuting non-overlapping neighborhoods in the input text sequence i.e.\textbf{context windows}.
-We further propose to add small amounts of
-noise to the input sequence by randomly replacing words with words taken from the training vocabulary.
+The data augmentation techniques mentioned above are common practive in computer vision tasks such as image classification.
+In order to introduce more variance into our dataset, we propose data augmentation techniques inspired by computer vision by designed for
+text sequence data.
+We propose to \textbf{shuffle} by randomly changing the order of words within a \textbf{context windows}, or non-overlapping neighborhood of words
+in the input text sequence.
+We further propose to inject small amounts of \textbf{noise} to the input sequence by randomly replacing words with words taken from the training vocabulary.
+
+As long as the overall structure of the data (and label) is preserved, data augmentation normally lead to improved task performance CITE[Chawla et al 2002]
+CITE[Krizhevsky et al 2012]CITE[Simonyan and Zisserman 2015] CITE[He et al 2016].
+With that same rationale, we expect our proposed augmentation techniques to yield increase accuracy percentages. In other words, we expect that
+our changes will be subtle enough for the label to be preserved, but effective enough that we introduce more variance into our dataset and help cope with
+the limited amount of training examples.
+
 
 \subsection{Shuffling}
 We propose to augment our dataset by making small \textit{context} changes that don't change the global structure
-of the input sequences. Concretely, we move a non-overlapping \textit{context window} along the input sequence, randomly
+of the input sequences. Concretely, we move a \textit{context window} along non-overlapping neighborhoods the input sequence, randomly
 shuffling the words indexes inside it. For example using a context window of size 2 i.e. \textit{bi-gram}, an input sequence
 \[\bm{x} = x_1, x_2, x_3, x_4, x_5, x_6\]
 
@@ -60,8 +83,10 @@ shuffling the words indexes inside it. For example using a context window of siz
 In the first pass, the first two indexes get shuffled. The second pass led to no changes in ordering. The third and
 final pass shuffles the last two indexes.
 
-The motivation for this dataset augmentation technique is that small changes in the ordering of the words will
-simulate a larger training sample; a training input sequence has a low chance of being repeated as its
+As it is common practice in computer vision tasks to apply small translations and rotations to images, we perform
+this operation to slightly perturb the temporal structure of our text sequence data.
+The rationale for this dataset augmentation technique is that small changes in the ordering of the words will
+result in a larger training sample; a training input sequence has a low chance of being repeated as its
 length increases. Smaller context windows preserve the most structure. This method will preserve
 most of the original context structure in the sequence, as long as the shuffling is not to harsh e.g.
 a complete random permutation of the sequence.
@@ -115,28 +140,22 @@ from a single word:
 \[\text{"This paper is about computer graphics"}\]
 
 where the label is "Graphics" i.e. a publication about computer graphics.
-In this simple case, the label is determined by the word "graphics". A single, \textbf{very
-informative} word is enough for the classifier to predict the label correctly. This very
-informative word however is only 1/6 of the entire text.
+In this simple case, the label is determined by the word "graphics". To the human reader, this single informative word
+is enough for the classifier to predict the label correctly although it is only 1/6 of the entire text.
 
 Now consider a the padded version, where we enfore an input length of 10:
 
 \[\text{"This paper is about computer graphics PAD PAD PAD PAD"}\]
 
 In the padded version, the word graphics is now only 1/10 of the entire text. If we
-could find this very informative word from within the text and pad using it instead of some
-meaningless token e.g. 0's, we could increase the information of this word over the entire
-input sequence by making it comprise a larger amount of the input sequence. In other
+could pad the sequence using this informative word instead of some
+meaningless token e.g. 0's, we could increase the likelihood of the model extracting features from it. In other
 words, make important words be present more frequently.
-
-We propose to pad input sequences with \textbf{meaningful} values found already within the
-input text sequence instead of 0's only. In the following section, we will develop on how to
-extract these meaningful words via a cosine similarity-based metric and apply them to pad
-our data. In the following subsections, we propose several padding schemes in order reduce the amount of non-informative
-when training.
+We propose to pad input sequences with values found already within the
+input text sequence instead of 0's only.
 
 \subsection{Wrap Padding}
-Our first padding scheme is to \textit{wrap around} the text, repeating words once we reach the padding portion.
+Our proposed padding scheme is to \textit{wrap around} the text, repeating words once we reach the padding portion.
 Refering back to the first example, the input sequence:
 \[\text{"This paper is about computer graphics PAD PAD PAD PAD"}\]
 
@@ -145,95 +164,13 @@ would then be
 
 One thing to observe is that using this simple scheme, we remove all 0's i.e. non-informative padding indexes
 from the text sequence, but we also don't have selection mechanism and can miss useful words such as missing the
-word "\textit{graphics}" in this example. Nonetheless, it is a simple first approach to pad our data.
+word "\textit{graphics}" in this example. Nonetheless, it is a simple approach to pad our data and increase the likelihood of encountering informative
+words during feature extraction.
 
-\subsection{Keyword Padding}
-One characteristic of the wrap padding scheme described above is that there is no selection mechanism. Words are not selected based on some metric,
-but rather just \textit{wrapped}. We now propose a simple algorithm to select \textit{keywords} from within the input text sequence
-based on a cosine similarity based metric, as well as a padding scheme using those keywords.
-
-Using word embeddings, word tokens i.e. strings can now be represented as dense, continuous vectors of dimensionality much smaller than
-vocabulary size. Another useful property of embeddings is that semantic relationships are captured
-in this embedding space and can be measured between any two words using the cosine
-similarity metric[CITE]. This is an attractive property that allows for term comparison
-by semantic relationships. These relationships can range from complete similarity i.e. the
-same term, to term orthogonality i.e. unrelated words, and even capture the direction of
-the relation e.g. negative values of cosine similarity.
-
-The cosine similarity between two vectors can be computed as follows:
-\[
-  \frac{\mathbf{x} \cdot \mathbf{y}}{\lVert \mathbf{x} \rVert \lVert \mathbf{y} \rVert}
-\]
-We can therefore quantify similarity between words in a sentece as a function of their
-cosine similarity with respect to each other. We refer to this measure as the \textit{within-sentence}
-cosine similarity. Similarly, we can measure this similarity for words within a noun phrase
-in a sentence. We call this the \textit{within-noun-phrase} cosine similarity.
-We represent a noun phrase $\mathbf{np}$ as a matrix composed of horizontally stacked vectors of size $d$, each vector a word in the noun phrase:
-
-\[\mathbf{np} = \begin{bmatrix}
-    \bm{np}_{1}   \\
-    \vdots \\
-    \bm{np}_{n}
-  \end{bmatrix},
-\bm{np}_{i} \in \mathbb{R}^{1 \times d}\]
-
-Given a noun phrase $\mathbf{np}$ comprised of $n$ unit norm embeddings $\bm{np}_i$, we can compute its \textit{within noun phrase} cosine similarity by:
-
-\[c = \frac{1}{{n^2}} \sum_{i=1}^{n} \sum_{j=1}^{n} \begin{bmatrix}
-    \bm{np}_{1}   \\
-    \vdots \\
-    \bm{np}_{n}
-  \end{bmatrix} \times \begin{bmatrix}
-      \bm{np}_{1}   \\
-      \vdots \\
-      \bm{np}_{n}
-    \end{bmatrix}^\mathsf{T}\]
-
-Thus, given a set of noun phrases $\{\mathbf{np}^{(1)}, \dots \mathbf{np}^{(m)}\}$ from a sentence, we compute the corresponding set of
-\textit{within noun phrase} cosine similarities $\bm{c} = \{c_1 \dots c_m\}$, and we select the noun phrase which corresponds to minimum
-
-\[\mathbf{np}^{(j)}, j = \argmin{\bm{c}}\].
-
-The reasoning behind the cosine similarity minimization is as follows: An informative
-noun phrase within a sentence will contain a word which will stand out from the rest of the
-words in the noun phrase. We quantify this notion of \textit{standing out from the rest} using the
-mean within-noun-phrase cosine similarity. We therefore compute, for all noun phrases in a
-sentence, the mean \textit{within-noun-phrase} average cosine similarity, as described in [REFER TO ALGORITHM].
-We select the noun phrase that minimizes this measure.
-
-In practice, we find both maximization and minimization of the mean \textit{within-nounphrase}
-average cosine similarity leads to interesting results i.e. reasonable words to be
-considered keywords, so we include them both for padding.
-[INCLUDE SNAPSHOT OF CSO OUTPUT]
-
-\subsection{Proposed Padding Scheme}
-We propose to pad an input sequence $\bm{x}_{pad} = x_1, ..., x_k, 0_{k+1}, ..., 0_n$ using
-the indexes of extracted keywords $x_{key^1}, ..., x_{key^j}$ by concatenating
-the non-zero entries $x_1, ..., x_k$ with the extracted keyword indexes:
-
-\[\bm{x}_{cso} = x_1, ..., x_k, x_{key^1}, ..., x_{key^j}, 0_{k+j+1}, ..., 0_n\]
-
-
-\section{Dataset Augmentation: Padding with Similar Keywords}
-Our CSO padding scheme can only pad with words already present in the input
-text sequence. It could prove beneficial to further pad the input with words that are \textit{similar}
-to its keywords i.e. words extracted via CSO. We therefore further pad the input sequence
-with the nearest neighbor of each keyword. In this context, we consider the nearest neighbor
-of a word embeddings $\bm{w}$ as:
-
-\[\min_{\bm{w}_i} 1 - \frac{\bm{w} \cdot \bm{w}_i}{\lVert \bm{w} \rVert \lVert \bm{w}_i \rVert}, \bm{w} \neq \bm{w}_i\]
-
-We use a Locality Sensitive Hashing forest for our approximate nearest neighbor search[CITE].
-After having computed the nearest neighbor of each keyword, we pad as follows:
-
-\[\bm{x}_{lsh} = x_1, ..., x_k, x_{key^1}, ..., x_{key^j},x_{lsh^1}, ..., x_{lsh^j}, 0_{k+j+1}, ..., 0_n\]
 
 \section{Reducing Data Granularity: From Abstract to Sentences}
-Our last proposed dataset augmentation scheme is break each training abtract into a set of sentences, and trained
+Our last proposed dataset augmentation scheme is break each training abtract into a set of sentences, and train
 the network using this finer text granularity. For example, training a model using single sentences, another using sentence pairs,
 and another using sentence triplets.
-
 During testing, we break a test abstract into sentence sets and classify each set individually. We then assign
 the class with the largest mean.
-
-\section{Embedding Matrix: Avoiding Overfitting}

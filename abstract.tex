@@ -4,14 +4,28 @@
 
 \chapter*{Abstract}
 Convolutional neural networks have seen much success in computer vision and natural language processing tasks.
-Recent convolutional network architectures employ word embeddings, or words represented as dense vectors, to
-transform a given input sequence of words into a dense matrix of continuous values akin to image data.
-This allows for the well known convolution/pooling operations to be applied to text data in a manner similar to
-convolution and pooling operations on image data. These embeddings may incorporated into the neural
-network itself as a trainable layer to allow fine-tuning their values to better fit the data.
-Because of the large number of parameters in these models', they are prone to overfitting
-if not regularized appropriately or trained on a sufficiently large dataset.
-In this work, we study the performance of convolutional neural networks when the available training datasets
-are of moderate size and propose several data augmentation techniques designed for text datasets in an attempt
-to mitigate overfitting and improve model generalization.
+When training convolutional neural networks for text classification tasks, a common technique is to transform an input
+sequence of words into a dense matrix of word embeddings, or words represented as dense vectors, using table lookup
+operations. This allows for the inputs to be represented in a way that the well-known convolution/pooling operations can be applied
+to them in a manner similar to images. These word embeddings may be further incorporated into the neural
+network itself as a trainable layer to allow fine-tuning, usually leading to improved model predictions.
+The drastic increase of free parameters however, leads to overfitting if proper regularization is not applied or the size of
+the training set is not large enough.
+
+This work is an early step towards fascilitating interdisciplinary research within the University of Texas at El Paso.
+In the future, we wish to design a system to automatically assign or recommend faculty to
+interdisciplinary research communities based on their publication data. For this task, we want to learn models that capture
+important and high-level features from the raw inputs in order to make decisions as accurate and meaningful to the faculty members as possible.
+Neural networks are notoriously effective at learning said complex features. This study is to better understand
+deep convolutional and recurrent networks for the task of classifying scientific publication abstracts.
+
+We give an overview of popular convolutional and recurrent network architectures, describe their basic functions, and discuss their
+observed advantages and shortcomings on our task and data. We follow this discussion with an overview of our final choice of architecture,
+based on a combination of these architectures.
+
+We train our neural networks using abstracts from multiple science and engineering fields, each set of
+abstracts comprised of multiple topics. The number of publications available for our task is moderate, in the mid thousands for each topic.
+We analyse the effect of using word embeddings with our models in terms of fit and prediction. We then propose embedding "trainability" schemes
+to alleviate overfitting, improve performance and achieve faster convergeance. We conclude our study proposing several data augmentation
+techniques designed for text sequences in an attempt to further mitigate overfitting and improve generalization.
 Finally, we provide discussion on our empirical results as well as future work.

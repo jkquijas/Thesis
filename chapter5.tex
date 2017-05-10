@@ -5,37 +5,38 @@ In this chapter we will show our results.
 
 \section{Dataset Descriptions}
 
-We scraped a scientific publication abstract dataset from Arxiv.org. Concretely, we gathered
-publications from the physics, mathematics, computer science, quantitative biology,
-and quantitative finance departments. For each department, we considered each \textbf{topic} as a
+We gathered a scientific publication abstract dataset from Arxiv.org. Concretely, we obtained
+publications from the physics, mathematics, computer science, and quantitative biology departments.
+For each department, we considered each \textbf{topic} as a
 class. For example, when considering computer science publications, we considered the
 "computational complexity" topic as one class, "artificial intelligence" as another class,
-and so on. We apply simple preprocessing to the texts by removing non-alphanumeric
-characters, and converting to lower case characters.
+and so on. Each class has 5000 examples. Because of this class balance, it is appropriate to report the prediction
+accuracy on the test set. We use a 70/30 split for training and testing. We apply simple preprocessing to the texts by removing non-alphanumeric
+characters, and converting to lower case characters. The dataset distribution is shown in the table below.
 
-\begin{center}\begin{tabular}{||c c||}
+\begin{center}\begin{table}\begin{tabular}{||c c c c||}
  \hline
- Department & Number of Labels\\ [0.5ex]
+ Department & Number of Labels & Training Size & Testing Size\\ [0.5ex]
  \hline\hline
 AstroPhysics & 5\\
 Physics & 13\\
-Computer Science & 20\\
-Mathematics & 26\\
-Quant. Bio & 0\\
- [1ex]\hline\end{tabular}\end{center}
+Computer Science & 20 & 63396 & 27170 \\
+Mathematics & 26 & 87705 & 37588 \\
+Quant. Bio & 5 & 11006 & 4717\\
+ [1ex]\hline\end{tabular}\caption{Dataset distribution. We obtained 5000 abstracts for each class. We use 70\% of the data for
+ training and 30\% for testing.}\end{table}\end{center}
 
 For our pretrained embeddgins, we used the GloVe embedding set [CITE GLOVE]. This set consists of six billion tokens, each represented
 as a vector of size 100.
 
 \section{Freezing the Embeddings: Results}
 We tested the four different proposed embedding training approaches.
-The first is to leave the embeddings frozen throughout training i.e. non-trainable parameters.
+The first method is to leave the embeddings frozen throughout training i.e. non-trainable parameters.
 The second approach is to freeze the embeddings until convergeance, then retrain with the embeddings unfrozen.
-The thid approach is to train with the embeddings unfrozen for a small amount of epochs e.g. three, then
+The third proposed approach is to train with the embeddings unfrozen for a small amount of epochs e.g. three, then
 freeze the embeddings and retrain the model.
 The last approach is to simply train with the embeddings as trainable parameters from the very beggining.
 
-We now present our results
 \begin{center}\begin{table}[H]\begin{tabular}{||c c c c c c ||}
  \hline
  Dataset & Training Set Size & Frozen & Not-Frozen & Freeze-Unfreeze & Flash-Freeze\\ [0.5ex]
@@ -55,13 +56,14 @@ the accuracy of all other methods.
 \section{Data Augmentation Results}
 In this section we show our experimental results when using our proposed data augmentation techniques. Our model hyper-parameters are as follows:
 number of training words=20000, kernel size=3, learning rate=0.001, regularization rate=0.00001,
-dropout rate = 0.2, maximum sequence length = 250.
+dropout rate = 0.2, maximum sequence length = 250. We consider the baseline model as our chosen architecture (RNN) with
+trainable embeddings (Not Frozen) and no data augmentation.
 
 %
 %%%%%%%%%%% ASTROPHYSICS
 %
 \section{AstroPhysics}
-[Distribution]
+
 \subsection{Baseline}
 \begin{center}\begin{tabular}{||c c c c c c c c c||}
  \hline
@@ -155,6 +157,20 @@ dropout rate = 0.2, maximum sequence length = 250.
  [1ex]\hline\end{tabular}\end{center}
 
 
+\section{Quantitative Biology}
+\subsection{Embedding PCA}
+\begin{center}
+ \begin{tabular}{||c c c c||}
+ \hline
+ Baseline & EmbeddingPCA & EmbeddingPCA+Noise & Ensemble\\ [0.5ex]
+ \hline\hline
+ &r&r&r&r\\
+ [1ex]\hline\end{tabular}\end{center}
+
+\subsection{Embedding PCA + Wrap Padding}
+
+
+\subsection{Sentence Splitting}
 
 
 %

@@ -1,0 +1,79 @@
+\subsection{Keyword Padding}
+One characteristic of the wrap padding scheme described above is that there is no selection mechanism. Words are not selected based on some metric,
+but rather just \textit{wrapped}. We now propose a simple algorithm to select \textit{keywords} from within the input text sequence
+based on a cosine similarity based metric, as well as a padding scheme using those keywords.
+Using word embeddings, word tokens i.e. strings can now be represented as dense, continuous vectors of dimensionality much smaller than
+vocabulary size. Another useful property of embeddings is that semantic relationships are captured
+in this embedding space and can be measured between any two words using the cosine
+similarity metric[CITE]. This is an attractive property that allows for term comparison
+by semantic relationships. These relationships can range from complete similarity i.e. the
+same term, to term orthogonality i.e. unrelated words, and even capture the direction of
+the relation e.g. negative values of cosine similarity.
+
+The cosine similarity between two vectors can be computed as follows:
+\[
+  \frac{\mathbf{x} \cdot \mathbf{y}}{\lVert \mathbf{x} \rVert \lVert \mathbf{y} \rVert}
+\]
+We can therefore quantify similarity between words in a sentece as a function of their
+cosine similarity with respect to each other. We refer to this measure as the \textit{within-sentence}
+cosine similarity. Similarly, we can measure this similarity for words within a noun phrase
+in a sentence. We call this the \textit{within-noun-phrase} cosine similarity.
+We represent a noun phrase $\mathbf{np}$ as a matrix composed of horizontally stacked vectors of size $d$, each vector a word in the noun phrase:
+
+\[\mathbf{np} = \begin{bmatrix}
+    \bm{np}_{1}   \\
+    \vdots \\
+    \bm{np}_{n}
+  \end{bmatrix},
+\bm{np}_{i} \in \mathbb{R}^{1 \times d}\]
+
+Given a noun phrase $\mathbf{np}$ comprised of $n$ unit norm embeddings $\bm{np}_i$, we can compute its \textit{within noun phrase} cosine similarity by:
+
+\[c = \frac{1}{{n^2}} \sum_{i=1}^{n} \sum_{j=1}^{n} \begin{bmatrix}
+    \bm{np}_{1}   \\
+    \vdots \\
+    \bm{np}_{n}
+  \end{bmatrix} \times \begin{bmatrix}
+      \bm{np}_{1}   \\
+      \vdots \\
+      \bm{np}_{n}
+    \end{bmatrix}^\mathsf{T}\]
+
+Thus, given a set of noun phrases $\{\mathbf{np}^{(1)}, \dots \mathbf{np}^{(m)}\}$ from a sentence, we compute the corresponding set of
+\textit{within noun phrase} cosine similarities $\bm{c} = \{c_1 \dots c_m\}$, and we select the noun phrase which corresponds to minimum
+
+\[\mathbf{np}^{(j)}, j = \argmin{\bm{c}}\].
+
+The reasoning behind the cosine similarity minimization is as follows: An informative
+noun phrase within a sentence will contain a word which will stand out from the rest of the
+words in the noun phrase. We quantify this notion of \textit{standing out from the rest} using the
+mean within-noun-phrase cosine similarity. We therefore compute, for all noun phrases in a
+sentence, the mean \textit{within-noun-phrase} average cosine similarity, as described in [REFER TO ALGORITHM].
+We select the noun phrase that minimizes this measure.
+
+In practice, we find both maximization and minimization of the mean \textit{within-nounphrase}
+average cosine similarity leads to interesting results i.e. reasonable words to be
+considered keywords, so we include them both for padding.
+[INCLUDE SNAPSHOT OF CSO OUTPUT]
+
+\subsection{Proposed Padding Scheme}
+We propose to pad an input sequence $\bm{x}_{pad} = x_1, ..., x_k, 0_{k+1}, ..., 0_n$ using
+the indexes of extracted keywords $x_{key^1}, ..., x_{key^j}$ by concatenating
+the non-zero entries $x_1, ..., x_k$ with the extracted keyword indexes:
+
+\[\bm{x}_{cso} = x_1, ..., x_k, x_{key^1}, ..., x_{key^j}, 0_{k+j+1}, ..., 0_n\]
+
+
+\section{Dataset Augmentation: Padding with Similar Keywords}
+Our CSO padding scheme can only pad with words already present in the input
+text sequence. It could prove beneficial to further pad the input with words that are \textit{similar}
+to its keywords i.e. words extracted via CSO. We therefore further pad the input sequence
+with the nearest neighbor of each keyword. In this context, we consider the nearest neighbor
+of a word embeddings $\bm{w}$ as:
+
+\[\min_{\bm{w}_i} 1 - \frac{\bm{w} \cdot \bm{w}_i}{\lVert \bm{w} \rVert \lVert \bm{w}_i \rVert}, \bm{w} \neq \bm{w}_i\]
+
+We use a Locality Sensitive Hashing forest for our approximate nearest neighbor search[CITE].
+After having computed the nearest neighbor of each keyword, we pad as follows:
+
+\[\bm{x}_{lsh} = x_1, ..., x_k, x_{key^1}, ..., x_{key^j},x_{lsh^1}, ..., x_{lsh^j}, 0_{k+j+1}, ..., 0_n\]

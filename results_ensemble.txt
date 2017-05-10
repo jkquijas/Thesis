@@ -1,0 +1,23 @@
+Noise fraction = .4
+Context Window Size = 7
+
+QBIO
+BASELINE RESULT .835
+NORMAL loss: 0.1309 - acc: 0.9563 - val_loss: 0.5256 - val_acc: 0.8374
+SHUFFLE loss: 0.2764 - acc: 0.8987 - val_loss: 0.5240 - val_acc: 0.8329
+NOISE loss: 0.4563 - acc: 0.8262 - val_loss: 0.5002 - val_acc: 0.8238
+ENSEMBLE final score =  0.841848632605
+
+PHYSICS
+BASELINE RESULT .781
+NORMAL loss: 0.1078 - acc: 0.9484 - val_loss: 0.8963 - val_acc: 0.7914
+SHUFFLE loss: 0.4890 - acc: 0.8261 - val_loss: 0.7086 - val_acc: 0.7901
+NOISE loss: 0.7917 - acc: 0.7298 - val_loss: 0.7425 - val_acc: 0.7533
+ENSEMBLE final score =  0.79987560255
+
+ASTROPHYSICS
+BASELINE RESULT .770
+NORMAL loss: 0.1758 - acc: 0.9159 - val_loss: 0.7511 - val_acc: 0.7773
+SHUFFLE loss: 0.5807 - acc: 0.7795 - val_loss: 0.6511 - val_acc: 0.7651
+NOISE loss: 0.5041 - acc: 0.8047 - val_loss: 0.6286 - val_acc: 0.7725
+ENSEMBLE final score =  0.779066666667
