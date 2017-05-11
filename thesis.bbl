@@ -1,0 +1,134 @@
+\begin{thebibliography}{10}
+
+\bibitem{bengio2003neural}
+Yoshua Bengio, R{\'e}jean Ducharme, Pascal Vincent, and Christian Jauvin.
+\newblock A neural probabilistic language model.
+\newblock {\em Journal of machine learning research}, 3(Feb):1137--1155, 2003.
+
+\bibitem{bottou2010large}
+L{\'e}on Bottou.
+\newblock Large-scale machine learning with stochastic gradient descent.
+\newblock In {\em Proceedings of COMPSTAT'2010}, pages 177--186. Springer,
+  2010.
+
+\bibitem{chawla2002smote}
+Nitesh~V Chawla, Kevin~W Bowyer, Lawrence~O Hall, and W~Philip Kegelmeyer.
+\newblock Smote: synthetic minority over-sampling technique.
+\newblock {\em Journal of artificial intelligence research}, 16:321--357, 2002.
+
+\bibitem{chung2014empirical}
+Junyoung Chung, Caglar Gulcehre, KyungHyun Cho, and Yoshua Bengio.
+\newblock Empirical evaluation of gated recurrent neural networks on sequence
+  modeling.
+\newblock {\em arXiv preprint arXiv:1412.3555}, 2014.
+
+\bibitem{dosovitskiy2014discriminative}
+Alexey Dosovitskiy, Jost~Tobias Springenberg, Martin Riedmiller, and Thomas
+  Brox.
+\newblock Discriminative unsupervised feature learning with convolutional
+  neural networks.
+\newblock In {\em Advances in Neural Information Processing Systems}, pages
+  766--774, 2014.
+
+\bibitem{he2016deep}
+Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
+\newblock Deep residual learning for image recognition.
+\newblock In {\em Proceedings of the IEEE Conference on Computer Vision and
+  Pattern Recognition}, pages 770--778, 2016.
+
+\bibitem{hinton2012improving}
+Geoffrey~E Hinton, Nitish Srivastava, Alex Krizhevsky, Ilya Sutskever, and
+  Ruslan~R Salakhutdinov.
+\newblock Improving neural networks by preventing co-adaptation of feature
+  detectors.
+\newblock {\em arXiv preprint arXiv:1207.0580}, 2012.
+
+\bibitem{hochreiter1997long}
+Sepp Hochreiter and J{\"u}rgen Schmidhuber.
+\newblock Long short-term memory.
+\newblock {\em Neural computation}, 9(8):1735--1780, 1997.
+
+\bibitem{jaderberg2015spatial}
+Max Jaderberg, Karen Simonyan, Andrew Zisserman, et~al.
+\newblock Spatial transformer networks.
+\newblock In {\em Advances in Neural Information Processing Systems}, pages
+  2017--2025, 2015.
+
+\bibitem{kim2014convolutional}
+Yoon Kim.
+\newblock Convolutional neural networks for sentence classification.
+\newblock {\em arXiv preprint arXiv:1408.5882}, 2014.
+
+\bibitem{krizhevsky2012imagenet}
+Alex Krizhevsky, Ilya Sutskever, and Geoffrey~E Hinton.
+\newblock Imagenet classification with deep convolutional neural networks.
+\newblock In {\em Advances in neural information processing systems}, pages
+  1097--1105, 2012.
+
+\bibitem{le2013building}
+Quoc~V Le.
+\newblock Building high-level features using large scale unsupervised learning.
+\newblock In {\em Acoustics, Speech and Signal Processing (ICASSP), 2013 IEEE
+  International Conference on}, pages 8595--8598. IEEE, 2013.
+
+\bibitem{lecun1989backpropagation}
+Yann LeCun, Bernhard Boser, John~S Denker, Donnie Henderson, Richard~E Howard,
+  Wayne Hubbard, and Lawrence~D Jackel.
+\newblock Backpropagation applied to handwritten zip code recognition.
+\newblock {\em Neural computation}, 1(4):541--551, 1989.
+
+\bibitem{DBLP:journals/corr/LinCY13}
+Min Lin, Qiang Chen, and Shuicheng Yan.
+\newblock Network in network.
+\newblock {\em CoRR}, abs/1312.4400, 2013.
+
+\bibitem{oquab2014learning}
+Maxime Oquab, Leon Bottou, Ivan Laptev, and Josef Sivic.
+\newblock Learning and transferring mid-level image representations using
+  convolutional neural networks.
+\newblock In {\em Proceedings of the IEEE conference on computer vision and
+  pattern recognition}, pages 1717--1724, 2014.
+
+\bibitem{pennington2014glove}
+Jeffrey Pennington, Richard Socher, and Christopher~D. Manning.
+\newblock Glove: Global vectors for word representation.
+\newblock In {\em Empirical Methods in Natural Language Processing (EMNLP)},
+  pages 1532--1543, 2014.
+
+\bibitem{rumelhart1986sequential}
+David~E Rumelhart, Paul Smolensky, James~L McClelland, and G~Hinton.
+\newblock Sequential thought processes in pdp models.
+\newblock {\em Parallel distributed processing: explorations in the
+  microstructures of cognition}, 2:3--57, 1986.
+
+\bibitem{DBLP:journals/corr/Shlens14}
+Jonathon Shlens.
+\newblock A tutorial on principal component analysis.
+\newblock {\em CoRR}, abs/1404.1100, 2014.
+
+\bibitem{srivastava2014dropout}
+Nitish Srivastava, Geoffrey~E Hinton, Alex Krizhevsky, Ilya Sutskever, and
+  Ruslan Salakhutdinov.
+\newblock Dropout: a simple way to prevent neural networks from overfitting.
+\newblock {\em Journal of Machine Learning Research}, 15(1):1929--1958, 2014.
+
+\bibitem{waibel1988phoneme}
+Alexander Waibel, Toshiyuki Hanazawa, Geoffrey Hinton, Kiyohiro Shikano, and
+  K~Lang.
+\newblock Phoneme recognition: neural networks vs. hidden markov models vs.
+  hidden markov models.
+\newblock In {\em Acoustics, Speech, and Signal Processing, 1988. ICASSP-88.,
+  1988 International Conference on}, pages 107--110. IEEE, 1988.
+
+\bibitem{yin2017comparative}
+Wenpeng Yin, Katharina Kann, Mo~Yu, and Hinrich Sch{\"u}tze.
+\newblock Comparative study of cnn and rnn for natural language processing.
+\newblock {\em arXiv preprint arXiv:1702.01923}, 2017.
+
+\bibitem{zhou1988image}
+Y-T Zhou, Rama Chellappa, Aseem Vaid, and B~Keith Jenkins.
+\newblock Image restoration using a neural network.
+\newblock {\em IEEE Transactions on Acoustics, Speech, and Signal Processing},
+  36(7):1141--1151, 1988.
+
+\end{thebibliography}

@@ -1,6 +1,7 @@
 % thesis.tex
 
 \documentclass[12pt]{report}
+%\usepackage{biblatex}
 
 \usepackage{utepcsthesis}
 \usepackage{graphicx}
@@ -8,7 +9,7 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{bm}
-
+\usepackage{multirow}
 \usepackage{algorithmicx}
 \usepackage{algorithm,algpseudocode}
 
@@ -107,7 +108,7 @@ thanks for everything}
 \include{chapter4}         % Chapter 4
 \include{chapter5}         % Chapter 5
 \include{chapter6}         % Chapter 6
-%\include{chapter7}         % Chapter 7, chap7.tex contains an	
+%\include{chapter7}         % Chapter 7, chap7.tex contains an
                         % example of figs and tables and inclusion of pdf.
 
 %%%%%%%%%%%%%%%%%%%%
@@ -118,13 +119,15 @@ thanks for everything}
 
 % If using bibtex, create or modify the refs.bib file
 % and use (uncomment) the following three lines.
-%\bibliographystyle{plain}     %You may prefer \bibliographystyle{alpha}
-%\addcontentsline{toc}{chapter}{\bibname}
-%\bibliography{refs}
+\bibliographystyle{plain}
+%You may prefer
+%\bibliographystyle{alpha}
+\addcontentsline{toc}{chapter}{\bibname}
+\bibliography{refs}
 
 % If using the ``thereference'' environment instead, modify the ref.tex file
 % and use the following line
-\include{ref}
+%\include{ref}
 
 % If including appendices, uncomment the following lines,
 % adding more includes if needed.

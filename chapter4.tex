@@ -1,17 +1,16 @@
 % chap3.tex (Definitions and Theorem)
 
 \chapter{Towards Improving Model Performance: Embeddings and Data Augmentation}
-As mentioned in [REFER TO SECTION], we can fine-tune the word embeddings via back-propagation and gradient descent (or some other
-gradient-based optimizer), just as any other weights in the neural network. In this case, the number of parameters in our model increases drastically.
-With more free parameters to learn from the data, it is easier to overfit. This is especially true if the amount of training data is limited, as is the case
-with our particular task. Another important aspect to consider when fine-tuning the embeddings is whether we lose the semantic information originally
-present in them. It is therefore a good idea to quantify the effect of training the embeddings. In the following sections, we propose different ways
+As mentioned in section \ref{embeddinglayer}, we can fine-tune the word embeddings via back-propagation and gradient descent (or some other
+gradient-based optimizer), just as any other weights in the neural network. In this case, the number of free parameters in our model increases drastically.
+It is easier to overfit a model with more free parameters when the amount of training data is limited, as is the case in our task. Another important aspect to consider when fine-tuning the embeddings is whether we lose the semantic information originally
+present in them. It is therefore a good idea to evaluate the effect of training the embeddings. In the following sections, we propose various ways
 treat the embedding layer in our neural network in order to mitigate overfitting. We also consider reducing the dimensionality of the embeddings
-via Principal Component Analysis (PCA). Finally, we propose data augmentation techniques inspired from computer vision tasks but designed for
+via Principal Component Analysis (PCA). Finally, we propose data augmentation techniques inspired by computer vision tasks but designed for
 text data with temporal structure, as is the case with our data.
 
 \section{Freezing the Embedding Layer}
-When we make our model's embeddings trainable, its number of parameters highly increases. With inputs of size $n$,
+When we make our model's embeddings trainable, its number of free parameters highly increases. With inputs of size $n$,
 and embeddings of size $d$, we introduce $n \times d$ new parameters into the model.
 We therefore propose multiple embedding \textit{trainability} schemes to quantify how much the embeddings help increase (or decrease) test
 accuracy and overfitting.
@@ -19,34 +18,37 @@ accuracy and overfitting.
 \begin{itemize}
   \item{Frozen Embeddings}
   \begin{itemize}
-    \item{With this scheme, we \textit{freeze} the embedding layer altogether. Not once during training do we update
+    \item{With this scheme, we \textit{freeze} the embedding layer altogether. We do not update
     the embedding vectors, so the model relies completely on its other parameters to fit the data.}
   \end{itemize}
   \item{Freeze-Unfreeze}
   \begin{itemize}
     \item{With the \textit{freeze-unfreeze} scheme, we train the model with its embedding layer frozen until some
-    stopping criterion is met e.g. early stopping due to validation error increase. After this, we \textit{unfreeze}, or make the
+    stopping criterion is met. After this, we \textit{unfreeze}, or make the
     embedding layer trainable, and retrain the model.}
   \end{itemize}
   \item{Flash-Freeze}
   \begin{itemize}
     \item{In the \textit{flash-freeze} scheme, we allow the embedding layer to be trainable for a small number of
-    epochs e.g. two, then freeze it and retrain the model.}
+    epochs (e.g. three), then freeze it and retrain the model.}
   \end{itemize}
   \item{Unfrozen Embeddings}
   \begin{itemize}
-    \item{We allow the embeddings layer to be trainable from the very beggining. We consider this training scheme as our \textbf{baseline}.}
+    \item{We allow the embeddings layer to be trainable from the beggining to the end.
+    We will refer to a model trained with unfrozen embeddings and without any of our proposed data augmentation schemes as the \textbf{baseline} model.}
   \end{itemize}
 \end{itemize}
 
 \section{Principal Component Analysis and Dimensionality Reduction of the Embeddings}
-Principal Component Analysis (PCA) is a very popular linear transformation commonly used to reduce dimensionality of a dataset CITE[Shlens 2005].
-It projects the data to a representation where each variable is linearly uncorrelated. Concretely, PCA rotates the data onto new axes called principal
-components. Given a data matrix $\bm{X}$ with $n$ dimensions, its principal components are the eigenvectors of the covariance matrix $\bm{X}^T\bm{X}$. The first principal component is the direction of most variation. The second principal component is the direction with the next largest amount
-of variation, and so on. We can then choose to retain only the $k<n$ principal components that contain the most amount of variation in the data.
+Principal Component Analysis (PCA) is a very popular linear transformation commonly used to reduce dimensionality of a dataset \cite{DBLP:journals/corr/Shlens14}.
+It projects the data to a representation where the variables are linearly uncorrelated. Concretely, PCA projects the data onto new axes called principal
+components. These axes, or dimensions, are orthogonal and selected in a way that minimizes reconstruction mean square error.
+Given a data matrix $\bm{X}$ with $n$ dimensions, its principal components are the eigenvectors of the covariance matrix $\bm{X}^T\bm{X}$.
+The first principal component is the direction of most variation. The second principal component is the direction with the next largest variation,
+and so on. We can then choose to retain only the $k<n$ principal components that contain the most variation in the data.
 
 We propose to apply PCA to the word embeddings in order to linearly decorrelate their dimensions and reduce their dimensionality.
-By reducing the dimensionality while preserving the majority of the variance in them (e.g. 95\%), we will reduce the amount of parameters introduced
+By reducing the dimensionality while preserving the majority of the variance in them (e.g. 95\%), we will reduce the number of parameters introduced
 to the model while retaining most of the information from the original embeddings.
 
 
@@ -55,7 +57,7 @@ to the model while retaining most of the information from the original embedding
 Another common practice aimed to reducing overfitting is to \textbf{augment} the dataset.
 Data augmentation refers to any transformation of the input data in a way that
 the label value does not change. Data augmentation is ubiquitous in computer vision tasks. Example transformations include translations,
-rotations, and color intensity jitters via Pricipal Component Analysis CITE[krizhevsky 2012]. All these tranformations should be subtle enough that the overall structure is preserved, but
+rotations, and color intensity jitters via Pricipal Component Analysis \cite{krizhevsky2012imagenet}. All these tranformations should be subtle enough that the overall structure is preserved, but
 allow for the model to process more distinct training data points.
 
 The data augmentation techniques mentioned above are common practive in computer vision tasks such as image classification.
@@ -65,11 +67,11 @@ We propose to \textbf{shuffle} by randomly changing the order of words within a 
 in the input text sequence.
 We further propose to inject small amounts of \textbf{noise} to the input sequence by randomly replacing words with words taken from the training vocabulary.
 
-As long as the overall structure of the data (and label) is preserved, data augmentation normally lead to improved task performance CITE[Chawla et al 2002]
-CITE[Krizhevsky et al 2012]CITE[Simonyan and Zisserman 2015] CITE[He et al 2016].
+As long as the overall structure of the data (and label) is preserved, data augmentation normally lead to improved task performance \cite{chawla2002smote}
+\cite{krizhevsky2012imagenet}\cite{jaderberg2015spatial}\cite{he2016deep}.
 With that same rationale, we expect our proposed augmentation techniques to yield increase accuracy percentages. In other words, we expect that
 our changes will be subtle enough for the label to be preserved, but effective enough that we introduce more variance into our dataset and help cope with
-the limited amount of training examples.
+the limited number of training examples.
 
 
 \subsection{Shuffling}
@@ -93,9 +95,9 @@ a complete random permutation of the sequence.
 
 \subsection{Noise Injection}
 One common augmentation technique for image datasets is to add small amount of noise. By replacing a relatively small
-amount of pixel values with noise, the model gets to process and train on a different but similar instance. The noise should be subtle
+number of pixel values with noise, the model gets to process and train on a different but similar instance. The noise should be subtle
 enough as to not distort the image too much, otherwise we could potentially train the model using mostly noise.
-We propose to augment our dataset by injecting small amounts of noise to each training sample. Again, we aim to simulate
+We propose to augment our dataset by injecting noise to each training sample. Again, we aim to simulate
 a larger training sample while avoiding harsh changes to the original inputs. Concretely, each word in a text sequence gets replaced
 with a specified probability with a word randomly chosen from our training vocabulary.
 \begin{algorithm}[H]
@@ -115,10 +117,6 @@ with a specified probability with a word randomly chosen from our training vocab
 
 
 \section{Dataset Augmentation: Padding}
-
-Although more complex neural models are designed to cope with variable length input,
-in practice a more common and simple approach is to pad data to be of some specified
-length as described in chapter [CITE CHAPTER].
 In order to enforce uniform input size for our neural networks,
 we apply \textbf{zero-padding}.For any arbitrary training instance $BoW(\bm{s})=$ $\bm{x} = x_1,...,x_k$, we enforce that $k = n$, for the specified input size
 $n$. Thus, if $k \textless n$, we transform it into $\bm{x}_{pad} = x_1,...,x_k, 0_{k+1}, ..., 0_{n}$. Conversely, if
@@ -131,8 +129,7 @@ Our network's input is a sequence of integers, each integer being a word index: 
 Word indexes range from 1 to $|\mathbb{V}|$, and the index 0 being left for out-of-vocabulary words.
 When we pad our input sequence with 0’s, we don’t add any additional information; we
 simply create a constant input length. We propose that if instead we add values that characterize or help
-describe the input sequence more thoroughly, we may increase the amount of useful information
-available during neural network training.
+describe the input sequence more thoroughly, we may increase the amount information available during neural network training.
 
 Consider a very simple input sequence, and assume its true label can be determined
 from a single word:

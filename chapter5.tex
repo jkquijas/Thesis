@@ -6,215 +6,131 @@ In this chapter we will show our results.
 \section{Dataset Descriptions}
 
 We gathered a scientific publication abstract dataset from Arxiv.org. Concretely, we obtained
-publications from the physics, mathematics, computer science, and quantitative biology departments.
-For each department, we considered each \textbf{topic} as a
+publications from the physics, mathematics, computer science, and quantitative biology disciplines.
+For each discipline, we considered each \textbf{topic} as a
 class. For example, when considering computer science publications, we considered the
 "computational complexity" topic as one class, "artificial intelligence" as another class,
 and so on. Each class has 5000 examples. Because of this class balance, it is appropriate to report the prediction
 accuracy on the test set. We use a 70/30 split for training and testing. We apply simple preprocessing to the texts by removing non-alphanumeric
 characters, and converting to lower case characters. The dataset distribution is shown in the table below.
 
-\begin{center}\begin{table}\begin{tabular}{||c c c c||}
+\begin{center}
+  \begin{table}\begin{tabular}{||c c c c||}
  \hline
  Department & Number of Labels & Training Size & Testing Size\\ [0.5ex]
  \hline\hline
-AstroPhysics & 5\\
-Physics & 13\\
+AstroPhysics & 5 & 17500 & 7500\\
+Physics & 13 & 45015 & 19293\\
 Computer Science & 20 & 63396 & 27170 \\
 Mathematics & 26 & 87705 & 37588 \\
 Quant. Bio & 5 & 11006 & 4717\\
  [1ex]\hline\end{tabular}\caption{Dataset distribution. We obtained 5000 abstracts for each class. We use 70\% of the data for
- training and 30\% for testing.}\end{table}\end{center}
+ training and 30\% for testing.}\end{table}
+\end{center}
 
-For our pretrained embeddgins, we used the GloVe embedding set [CITE GLOVE]. This set consists of six billion tokens, each represented
+We used the GloVe embedding set for our pretrained embeddings \cite{pennington2014glove}. This set consists of 400,000 words, each represented
 as a vector of size 100.
 
 \section{Freezing the Embeddings: Results}
 We tested the four different proposed embedding training approaches.
 The first method is to leave the embeddings frozen throughout training i.e. non-trainable parameters.
 The second approach is to freeze the embeddings until convergeance, then retrain with the embeddings unfrozen.
-The third proposed approach is to train with the embeddings unfrozen for a small amount of epochs e.g. three, then
+The third proposed approach is to train with the embeddings unfrozen for a small number of epochs (e.g. three), then
 freeze the embeddings and retrain the model.
-The last approach is to simply train with the embeddings as trainable parameters from the very beggining.
+The last approach is to simply train with the embeddings as trainable parameters from the beggining to the end.
 
 \begin{center}\begin{table}[H]\begin{tabular}{||c c c c c c ||}
  \hline
  Dataset & Training Set Size & Frozen & Not-Frozen & Freeze-Unfreeze & Flash-Freeze\\ [0.5ex]
  \hline\hline
-AstroPhysics & 17500 & .755(6) & .770(8) & 0.769(14) & \textbf{.775(6)}\\
-Physics &  45000 & .715(9) & \textbf{.781}(10) & .777(39) & .780\textbf{(8)}\\
-Computer Science & 63400 & .621\textbf{(9)} & .693(12) & 0.695(56) & \textbf{.701}(10)\\
-Mathematics & 87700 & .590(22) & \textbf{.685}(21) & .678(72) & .684\textbf{(11)}\\
-Quant. Bio & 11000 & .834(15) & .835(6) & 0.836(21) & \textbf{.841(5)}\\
+AstroPhysics & 17500 & 0.757(8) & 0.765(6) & 0.758(7) & \textbf{.775(6)}\\
+Physics &  45000 & 0.740(11) & 0.774(13) & 0.767(27) & \textbf{0.789(6)}\\
+Computer Science & 63400 & 0.647(17) & 0.682(10) & 0.682(16) & \textbf{.701(6)}\\
+Mathematics & 87700 & .590(22) & \textbf{.685}(21) & .678(72) & .684\textbf{(6)}\\
+Quant. Bio & 11000 & .805\textbf{(5)} & 0.823(9) & 0.820(7) & \textbf{.841}(6)\\
  [1ex]\hline\end{tabular}\caption{Accuracy results on all datasets with proposed embedding training schemes.
  The numbers in parenthesis represent the number of epochs until the model converged.}
 \end{table}\end{center}
 
 We observe that the Flash-Freeze method achieves relatively faster convergence, with accuracy competent or better than
-the accuracy of all other methods.
+the accuracy of all other methods. We observed that when using the \textit{flash-freeze} embedding training method, we reached a
+good stopping point after a small number of epochs (e.g. 6). This is useful because it removes the need to use a validation split for early
+stopping. From here on, all our models are trained using the \textit{flash-freeze} technique for 6 epochs: 3 epochs training the embeddings and 3 epochs
+with the embeddings frozen.
+
+All other methods required a validation split for early stopping. We used a 90/10 split for training and validation respectively.
 
 \section{Data Augmentation Results}
-In this section we show our experimental results when using our proposed data augmentation techniques. Our model hyper-parameters are as follows:
+In this section we show the experimental results obtained using the proposed data augmentation techniques. Our model hyper-parameters are as follows:
 number of training words=20000, kernel size=3, learning rate=0.001, regularization rate=0.00001,
-dropout rate = 0.2, maximum sequence length = 250. We consider the baseline model as our chosen architecture (RNN) with
-trainable embeddings (Not Frozen) and no data augmentation.
+dropout rate = 0.2, maximum sequence length = 250. We refer the model trained using the \textit{non-frozen} scheme
+and without any of the proposed augmentation techniques as the \textbf{baseline}.
 
-%
-%%%%%%%%%%% ASTROPHYSICS
-%
-\section{AstroPhysics}
-
-\subsection{Baseline}
-\begin{center}\begin{tabular}{||c c c c c c c c c||}
- \hline
- NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ & Acc\\ [0.5ex]
- \hline\hline
- 30000 & 64 & 200 & 0.442 & 3 & 5 & 1e-3 & 1e-4 & 0.773\\
- \hline
- 80000 & 64 & 250 & 0.059 & 3 & 2 & 1e-4 & 1e-5 & 0.760\\
- \hline
- 80000 & 64 & 250 & 0.056 & 2 & 2 & 1e-3 & 1e-4 & 0.759\\
- [1ex]\hline\end{tabular}\end{center}
-
-\subsection{Padding}
-\subsubsection{Wrap Padding}
-\begin{center}\begin{tabular}{||c c c c c c c c c ||}
- \hline
- NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ & Acc\\ [0.5ex]
- \hline\hline
- 30000 & 64 & 200 & 0.442 & 3 & 5 & 1e-3 & 1e-4 & 0.773\\
- \hline
- 80000 & 64 & 250 & 0.059 & 3 & 2 & 1e-4 & 1e-5 & 0.761\\
- \hline
- 80000 & 64 & 250 & 0.056 & 2 & 2 & 1e-3 & 1e-4 & 0.760\\
- [1ex]\hline\end{tabular}\end{center}
-
-\subsubsection{CSO Padding}
-\begin{center}\begin{tabular}{||c c c c c c c c c ||}
- \hline
- NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ & Acc\\ [0.5ex]
- \hline\hline
-30000 & 64 & 200 & 0.442 & 3 & 5 & 1e-3 & 1e-4 & 0.774\\
-\hline
-80000 & 64 & 250 & 0.059 & 3 & 2 & 1e-4 & 1e-5 & 0.752\\
-\hline
-80000 & 64 & 250 & 0.056 & 2 & 2 & 1e-3 & 1e-4 & 0.761\\
- [1ex]\hline\end{tabular}\end{center}
-
-\subsubsection{LSH Padding}
-\begin{center}\begin{tabular}{||c c c c c c c c c ||}
- \hline
- NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ & Acc\\ [0.5ex]
- \hline\hline
- 30000 & 64 & 200 & 0.442 & 3 & 5 & 1e-3 & 1e-4 & 0.768\\
- \hline
- 80000 & 64 & 250 & 0.059 & 3 & 2 & 1e-4 & 1e-5 & 0.752\\
- \hline
- 80000 & 64 & 250 & 0.056 & 2 & 2 & 1e-3 & 1e-4 & 0.755\\
- [1ex]\hline\end{tabular}\end{center}
-
-
-\subsection{Sentence Split}
-\subsubsection{Mean Vote}
-\begin{center}\begin{tabular}{||c c c c c c c c c ||}
- \hline
- NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ & Acc\\ [0.5ex]
- \hline\hline
- 30000 & 512 & 50 & 0.395 & 3 & 3 & 1e-5 & 1e-4 & 0.730\\
- \hline
- 60000 & 512 & 40 & 0.051 & 4 & 4 & 1e-5 & 1e-6 & 0.7152\\
- \hline
- 20000 & 512 & 40 & 0.062 & 5 & 5 & 1e-4 & 1e-6 & 0.685\\
- \hline
- 20000 & 512 & 60 & 0.247 & 3 & 5 & 1e-3 & 1e-5 & 0.710\\
- \hline
- 10000 & 512 & 60 & 0.121 & 5 & 3 & 1e-3 & 1e-5 &  0.712\\
- \hline
- 70000 & 512 & 40 & 0.223 & 4 & 5 & 1e-5 & 1e-5 &  0.690\\
- \hline
- 40000 & 128 & 50 & 0.225 & 5 & 3 & 1e-5 & 1e-4 &  0.734\\
- \hline
- 30000 & 64 & 40 & 0.132 & 3 & 4 & 1e-3 & 1e-4 &  0.711\\
- \hline
- 40000 & 1024 & 50 & 0.225 & 5 & 3 & 1e-4 & 1e-4 &  0.689\\
- [1ex]\hline\end{tabular}\end{center}
-
-\subsection{Noise Injection}
+\section{Astrophysics}
 \begin{center}
- \begin{tabular}{||c c c c c c c c c c c||}
+\begin{tabular}{|c||c|c|c|c|c|c|}
  \hline
- NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ & $p_{aug}$ & $p_{noise}$ & Acc\\ [0.5ex]
- \hline\hline
- 80000 & 64 & 250 & 0.548 & 4 & 5 & 1e-4 & 1e-5 & 0.653 & 0.195 & 0.537\\
- \hline
- 70000 & 64 & 300 & 0.423 & 5 & 4 & 1e-5 & 1e-3 & 0.107 & .004 & 0.665\\
- \hline
- 70000 & 32 & 200 & 0.512 & 3 & 4 & 1e-3 & 1e-5 & 0.179 & .373 &  0.764\\
- \hline
- 80000 & 128 & 200 & 0.185 & 4 & 4 & 1e-5 & 1e-6 & 0.973 & 0.128 &  0.680\\
- \hline
- 50000 & 32 & 250 & 0.167 & 4 & 4 & 1e-4 & 1e-4 & 0.866 & 0.364 & 0.761\\
- [1ex]\hline\end{tabular}\end{center}
+ \multicolumn{6}{|c|}{\textbf{Astrophysics Test Accuracy}}\\ \hline
+  & No Change & Embedding PCA & Wrap Padding & PCA \& Padding & Sentence Split\\  \hline
+  No Aug & 0.773 & 0.774 & 0.778 & 0.777 & 0.769 \\ \hline
+  Noise &  0.771 & 0.779 & 0.768 & 0.777 & 0.765  \\  \hline
+  Shuffle & 0.772 & 0.768 & 0.770 & 0.764 & 0.766 \\      \hline
+  Ensemble & 0.771 & 0.777 &  0.770 & 0.777 & 0.770 \\      \hline
+  \multicolumn{6}{|c|}{Baseline: 0.765}\\ \hline
+  \end{tabular}
+  \end{center}
 
+\section{Physics}
+  \begin{center}
+  \begin{tabular}{|c||c|c|c|c|c|c|}
+   \hline
+   \multicolumn{6}{|c|}{\textbf{Physics Test Accuracy}}\\ \hline
+    & No Change & Embedding PCA & Wrap Padding & PCA \& Padding & Sentence Split\\  \hline
+    No Aug & 0.789 & 0.789 & \textbf{0.790} & \textbf{0.790} & 0.786 \\ \hline
+    Noise &  0.774 & 0.757 & 0.783 & 0.782 & 0.743  \\  \hline
+    Shuffle & 0.772 & 0.761 & 0.787 & 0.787 & 0.766 \\      \hline
+    Ensemble & 0.783 & 0.775 &  0.789 & 0.789 & 0.765 \\      \hline
+    \multicolumn{6}{|c|}{Baseline: 0.774}\\ \hline
+    \end{tabular}
+    \end{center}
+\section{Mathematics}
+\begin{center}
+ \begin{tabular}{|c||c|c|c|c|c|c|}
+  \hline
+  \multicolumn{6}{|c|}{\textbf{Mathematics Test Accuracy}}\\ \hline
+   & No Change & Embedding PCA & Wrap Padding & PCA \& Padding & Sentence Split\\  \hline
+   No Aug & 1 & 2 & 3 & 1 & 2 \\      \hline
+   Noise & 1 & 2 & 3 & 1 & 2  \\      \hline
+   Shuffle & 1 & 2 & 3 & 1 & 2 \\      \hline
+   Ensemble & 1 & 2 & 3 & 1 & 2 \\      \hline
+   \multicolumn{6}{|c|}{Baseline: }\\ \hline
+   \end{tabular}
+  \end{center}
+
+\section{Computer Science}
+\begin{center}
+ \begin{tabular}{|c||c|c|c|c|c|c|}
+  \hline
+  \multicolumn{6}{|c|}{\textbf{Computer Science Test Accuracy}}\\ \hline
+   & No Change & Embedding PCA & Wrap Padding & PCA \& Padding & Sentence Split\\  \hline
+   No Aug & 1 & 2 & 3 & 0.702 & 2 \\      \hline
+   Noise & 1 & 2 & 3 & 1 & 2  \\      \hline
+   Shuffle & 1 & 2 & 3 & 1 & 2 \\      \hline
+   Ensemble & 1 & 2 & 3 & 1 & 2 \\      \hline
+   \multicolumn{6}{|c|}{Baseline: 0.682}\\ \hline
+ \end{tabular}
+\end{center}
 
 \section{Quantitative Biology}
-\subsection{Embedding PCA}
 \begin{center}
- \begin{tabular}{||c c c c||}
- \hline
- Baseline & EmbeddingPCA & EmbeddingPCA+Noise & Ensemble\\ [0.5ex]
- \hline\hline
- &r&r&r&r\\
- [1ex]\hline\end{tabular}\end{center}
-
-\subsection{Embedding PCA + Wrap Padding}
-
-
-\subsection{Sentence Splitting}
-
-
-%
-%%%%%%%%%%% MATH
-%
-\section{Math}
-[Distribution]
-[Distribution]
-\subsection{Sentence Split}
-\subsubsection{Mean Vote}
-
-\subsection{Padding}
-\subsubsection{Wrap Padding}
-\begin{center}\begin{tabular}{||c c c c c c c c c c ||}
- \hline
- NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ &  Loss & Acc\\ [0.5ex]
- \hline\hline
- 80000 & 64 & 250 & 0.548 & 4 & 5 & 1e-4 & 1e-5 & 1.818 & 0.537\\
- \hline
- 2 & 7 & 78 & 5415 \\
- [1ex]\hline\end{tabular}\end{center}
-
-\subsubsection{CSO Padding}
-\begin{center}\begin{tabular}{||c c c c c c c c c c ||}
- \hline
- NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ &  Loss & Acc\\ [0.5ex]
- \hline\hline
- 80000 & 64 & 250 & 0.548 & 4 & 5 & 1e-4 & 1e-5 & 1.818 & 0.537\\
- \hline
- 2 & 7 & 78 & 5415 \\
- [1ex]\hline\end{tabular}\end{center}
-\subsubsection{LSH Padding}
-\begin{center}\begin{tabular}{||c c c c c c c c c c ||}
- \hline
- NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ &  Loss & Acc\\ [0.5ex]
- \hline\hline
- 80000 & 64 & 250 & 0.548 & 4 & 5 & 1e-4 & 1e-5 & 1.818 & 0.537\\
- [1ex]\hline\end{tabular}\end{center}
-
-\subsection{Noise Injection}
-\begin{center}
- \begin{tabular}{||c c c c c c c c c c c c||}
- \hline
- NWords & Batch & MaxLen & $p_{drop}$ & Kern & Pool & $\alpha$ & $\lambda$ & $p_{aug}$ & $p_{noise}$ & Acc\\ [0.5ex]
- \hline\hline
- 80000 & 64 & 250 & 0.548 & 4 & 5 & 1e-4 & 1e-5 & 0.653 & 0.195 & 1.818 & 0.537\\
-[1ex]\hline\end{tabular}\end{center}
+\begin{tabular}{|c||c|c|c|c|c|c|}
+  \hline
+\multicolumn{6}{|c|}{\textbf{Quantitative Biology Test Accuracy}}\\ \hline
+  & No Change & Embedding PCA & Wrap Padding & PCA \& Padding & Sentence Split\\  \hline
+  No Aug & 0.836 & 0.837 & 0.839 & 0.838 & 0.833 \\      \hline
+  Noise & 0.827 & 0.835 & 0.837 & 0.834 & 0.812  \\      \hline
+  Shuffle & 0.831 & 0.827 & 0.831 & 0.829 & 0.820 \\      \hline
+  Ensemble & 0.839 & 0.840 & \textbf{0.840} & 0.840 & 0.830 \\      \hline
+  \multicolumn{6}{|c|}{Baseline: 0.828}\\ \hline
+\end{tabular}
+\end{center}

@@ -2,7 +2,7 @@
 
 \chapter{Model, Dataset, and Final Pipeline Description}
 \section{Layer Descriptions}
-\subsection{Embedding Layer}
+\subsection{Embedding Layer}\label{embeddinglayer}
 An \textbf{embedding layer} maps an word index, or integer, into its corresponding embedding.
 This layer is usually the first layer in a neural network that processes input such as text.
 Given input text $s$, this layer receives as input a sequence of word indexes $BoW(\bm{s})=$ $\bm{x} = x_1,...,x_k$
@@ -23,19 +23,18 @@ layer outputs a matrix comprised of stacked embeddings, one for each index.}
 
 We refer to a convolutional layer followed by a pooling layer as a feature map.
 Since our data are text sequences and thus have temporal structure, we use a one-dimensional convolutional
-layer to convolve with embedding n-grams through the input sequence [CITE LANG AND HINTON 1988, WAIBEL ET AL 1989,
-LANG ET AL 1990].
-As in [REFER TO CONVOLUTION DIAGRAM], we stride only along the time dimension. This is in contrast to the usual two-dimensional convolution schemes with image data,
+layer to convolve with embedding n-grams through the input sequence \cite{waibel1988phoneme}.
+As in Figure \ref{fig:convolution}, we stride only along the time dimension. This is in contrast to the usual two-dimensional convolution schemes with image data,
 where the kernels stride along the width and height dimensions of the input data. After the convolution step,
 we apply a non-linearity to each computed feature. We chose the rectified linear activation (\textbf{ReLU}) function
 \[ReLU(x) = max(0,x)\]
 Although simple, this non-linearity is quite effective and thus widely used.
-We then use a max pooling operation to ouput a single value for each kernel[CITE LIN ET AL 2014]. Besides the huge
+We then use a max pooling operation to ouput a single value for each kernel similar to \cite{DBLP:journals/corr/LinCY13}. Besides the huge
 dimensionality reduction, we do this so that we pass to the next layer the single strongest activation
 from each kernel i.e. a strong feature selection mechanism.
 
 \subsection{Gated Recurrent Unit Layer}
-A recurrent layer is designed to process data with temporal structure i.e. sequences [RUMELHART ET AL 1986].
+A recurrent layer is designed to process data with temporal structure i.e. sequences \cite{rumelhart1986sequential}.
 This recurrent layer is in itself a network, where the hidden layer values at time \textit{t} depend on the previous
 hidden layer's values, the input corresponding to time \textit{t}, and a shared parameter set:
 \[\bm{h}^{t} = f(\bm{h}^{t-1}, \bm{x}^{t}, \bm{\theta})\]
@@ -51,8 +50,8 @@ in order for the model to generalize better.}
 \includegraphics[width=0.5\textwidth]{RecurrentNet.png}
 \end{figure}
 
-A Gated Recurrent Unit layer is a type of recurrent layer designed to combat this condition[CITE CHO ET AL 2014].
-It is a simplified version of the earlier LSTM layer[CITE SCHMIDHUBER], also designed to mitigate the vanishing gradient problem,
+A Gated Recurrent Unit layer is a type of recurrent layer designed to combat this condition \cite{chung2014empirical}.
+It is a simplified version of the earlier LSTM layer \cite{hochreiter1997long}, also designed to mitigate the vanishing gradient problem,
 and in practice it performs comparably well.
 This layer models the latent features computed by the feature map as a time sequence. This means that it
 does not assume indepences between activation and learn to model the temporal structure of the previous
@@ -76,9 +75,9 @@ the all units, to finally output class probabilities:
 
 \section{Model Description}
 
-[YIN ET AL 2014] provide an overview of typical models used for text classification.
+\cite{yin2017comparative} provide an overview of typical neural models used for natural language processing.
 A standard architecture for convolutional neural networks for text sequence classification is the one proposed by
-[CITE YOON 2014]. This model has an embedding layer followed by a feature map and a dense layer with a softmax activation
+\cite{kim2014convolutional}. This model has an embedding layer followed by a feature map and a dense layer with a softmax activation
 to output class probabilities. This model has parameter sharing and sparse interaction properties inherent of convolutional
 neural networks, and thus is a good choice for efficiently extracting features from the data via convolutions and non-linearities.
 The pooling operation provides data dimensionality and acts as a translation invariance mechanism. This reduction makes forward propagation

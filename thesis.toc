@@ -1,0 +1,47 @@
+\hfill {\bf Page}
+\contentsline {chapter}{Acknowledgements}{v}
+\contentsline {chapter}{Abstract}{vi}
+\contentsline {chapter}{Table of Contents}{vii}
+\contentsline {chapter}{List of Figures}{ix}
+\noindent {\bf Chapter}
+\contentsline {chapter}{\numberline {1}Introduction}{1}
+\contentsline {section}{\numberline {1.1}Training a Neural Network}{1}
+\contentsline {section}{\numberline {1.2}Minimizing Non-Convex Functions: Gradiant-Based Learning}{2}
+\contentsline {section}{\numberline {1.3}Bias-Variance Tradeoff}{2}
+\contentsline {section}{\numberline {1.4}Weight Regularization}{4}
+\contentsline {subsection}{\numberline {1.4.1}Dropout}{5}
+\contentsline {chapter}{\numberline {2}Text Classification with Deep Neural Networks}{6}
+\contentsline {section}{\numberline {2.1}Brief Overview of Deep Learning}{6}
+\contentsline {section}{\numberline {2.2}Word Embeddings}{7}
+\contentsline {section}{\numberline {2.3}Convolutional Neural Networks}{8}
+\contentsline {subsection}{\numberline {2.3.1}Input Representation: Word Embeddings for Convolutional Networks}{9}
+\contentsline {chapter}{\numberline {3}Model, Dataset, and Final Pipeline Description}{11}
+\contentsline {section}{\numberline {3.1}Layer Descriptions}{11}
+\contentsline {subsection}{\numberline {3.1.1}Embedding Layer}{11}
+\contentsline {subsection}{\numberline {3.1.2}Feature Maps: Convolution + Pooling}{12}
+\contentsline {subsection}{\numberline {3.1.3}Gated Recurrent Unit Layer}{13}
+\contentsline {subsection}{\numberline {3.1.4}Dense Layer}{14}
+\contentsline {section}{\numberline {3.2}Model Description}{14}
+\contentsline {chapter}{\numberline {4}Towards Improving Model Performance: Embeddings and Data Augmentation}{17}
+\contentsline {section}{\numberline {4.1}Freezing the Embedding Layer}{17}
+\contentsline {section}{\numberline {4.2}Principal Component Analysis and Dimensionality Reduction of the Embeddings}{18}
+\contentsline {section}{\numberline {4.3}Dataset Augmentation: Shuffling and Noise Injection}{19}
+\contentsline {subsection}{\numberline {4.3.1}Shuffling}{20}
+\contentsline {subsection}{\numberline {4.3.2}Noise Injection}{21}
+\contentsline {section}{\numberline {4.4}Dataset Augmentation: Padding}{21}
+\contentsline {subsection}{\numberline {4.4.1}Wrap Padding}{23}
+\contentsline {section}{\numberline {4.5}Reducing Data Granularity: From Abstract to Sentences}{23}
+\contentsline {chapter}{\numberline {5}Experimental Results}{24}
+\contentsline {section}{\numberline {5.1}Dataset Descriptions}{24}
+\contentsline {section}{\numberline {5.2}Freezing the Embeddings: Results}{24}
+\contentsline {section}{\numberline {5.3}Data Augmentation Results}{26}
+\contentsline {section}{\numberline {5.4}Astrophysics}{26}
+\contentsline {section}{\numberline {5.5}Physics}{26}
+\contentsline {section}{\numberline {5.6}Mathematics}{27}
+\contentsline {section}{\numberline {5.7}Computer Science}{27}
+\contentsline {section}{\numberline {5.8}Quantitative Biology}{28}
+\contentsline {chapter}{\numberline {6}Concluding Remarks}{29}
+\contentsline {section}{\numberline {6.1}Significance of the Result}{29}
+\contentsline {section}{\numberline {6.2}Future Work}{29}
+\contentsline {chapter}{References}{30}
+\contentsline {chapter}{Curriculum Vitae}{33}
