@@ -69,11 +69,12 @@ obtain $\bm{\theta}_{ML}$ by minimizing $J_{train}(\bm{\theta})$, but we care ab
 on test data points.
 
 \begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{OverfittingLossPlot.png}
 \caption{Visualization of overfitting. Training error decreases as epochs progress, eventually reaching zero.
 Validation error starts increasing, indicating overfitting. The best model is shown at the dotted line, where
 validation error reached its minimum.}
-\centering
-\includegraphics[width=0.5\textwidth]{OverfittingLossPlot.png}
+
 \end{figure}
 
 \textbf{Overfitting} occurs when a network is able to predict its training set extremely well (i.e. very close to zero error), but fails to predict

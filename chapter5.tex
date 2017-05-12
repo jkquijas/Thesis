@@ -68,6 +68,7 @@ and without any of the proposed augmentation techniques as the \textbf{baseline}
 
 \section{Astrophysics}
 \begin{center}
+\begin{table}[H]
 \begin{tabular}{|c||c|c|c|c|c|c|}
  \hline
  \multicolumn{6}{|c|}{\textbf{Astrophysics Test Accuracy}}\\ \hline
@@ -78,10 +79,13 @@ and without any of the proposed augmentation techniques as the \textbf{baseline}
   Ensemble & 0.771 & 0.777 &  0.770 & 0.777 & 0.770 \\      \hline
   \multicolumn{6}{|c|}{Baseline: 0.765}\\ \hline
   \end{tabular}
+\caption{Test accuracy on the astrophysics dataset.}
+\end{table}
   \end{center}
 
 \section{Physics}
   \begin{center}
+    \begin{table}[H]
   \begin{tabular}{|c||c|c|c|c|c|c|}
    \hline
    \multicolumn{6}{|c|}{\textbf{Physics Test Accuracy}}\\ \hline
@@ -92,37 +96,43 @@ and without any of the proposed augmentation techniques as the \textbf{baseline}
     Ensemble & 0.783 & 0.775 &  0.789 & 0.789 & 0.765 \\      \hline
     \multicolumn{6}{|c|}{Baseline: 0.774}\\ \hline
     \end{tabular}
+    \caption{Test accuracy on the physics dataset.}
+    \end{table}
     \end{center}
-\section{Mathematics}
-\begin{center}
- \begin{tabular}{|c||c|c|c|c|c|c|}
-  \hline
-  \multicolumn{6}{|c|}{\textbf{Mathematics Test Accuracy}}\\ \hline
-   & No Change & Embedding PCA & Wrap Padding & PCA \& Padding & Sentence Split\\  \hline
-   No Aug & 1 & 2 & 3 & 1 & 2 \\      \hline
-   Noise & 1 & 2 & 3 & 1 & 2  \\      \hline
-   Shuffle & 1 & 2 & 3 & 1 & 2 \\      \hline
-   Ensemble & 1 & 2 & 3 & 1 & 2 \\      \hline
-   \multicolumn{6}{|c|}{Baseline: }\\ \hline
-   \end{tabular}
-  \end{center}
+%\section{Mathematics}
+%\begin{center}
+% \begin{tabular}{|c||c|c|c|c|c|c|}
+%  \hline
+%  \multicolumn{6}{|c|}{\textbf{Mathematics Test Accuracy}}\\ \hline
+%   & No Change & Embedding PCA & Wrap Padding & PCA \& Padding & Sentence Split\\  \hline
+%   No Aug & 1 & 2 & 3 & 1 & 2 \\      \hline
+%   Noise & 1 & 2 & 3 & 1 & 2  \\      \hline
+%   Shuffle & 1 & 2 & 3 & 1 & 2 \\      \hline
+%   Ensemble & 1 & 2 & 3 & 1 & 2 \\      \hline
+%   \multicolumn{6}{|c|}{Baseline: }\\ \hline
+%   \end{tabular}
+%  \end{center}
 
 \section{Computer Science}
 \begin{center}
+  \begin{table}[H]
  \begin{tabular}{|c||c|c|c|c|c|c|}
   \hline
   \multicolumn{6}{|c|}{\textbf{Computer Science Test Accuracy}}\\ \hline
    & No Change & Embedding PCA & Wrap Padding & PCA \& Padding & Sentence Split\\  \hline
-   No Aug & 1 & 2 & 3 & 0.702 & 2 \\      \hline
-   Noise & 1 & 2 & 3 & 1 & 2  \\      \hline
-   Shuffle & 1 & 2 & 3 & 1 & 2 \\      \hline
-   Ensemble & 1 & 2 & 3 & 1 & 2 \\      \hline
+   No Aug & 0.703 & 0.690 & 0.701 & 0.699 & 2 \\      \hline
+   Noise & 0.655 & 0.665 &  &  0.675 & 2  \\      \hline
+   Shuffle & 0.682 & 0.663 & 3 & 0.685 & 2 \\  \hline
+   Ensemble & 0.678 & 0.680 & 3 & 0.689 & 2 \\      \hline
    \multicolumn{6}{|c|}{Baseline: 0.682}\\ \hline
  \end{tabular}
+ \caption{Test accuracy on the computer science dataset.}
+ \end{table}
 \end{center}
 
 \section{Quantitative Biology}
 \begin{center}
+  \begin{table}[H]
 \begin{tabular}{|c||c|c|c|c|c|c|}
   \hline
 \multicolumn{6}{|c|}{\textbf{Quantitative Biology Test Accuracy}}\\ \hline
@@ -133,4 +143,6 @@ and without any of the proposed augmentation techniques as the \textbf{baseline}
   Ensemble & 0.839 & 0.840 & \textbf{0.840} & 0.840 & 0.830 \\      \hline
   \multicolumn{6}{|c|}{Baseline: 0.828}\\ \hline
 \end{tabular}
+\caption{Test accuracy on the quantitative biology dataset.}
+\end{table}
 \end{center}

@@ -1,7 +1,56 @@
 % chap6.tex (Significance and Future Work)
 
 \chapter{Concluding Remarks}
+We presented an evaluation of recurrent convolutional neural networks for classification of publication abstracts from multiple science and
+engineering disciplines. Using our proposed techniques we obtained a small increase in test accuracy compared to our baseline model.
 
-\section{Significance of the Result}
+One conclusion we can make from this study is that recurrent convolutional networks are efficient and effective feature extractors even with
+moderate amounts of training data. The combination of convolution and global max pooling provided efficient feature extraction, while the recurrent layer
+learned to model the temporal structure of our data. The model with this combination of layers reached the highest test accuracy in our experiments.
+
+We proposed several embeding \textit{trainability} schemes to manipulate the word embeddings during training.
+The results we obtained were different than what we had anticipated. Since the embeddings were already learned (pre-trained) from a previous task to represent words in a distributed way and to capture semantic relations,
+we originally believed that changing their values would only overfit the training set and thus significantly reduce testing set accuracy.
+We expected that the \textit{freeze-unfreeze} method would achieve faster convergeance and higher accuracy compared to all other proposed embedding methods.
+With this scheme, we hoped the model would converge then increase accuracy by allowing the embeddings to be trainable until convergeance determined by
+a stopping criterion. Although the model test accuracy did increase with this scheme, the \textit{flash-freeze} method outperformed all others.
+By allowing the embeddings to be fine-tuned for a small number of iterations (three in our tests), then allowing the model to rely
+only on its weights (frozen embeddings), we observed we could finish training after a constant number of epochs and remove the need for a validation set.
+For our task, three epochs were enough to finish termination. This increased, albeit by not much, the amount of data available for training purposes.
+A validation set for early stopping was crucial before we incorporated the \textit{freeze-flash} stopping mechanism; the model would quickly overfit and test accuracy
+would decrease.
+
+One interesting observation from our experiments is that the use of PCA on the embeddings yielded favorable results. The dimensionality reduction and linear decorrelation of the embedding
+variables did not affect the model's generalization when a large enough variance percentage was retained. This allowed us to add a smaller number of free parameters
+while retaining competent performance compared to using the entire embedding set.
+
+Our tests were inconclusive in determining whether the proposed noise injection and word shuffling augmentations yielded improved results. Overall, we obtained slightly
+lower test accuracy with models trained using these augmentation schemes. We believe that the
+model learns the structure of the data and therefore develops a sort of translation invariance. This could explain why shuffling the order of words as a data augmentation
+technique yielded results similar than without the shuffling.
+A larger dataset and more tests are necessary to decide if this technique is indeed beneficial or not.
+
+We proposed to split the abstracts into sentences and train the model using this finer data granularity. This would increase the amount of training examples
+the model could perform weight updates with. By increaseing the number of examples available for training, we hoped to obtain better test accuracy.
+Our results were contraty to this, as we obtained higher accuracy when we treated an entire abstract as a single training example.
+We believe this is due to the noise present in our data, as well as the increased likelihood of class ambiguity when processing a single sentence versus an entire
+paragraph.
 
 \section{Future Work}
+We would like to extend our research to incorporate datasets of various sizes on our same task. This will give us further insight on how
+well recurrent convolutional neural networks learn with a range of different training set sizes. Another further augmentation technique we would like to further
+study is padding.
+
+The application of PCA to the embedding matrix yielded unexpected and favorable results. Because of the projection of the embeddings into a different set of axes,
+we believed we would lose the performance gain of using pre-trained embeddings. The results were contrary to this, as we obtained similar performance
+withe the PCA embeddings with a smaller number of free parameters. It would be interesting to apply non-linear dimensionality
+reduction techniques (e.g. principal curves, autoencoders) and evaluate the effects.
+
+In our work, we padded an input sequence with zeros to enforce uniform input size. We proposed to pad our inputs by \textit{wrapping}
+around the text to remove zero-padding. It is unclear from our experiments if this augmentation helped improve our model's performance directly.
+We would like to extend our proposed padding to have a selection mechanism to pad with words that could potentially increase the information content in a training
+sample (i.e. keywords). Having such a selection mechanism, we could pad an input sequence using words selected as informative or meaningful based on
+some specified criteria rather than simply wrapping around the sequence.
+
+Lastly, we are interested in seeing the effect of synonyms as a data augmentation procedure. This could be to replace words with their
+actual synonyms using table lookups, or to compute nearest neighbors and replace words based on this criterion.

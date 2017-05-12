@@ -13,6 +13,9 @@
 \usepackage{algorithmicx}
 \usepackage{algorithm,algpseudocode}
 
+\usepackage{float}
+\floatstyle{plaintop}
+\restylefloat{table}
 
 
 \DeclareMathOperator*{\argmin}{\arg\!\min}
@@ -48,7 +51,7 @@
 % Uncomment to put degrees on title page
 %\AuthorDegrees{B.S.}
 \date{May 2017}
-\DeptName{Department of Computer Science}
+\DeptName{Computer Science}
 
 \CommitteeChair{Olac Fuentes, Chair, Ph.D.}
 \CommitteeMembers{Monika Akbar, Ph.D.}
@@ -78,12 +81,13 @@ thanks for everything}
 
 \maketitlepage
 
-\include{acknowl}       % Acknowledgements, optional
+%\include{acknowl}       % Acknowledgements, optional
 %\include{preface}       % Preface, optional
 \include{abstract}      % Abstract, optional, but strongly recommended
 
 \tableofcontents        % Generate Table of Contents
 \listoffigures
+\listoftables
 
 % If you a list of tables, uncomment the next line.
 % It is required if the document contains three or more tables

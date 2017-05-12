@@ -44,10 +44,10 @@ embedding space. Thus, word embeddings are said to capture semantic relations an
 a bag-of-words or one-hot vector representation).
 
 \begin{figure}[h]
-\caption{Visualization of embeddings using the t-distributed stochastic neighbor embedding (t-SNE) dimensionality reduction algorithm.
-Words with similar or related meanings tend to lie close to each other in embedding space.}
 \centering
 \includegraphics[width=1.0\textwidth]{EmbeddingViz.png}
+\caption{Visualization of embeddings using the t-distributed stochastic neighbor embedding (t-SNE) dimensionality reduction algorithm.
+Words with similar or related meanings tend to lie close to each other in embedding space.}
 \end{figure}
 
 \section{Convolutional Neural Networks}
@@ -74,12 +74,12 @@ We represent a training document $\bm{s}$ as a sequence of integers $BoW(\bm{s})
 in $\mathbb{V}$. When the convolutional network receives this input sequence, each word index will be mapped to a corresponding embedding vector.
 
 \begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{FeatureMap.png}
 \caption{Visualization of a feature map with a single kernel. In this example, the kernel convolves tri-grams, or windows of three words.
 After convolution with all possible trigram context windows, max pooling is applied to reduce dimensionality.
 Here, the pool size is 3. This process is repeated as many times as there are kernels in the layer and their outputs are
 concatenated horizantally to yield a matrix of size \textit{num filters} $\times$ (\textit{input length - pool size + 1}).}
-\centering
-\includegraphics[width=0.5\textwidth]{FeatureMap.png}
 \label{fig:convolution}
 \end{figure}
 %%% Local Variables:
