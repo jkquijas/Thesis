@@ -30,6 +30,12 @@ Alexey Dosovitskiy, Jost~Tobias Springenberg, Martin Riedmiller, and Thomas
 \newblock In {\em Advances in Neural Information Processing Systems}, pages
   766--774, 2014.
 
+\bibitem{graves2013speech}
+Alex Graves, Abdel-rahman Mohamed, and Geoffrey Hinton.
+\newblock Speech recognition with deep recurrent neural networks.
+\newblock In {\em Acoustics, speech and signal processing (icassp), 2013 ieee
+  international conference on}, pages 6645--6649. IEEE, 2013.
+
 \bibitem{he2016deep}
 Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
 \newblock Deep residual learning for image recognition.
@@ -53,6 +59,18 @@ Max Jaderberg, Karen Simonyan, Andrew Zisserman, et~al.
 \newblock Spatial transformer networks.
 \newblock In {\em Advances in Neural Information Processing Systems}, pages
   2017--2025, 2015.
+
+\bibitem{joachims2002learning}
+Thorsten Joachims.
+\newblock {\em Learning to classify text using support vector machines:
+  Methods, theory and algorithms}.
+\newblock Kluwer Academic Publishers, 2002.
+
+\bibitem{johnson2014effective}
+Rie Johnson and Tong Zhang.
+\newblock Effective use of word order for text categorization with
+  convolutional neural networks.
+\newblock {\em arXiv preprint arXiv:1412.1058}, 2014.
 
 \bibitem{kim2014convolutional}
 Yoon Kim.
@@ -82,6 +100,12 @@ Min Lin, Qiang Chen, and Shuicheng Yan.
 \newblock Network in network.
 \newblock {\em CoRR}, abs/1312.4400, 2013.
 
+\bibitem{luhn1957statistical}
+Hans~Peter Luhn.
+\newblock A statistical approach to mechanized encoding and searching of
+  literary information.
+\newblock {\em IBM Journal of research and development}, 1(4):309--317, 1957.
+
 \bibitem{oquab2014learning}
 Maxime Oquab, Leon Bottou, Ivan Laptev, and Josef Sivic.
 \newblock Learning and transferring mid-level image representations using
@@ -105,6 +129,11 @@ David~E Rumelhart, Paul Smolensky, James~L McClelland, and G~Hinton.
 Jonathon Shlens.
 \newblock A tutorial on principal component analysis.
 \newblock {\em CoRR}, abs/1404.1100, 2014.
+
+\bibitem{siegelmann1995computational}
+Hava~T Siegelmann and Eduardo~D Sontag.
+\newblock On the computational power of neural nets.
+\newblock {\em Journal of computer and system sciences}, 50(1):132--150, 1995.
 
 \bibitem{srivastava2014dropout}
 Nitish Srivastava, Geoffrey~E Hinton, Alex Krizhevsky, Ilya Sutskever, and

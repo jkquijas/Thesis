@@ -5,15 +5,14 @@ As mentioned in section \ref{embeddinglayer}, we can fine-tune the word embeddin
 gradient-based optimizer), just as any other weights in the neural network. In this case, the number of free parameters in our model increases drastically.
 It is easier to overfit a model with more free parameters when the amount of training data is limited, as is the case in our task. Another important aspect to consider when fine-tuning the embeddings is whether we lose the semantic information originally
 present in them. It is therefore a good idea to evaluate the effect of training the embeddings. In the following sections, we propose various ways
-treat the embedding layer in our neural network in order to mitigate overfitting. We also consider reducing the dimensionality of the embeddings
+to treat the embedding layer in our neural network in order to mitigate overfitting. We also consider reducing the dimensionality of the embeddings
 via Principal Component Analysis (PCA). Finally, we propose data augmentation techniques inspired by computer vision tasks but designed for
 text data with temporal structure, as is the case with our data.
 
 \section{Freezing the Embedding Layer}
 When we make our model's embeddings trainable, its number of free parameters highly increases. With inputs of size $n$,
 and embeddings of size $d$, we introduce $n \times d$ new parameters into the model.
-We therefore propose multiple embedding \textit{trainability} schemes to quantify how much the embeddings help increase (or decrease) test
-accuracy and overfitting.
+We therefore propose multiple embedding \textit{trainability} schemes and evaluate their effects on overall performance.
 
 \begin{itemize}
   \item{Frozen Embeddings}
@@ -40,12 +39,12 @@ accuracy and overfitting.
 \end{itemize}
 
 \section{Principal Component Analysis and Dimensionality Reduction of the Embeddings}
-Principal Component Analysis (PCA) is a very popular linear transformation commonly used to reduce dimensionality of a dataset \cite{DBLP:journals/corr/Shlens14}.
+Principal Component Analysis (PCA) is a very popular linear transformation commonly used to reduce dimensionality and eliminate noise in a dataset \cite{DBLP:journals/corr/Shlens14}.
 It projects the data to a representation where the variables are linearly uncorrelated. Concretely, PCA projects the data onto new axes called principal
 components. These axes, or dimensions, are orthogonal and selected in a way that minimizes reconstruction mean square error.
 Given a data matrix $\bm{X}$ with $n$ dimensions, its principal components are the eigenvectors of the covariance matrix $\bm{X}^T\bm{X}$.
-The first principal component is the direction of most variation. The second principal component is the direction with the next largest variation,
-and so on. We can then choose to retain only the $k<n$ principal components that contain the most variation in the data.
+The first principal component (the one with the largest associated eigenvalue) is the direction of most variation. The second principal component is the direction with the next largest variation,
+and so on. We can then choose to retain only the $k<n$ principal components that encode the most variation in the data.
 
 We propose to apply PCA to the word embeddings in order to linearly decorrelate their dimensions and reduce their dimensionality.
 By reducing the dimensionality while preserving the majority of the variance in them (e.g. 95\%), we will reduce the number of parameters introduced
@@ -56,49 +55,47 @@ to the model while retaining most of the information from the original embedding
 \section{Dataset Augmentation: Shuffling and Noise Injection}
 Another common practice aimed to reducing overfitting is to \textbf{augment} the dataset.
 Data augmentation refers to any transformation of the input data in a way that
-the label value does not change. Data augmentation is ubiquitous in computer vision tasks. Example transformations include translations,
-rotations, and color intensity jitters via Pricipal Component Analysis \cite{krizhevsky2012imagenet}. All these tranformations should be subtle enough that the overall structure is preserved, but
-allow for the model to process more distinct training data points.
+the label value does not change. Data augmentation is ubiquitous in computer vision tasks. Example transformations include small translations,
+rotations, mirroring, and color intensity jitters via Pricipal Component Analysis \cite{krizhevsky2012imagenet}. All these tranformations should be subtle enough that the overall structure is preserved, but
+allow for the model to process distinct training data points.
 
-The data augmentation techniques mentioned above are common practive in computer vision tasks such as image classification.
-In order to introduce more variance into our dataset, we propose data augmentation techniques inspired by computer vision by designed for
+The data augmentation techniques mentioned above are common practice in computer vision tasks such as image classification.
+In order to introduce more variance into our dataset, we propose data augmentation techniques inspired by computer vision tasks and designed for
 text sequence data.
-We propose to \textbf{shuffle} by randomly changing the order of words within a \textbf{context windows}, or non-overlapping neighborhood of words
-in the input text sequence.
+We propose to \textbf{shuffle} by randomly changing the order of words within a \textbf{context window}, or non-overlapping neighborhood of words
+through the input text sequence.
 We further propose to inject small amounts of \textbf{noise} to the input sequence by randomly replacing words with words taken from the training vocabulary.
 
-As long as the overall structure of the data (and label) is preserved, data augmentation normally lead to improved task performance \cite{chawla2002smote}
-\cite{krizhevsky2012imagenet}\cite{jaderberg2015spatial}\cite{he2016deep}.
-With that same rationale, we expect our proposed augmentation techniques to yield increase accuracy percentages. In other words, we expect that
-our changes will be subtle enough for the label to be preserved, but effective enough that we introduce more variance into our dataset and help cope with
+As long as the overall structure of the data (and label) is preserved, data augmentation normally leads to improved task performance \cite{chawla2002smote}\cite{he2016deep}
+\cite{jaderberg2015spatial}\cite{krizhevsky2012imagenet}.
+With that same rationale, we expect our proposed augmentation techniques to yield increased accuracy percentages. In other words, we expect that
+our changes will be subtle enough for the label to be preserved, but effective enough that we introduce more variation into our dataset and help cope with
 the limited number of training examples.
 
 
 \subsection{Shuffling}
 We propose to augment our dataset by making small \textit{context} changes that don't change the global structure
 of the input sequences. Concretely, we move a \textit{context window} along non-overlapping neighborhoods the input sequence, randomly
-shuffling the words indexes inside it. For example using a context window of size 2 i.e. \textit{bi-gram}, an input sequence
+shuffling the words indexes inside it. For example using a context window of size 2 (bi-grams), an input sequence
 \[\bm{x} = x_1, x_2, x_3, x_4, x_5, x_6\]
 
  could be shuffled to:
 \[\bm{x}^{\prime} = x_2, x_1, x_3, x_4, \underbrace{x_6, x_5}_\text{bi-gram}\]
-In the first pass, the first two indexes get shuffled. The second pass led to no changes in ordering. The third and
-final pass shuffles the last two indexes.
 
 As it is common practice in computer vision tasks to apply small translations and rotations to images, we perform
 this operation to slightly perturb the temporal structure of our text sequence data.
 The rationale for this dataset augmentation technique is that small changes in the ordering of the words will
 result in a larger training sample; a training input sequence has a low chance of being repeated as its
 length increases. Smaller context windows preserve the most structure. This method will preserve
-most of the original context structure in the sequence, as long as the shuffling is not to harsh e.g.
-a complete random permutation of the sequence.
+most of the original context structure in the sequence, as long as the shuffling is not too harsh (e.g.
+a complete random permutation of the sequence).
 
 \subsection{Noise Injection}
-One common augmentation technique for image datasets is to add small amount of noise. By replacing a relatively small
+One common augmentation technique for image datasets is to add a small amount of noise. By replacing a relatively small
 number of pixel values with noise, the model gets to process and train on a different but similar instance. The noise should be subtle
 enough as to not distort the image too much, otherwise we could potentially train the model using mostly noise.
 We propose to augment our dataset by injecting noise to each training sample. Again, we aim to simulate
-a larger training sample while avoiding harsh changes to the original inputs. Concretely, each word in a text sequence gets replaced
+a larger training sample while avoiding harsh changes to the original inputs. Specifically, each word in a text sequence is replaced
 with a specified probability with a word randomly chosen from our training vocabulary.
 \begin{algorithm}[H]
 \caption{Add noise to input sequence}
@@ -118,27 +115,27 @@ with a specified probability with a word randomly chosen from our training vocab
 
 \section{Dataset Augmentation: Padding}
 In order to enforce uniform input size for our neural networks,
-we apply \textbf{zero-padding}.For any arbitrary training instance $BoW(\bm{s})=$ $\bm{x} = x_1,...,x_k$, we enforce that $k = n$, for the specified input size
+we apply \textbf{zero-padding}. For any arbitrary training instance $BoW(\bm{s})=$ $\bm{x} = x_1,...,x_k$, we enforce that $k = n$, for the specified input size
 $n$. Thus, if $k \textless n$, we transform it into $\bm{x}_{pad} = x_1,...,x_k, 0_{k+1}, ..., 0_{n}$. Conversely, if
 $k \textgreater n$, we simply truncate $\bm{x}$ to be of size $n$. The input length introduces another model hyper-parameter
 that should be fine-tuned, but a reasonable approach is to pad enough to fully accomodate
-the length of most input sequences i.e. it’s preferrable to pad than truncate and lose
-information.
+the length of most input sequences (i.e. it is preferrable to pad than truncate and lose
+information).
 
 Our network's input is a sequence of integers, each integer being a word index: a number representing a word in our vocabulary $\mathbb{V}$.
-Word indexes range from 1 to $|\mathbb{V}|$, and the index 0 being left for out-of-vocabulary words.
-When we pad our input sequence with 0’s, we don’t add any additional information; we
+Word indexes range from 1 to $|\mathbb{V}|$, with the index 0 being left for out-of-vocabulary words.
+When we pad our input sequence with 0’s, we do not add any information; we
 simply create a constant input length. We propose that if instead we add values that characterize or help
-describe the input sequence more thoroughly, we may increase the amount information available during neural network training.
+describe the input sequence more thoroughly, we may increase the amount of information available during training.
 
 Consider a very simple input sequence, and assume its true label can be determined
 from a single word:
 
 \[\text{"This paper is about computer graphics"}\]
 
-where the label is "Graphics" i.e. a publication about computer graphics.
+where the label is "Graphics" (a publication about computer graphics).
 In this simple case, the label is determined by the word "graphics". To the human reader, this single informative word
-is enough for the classifier to predict the label correctly although it is only 1/6 of the entire text.
+is enough to predict the label correctly although it is only 1/6 of the entire text.
 
 Now consider a the padded version, where we enfore an input length of 10:
 
@@ -146,8 +143,8 @@ Now consider a the padded version, where we enfore an input length of 10:
 
 In the padded version, the word graphics is now only 1/10 of the entire text. If we
 could pad the sequence using this informative word instead of some
-meaningless token e.g. 0's, we could increase the likelihood of the model extracting features from it. In other
-words, make important words be present more frequently.
+meaningless token (e.g. 0's), we could increase the likelihood of the model extracting features from it. In other
+words, we make important words be present more frequently.
 We propose to pad input sequences with values found already within the
 input text sequence instead of 0's only.
 
@@ -159,14 +156,14 @@ Refering back to the first example, the input sequence:
 would then be
 \[\text{"This paper is about computer graphics This paper is about"}\]
 
-One thing to observe is that using this simple scheme, we remove all 0's i.e. non-informative padding indexes
-from the text sequence, but we also don't have selection mechanism and can miss useful words such as missing the
-word "\textit{graphics}" in this example. Nonetheless, it is a simple approach to pad our data and increase the likelihood of encountering informative
+One thing to observe is that using this simple scheme, we remove all 0's (non-informative padding indexes)
+from the text sequence, but we do not have a selection mechanism and can miss useful words such as the
+word "\textit{graphics}" in this example. Nonetheless, it is a simple approach to pad our data and hopefully increase the likelihood of encountering informative
 words during feature extraction.
 
 
 \section{Reducing Data Granularity: From Abstract to Sentences}
-Our last proposed dataset augmentation scheme is break each training abtract into a set of sentences, and train
+Our last proposed dataset augmentation scheme is to break each training abtract into a set of sentences, and train
 the network using this finer text granularity. For example, training a model using single sentences, another using sentence pairs,
 and another using sentence triplets.
 During testing, we break a test abstract into sentence sets and classify each set individually. We then assign

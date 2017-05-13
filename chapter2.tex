@@ -6,42 +6,48 @@
 Deep convolutional neural networks have seen much success on a wide
 array of application, from scene interpretation to self-driving vehicles and art generation.
 Natural language processing tasks are no exception to the range of problems
-deep learning can solve, from sentiment analysis to language modeling. One very useful function of deep neural networks
-is their ability to learn high-level features at each consecutive layer \cite{le2013building}.
+deep learning can solve, from sentiment analysis to language modeling. This success of deep neural networks
+is accredited to their ability to learn high-level features from raw input data\cite{le2013building}.
 
-One type of neural networks that is particularly good at learning features from the data is the convolutional neural network (CNN)\cite{lecun1989backpropagation}\cite{oquab2014learning}\cite{dosovitskiy2014discriminative}.
-A CNN learns a set of weights, or kernels, that are normally much smaller than the input size.
+One type of neural networks that is particularly good at learning features from the data is the convolutional neural network (CNN)\cite{dosovitskiy2014discriminative}\cite{lecun1989backpropagation}\cite{oquab2014learning}.
+A CNN learns a set of weights, or convolution kernels, that are normally much smaller than the input size.
 The difference in size forces the weights to have \textbf{sparse interaction}, or interaction on a subregion of the input, versus the dense interaction
-between every input with every output in traditional neural networks (i.e. vector-matrix multiplication). This sparse interaction
-allows for features to be detected locally within the input (e.g. edge detection).
+between every input with every output in traditional neural networks (vector-matrix multiplication). This sparse interaction
+allows for features to be detected locally within the input (for example, an edge detector).
+\begin{figure}[H]
+\centering
+\includegraphics[width=1.0\textwidth]{SparseInteraction.png}
+\caption{Visualization of sparse interaction (left) and dense interaction (right) between inputs and weights. With sparse interaction, the weights only
+interact on a subregion of the entire input. This is in contrast to the dense interaction of classic neural networks, where there's an interaction between every
+input and every output.}
+\end{figure}
 \textbf{Parameter sharing} allows for distinct outputs to be computed using the same set of weights. This drastically reduces
 the number of unique weights and allows for significant increases in network depth (i.e. deep networks) without the need
 to increase the amount of training data.
 These two design principles make CNN's poweful and efficient feature extractors.
 
-Another type of deep neural network that has seen much success is the recurrent neural network (RNN). RNN's are designed to model data that display temporal structure, such as text and speech. By \textit{unfolding}
+Another type of deep neural network that has seen much success is the recurrent neural network (RNN). RNN's are designed to model data that display temporal structure, such as text and speech. In contrast to
+traditional neural networks, by \textit{unfolding}
 time-steps as a computational graph, the network can learn to model data along the time dimension, using at each time step the
-raw input plus the output of the last time step's layer [Siegelman and Sontag 1995]. Because of the usually very deep structure of
+raw input plus the output of the last time step's layer \cite{siegelmann1995computational}. Because of the usually very deep structure of
 the recurrent network, computation of the gradient via back propagation can lead to the \textit{vanishing gradient} problem, where the gradient
-starts to shrink and become very close to zero as we back-propagate the errors. \cite{hochreiter1997long} proposed
-the \textbf{Long Short-Term Memory (LSTM)} recurrent network, a type of recurrent that essentially solves this problem with recurrent networks.
+starts to shrink and become very close to zero. The \textbf{Long Short-Term Memory (LSTM)} recurrent network proposed by \cite{hochreiter1997long} essentially solves this problem.
 A recent and simpler variation of the LSTM network is the Gated Recurrent Unit (GRU), which performs comparably well \cite{chung2014empirical}.
 
 
-
 \section{Word Embeddings}
-Another significant achievement of deep learning for natural language processing is the neural probabilistic language model. \cite{bengio2003neural}
+Another significant achievement of deep learning for natural language processing is the neural probabilistic language model. In their work, \cite{bengio2003neural}
 proposed a neural network to model the probability of a word given its context
-$P(w_t|w_{t-k},\dots,w_{t-1})$
+$P(w_t|w_{t-k},\dots,w_{t-1})$.
 
-In their work, they addressed the curse of dimensionality, manifested by the fact that a test word sequence $(w_{t-k},\dots,w_{t})$
-is likely to be different from all training sequences, by learning distributed representations of words. Words are represented as
+The curse of dimensionality, manifested by the fact that a test word sequence $(w_{t-k},\dots,w_{t})$
+is likely to be different from all training sequences, was addressed by learning distributed representations of words. Words are represented as
 dense continuous vectors called \textbf{word embeddings}.
 Using word embeddings to model the likelihood of word sequences allowed generalization because the language model
 would give high probability to unseen word sequences if they were made up of words semantically similar to already seen words.
-Because of the of the underlying algorithm used to learn these word embeddings, similar words tend to lie closer to each other on
+Because of the underlying algorithm used to learn these word embeddings, similar words tend to lie closer to each other in
 embedding space. Thus, word embeddings are said to capture semantic relations and encode more information than just a word identifier (e.g.
-a bag-of-words or one-hot vector representation).
+Bag of Words input representation).
 
 \begin{figure}[h]
 \centering
@@ -51,17 +57,25 @@ Words with similar or related meanings tend to lie close to each other in embedd
 \end{figure}
 
 \section{Convolutional Neural Networks}
-As described previously, convolutional neural networks are known for their abilities to learn high-level features from raw data. As input signals advance
-forward through the network, they produce latent signals as linear conbinations with learned parameters, have non-linearities applied
+As mentioned previously, convolutional neural networks are known for their abilities to learn high-level features from raw data. As input signals advance
+forward through the network, they produce latent signals as linear combinations with learned parameters, have non-linearities applied
 to them, and have a pooling or selection mechanism based on simple functions such as the average or maximum operations \cite{zhou1988image}.
 
-When dealing with image data, images are convolved with multiple filters, each convolution applied to overlapping subimages called as receptive fields.
+When dealing with image data, images are convolved with multiple filters, each convolution applied to overlapping subimages called receptive fields.
 This localized convolution process leads to discovery of low level features of images in the training set such as edges. As data
 flows forward through the model, higher level features are discovered (e.g. wheels or headlights in a vehicle image dataset).
 
 These convolutional neural networks are comprised of \textit{feature maps}. A feature map is a \textbf{convolution} layer paired with a
-\textbf{pooling} layer afterwards. The convolution stage creates \textit{activations}, whereas the pooling stage
-reduces dimensionality and creates translation invariance.
+\textbf{pooling} layer afterwards. The convolution stage creates \textit{activations} by convolution of kernels with the inputs followed by a non-linear.
+The convolution operator of two-dimensional data such as images can be defined as:
+
+\[\begin{aligned}
+S(i,j) = (I \ast K)(i,j)
+= \sum_{m} \sum_{n} I(i-m,j-n)K(m,n)
+\end{aligned}\]
+where $m$ and $n$ are the kernel's width and height respectively.
+
+
 
 
 \subsection{Input Representation: Word Embeddings for Convolutional Networks}
@@ -75,8 +89,8 @@ in $\mathbb{V}$. When the convolutional network receives this input sequence, ea
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.5\textwidth]{FeatureMap.png}
-\caption{Visualization of a feature map with a single kernel. In this example, the kernel convolves tri-grams, or windows of three words.
+\includegraphics[width=0.7\textwidth]{FeatureMap.png}
+\caption{Visualization of a feature map with a single kernel. In this example, the kernel convolves tri-grams, or windows of three consecutive words.
 After convolution with all possible trigram context windows, max pooling is applied to reduce dimensionality.
 Here, the pool size is 3. This process is repeated as many times as there are kernels in the layer and their outputs are
 concatenated horizantally to yield a matrix of size \textit{num filters} $\times$ (\textit{input length - pool size + 1}).}

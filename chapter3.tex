@@ -2,25 +2,31 @@
 
 \chapter{Model, Dataset, and Final Pipeline Description}
 \section{Model Description}
-\cite{yin2017comparative} provide an overview of typical neural models used for natural language processing.
-A standard architecture for convolutional neural networks for text sequence classification is the one proposed by
-\cite{kim2014convolutional}. This model has an embedding layer followed by a feature map and a dense layer with a softmax activation
-to output class probabilities. This model has parameter sharing and sparse interaction properties inherent of convolutional
+A standard architecture for convolutional neural networks for text sequence classification is an embedding layer
+followed by a feature map and a dense layer with a softmax activation to output class probabilities, as proposed by \cite{kim2014convolutional}.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{ConvText.png}
+\caption{A common architecture for a convolutional network for text classification is an embedding layer followed by a feature map, then a
+dense layer to compute class probabilities.}
+\end{figure}
+This model has parameter sharing and sparse interaction properties inherent of convolutional
 neural networks, and thus is a good choice for efficiently extracting features from the data via convolutions and non-linearities.
 The pooling operation acts as a feature selection mechanism and reduces the number of outputs in its layer. This reduction makes forward propagation
 an even more efficient process. Convolutional neural networks, however, are not designed to consider the data as having temporal
 structure, as is the case with text sequence data.
 
-Another popular neural model for text classification is the recurrent neural network. This architecture is explicitly designed to treat
-data to display temporal structure. Because of this, the recurrent neural network is an excelent choice for text sequence data.
-At a basic level, this architecture is comprised of an embedding layer (to transform input sequences into word embeddings)
-followed by a recurrent layer e.g. LSTM or GRU, then a dense layer with the softmax activation to output probabilities.
-In the following sections we provide a technical description of the model layers introduced above.
 
+Another popular neural model for text classification is the recurrent neural network. This architecture is explicitly designed to treat
+data that display temporal structure. Because of this, the recurrent neural network is an excelent choice for text sequence data.
+At a basic level, this architecture is comprised of an embedding layer (to transform input sequences into word embeddings)
+followed by a recurrent layer, then a dense layer with the softmax activation to output probabilities.
+In the following sections we provide a technical description of the model layers introduced above.
+A more in-depth description of typical neural models used for natural language processing is presented by \cite{yin2017comparative}.
 \section{Layer Descriptions}
 \subsection{Embedding Layer}\label{embeddinglayer}
 The \textbf{embedding layer} layer is usually the first layer in a convolutional neural network that processes text input for classification tasks.
-Given an input sequence of words $\bm{s}$, we transform it into a sequence of indexes $BoW(\bm{s})=$ $\bm{x} = x_1,...,x_n$.
+Given an input sequence of words $\bm{s}=\{w_1,\dots,w_n\}$, we transform it into a sequence of indexes $BoW(\bm{s})=$ $\bm{x} = x_1,...,x_n$.
 The embedding layer maps each index $x_i$ to a corresponding embedding and outputs an embedding matrix $\mathbf{E} \in \mathbb{R}^{n \times d}$, where $d$ is
 the embedding size. These embeddings may be further fine-tuned during training. Because of the large number of
 parameters in this layer (number of words allowed times embedding size), it is usually a good idea to
@@ -51,18 +57,18 @@ we apply a non-linearity to each computed feature. We chose the rectified linear
 Although simple, this non-linearity is quite effective and thus widely used.
 We then use a max pooling operation
 \[maxpool(\bm{x}) = \max_i{ \bm{x} }\]
-to ouput a single value for each kernel similar to \cite{DBLP:journals/corr/LinCY13}.
+to ouput a single value for each kernel as done in to \cite{DBLP:journals/corr/LinCY13}.
 Max pooling is a strong feature selection and dimensionality reduction mechanism.
 We pass to the next layer the single strongest activation from each kernel.
 
 \subsection{Gated Recurrent Unit Layer}
-A recurrent layer is designed to process data with temporal structure i.e. sequences \cite{rumelhart1986sequential}.
+A recurrent layer is designed to process data with temporal structure\cite{rumelhart1986sequential}.
 This recurrent layer is in itself a network, where the hidden layer values at time \textit{t} depend on the previous
 hidden layer's values, the input corresponding to time \textit{t}, and a shared parameter set:
-\[\bm{h}^{t} = f(\bm{h}^{t-1}, \bm{x}^{t}, \bm{\theta})\]
+\[\bm{h}^{t} = f(\bm{h}^{t-1}, \bm{x}^{t}, \bm{W}, \bm{V})\]
 This is implemented by \textit{unrolling} the layer along the time dimension as a sequence of layers, each corresponding
-to the next in time. Because of this design, back propagation of error through the unrolled layer can result
-in the vanishing gradient problem.
+to a moment in time. Because of this design, back-propagation of error through the unrolled layer can result
+in the vanishing gradient problem (i.e. the gradients shrink exponentially as they propagate backwards through the network layers).
 
 \begin{figure}[H]
 \centering
@@ -83,26 +89,25 @@ layer's output. This property makes the layer an adequate choice for text sequen
 The last layer in our model is the classical \textbf{dense}, or fully connected layer.
 The number of units in this layer is equal to the number of classes in our dataset.
 Given the output of the network's second to last layer $\bm{h}$, we can compute the unnormalized log probabilities
-\[\bm{z} = \bm{W}^{T}\bm{h} + \bm{b}\]
-for some bias vector $\bm{b}$.
+\[\bm{z} = \bm{\theta}^{T}\bm{h} + \bm{b}\]
+where $\bm{b}$ is the bias vector.
 
 
 
 Each  $z_i$ is a log probability of the input corresponding to class $i$. The \textbf{softmax} activation function is then applied to
 all the units, to finally output class probabilities:
 
-\[\hat{y}_i = softmax(\bm{z})_i = \frac{exp(z_i)}{\sum_j exp(z_j)}\],
+\[\hat{y}_i = softmax(\bm{z})_i = \frac{e^{z_i}}{\sum_j e^{z_j}}\],
 \[\hat{y}_i = P\{y=i|\bm{x}\}\]
 
 In our experiments, a purely convolutional neural network finished training in a significantly shorter amount of time compared to the recurrent network.
-Because of the convolution and pooling operations, the CNN normally processed the data around 10 times as fast as the RNN. The RNN, although slower,
+Because of the convolution and pooling operations, the CNN normally processed the data around 10 times faster than the RNN. The RNN, although slower,
 always achieved around 4\% higher accuracy on all experiments.
 
 After testing both architectures, the model we use in the rest of this work is a mixture of these two standards.
 After the embedding layer, we add a feature map to extract features from the raw inputs,
 then we add a GRU layer. This design choice incorporates the sequence modeling power of the RNN with the fast and efficient feature extraction of the CNN.
-This combination always led to the highest accuracy achieved with the RNN, with the reduced training times of the CNN.
-We further extended our pooling operation to be global. Out of all the features computed by a kernel, we select only the single strongest one
+This combination always led to the highest accuracy achieved with the RNN, with the reduced training times of the CNN. Out of all the features computed by a kernel, we select only the single strongest one
 (i.e. highest value). The pooling layer's output size is therefore equal to the number of kernels in our convolutional layer. In order to create
 a one-to-one correspondance between the network's inputs (the word indices in the input sequence) and the units in the recurrent layer, we chose to have
 a number of kernels equal to the network's input size (i.e. length of input sequence).

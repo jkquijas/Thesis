@@ -1,17 +1,15 @@
 % chap5.tex (Definitions, Theorem and Proof)
 
 \chapter{Experimental Results} \label{Results}
-In this chapter we will show our results.
 
 \section{Dataset Descriptions}
 
-We gathered a scientific publication abstract dataset from Arxiv.org. Concretely, we obtained
+We gathered a scientific publication abstract dataset from Arxiv.org. We obtained
 publications from the physics, mathematics, computer science, and quantitative biology disciplines.
 For each discipline, we considered each \textbf{topic} as a
 class. For example, when considering computer science publications, we considered the
-"computational complexity" topic as one class, "artificial intelligence" as another class,
-and so on. Each class has 5000 examples. Because of this class balance, it is appropriate to report the prediction
-accuracy on the test set. We use a 70/30 split for training and testing. We apply simple preprocessing to the texts by removing non-alphanumeric
+"computational complexity" topic as one class, "artificial intelligence" as another class. Each class has 5000 examples. Because of this class balance, it is appropriate to
+report the prediction accuracy on the test set rather than using precision, recall, and f-measure. We use a 70/30 split for training and testing. We apply simple preprocessing to the texts by removing non-alphanumeric
 characters, and converting to lower case characters. The dataset distribution is shown in the table below.
 
 \begin{center}
@@ -19,7 +17,7 @@ characters, and converting to lower case characters. The dataset distribution is
  \hline
  Department & Number of Labels & Training Size & Testing Size\\ [0.5ex]
  \hline\hline
-AstroPhysics & 5 & 17500 & 7500\\
+Astrophysics & 5 & 17500 & 7500\\
 Physics & 13 & 45015 & 19293\\
 Computer Science & 20 & 63396 & 27170 \\
 Mathematics & 26 & 87705 & 37588 \\
@@ -43,16 +41,16 @@ The last approach is to simply train with the embeddings as trainable parameters
  \hline
  Dataset & Training Set Size & Frozen & Not-Frozen & Freeze-Unfreeze & Flash-Freeze\\ [0.5ex]
  \hline\hline
-AstroPhysics & 17500 & 0.757(8) & 0.765(6) & 0.758(7) & \textbf{.775(6)}\\
+Astrophysics & 17500 & 0.757(8) & 0.765(6) & 0.758(7) & \textbf{.775(6)}\\
 Physics &  45000 & 0.740(11) & 0.774(13) & 0.767(27) & \textbf{0.789(6)}\\
 Computer Science & 63400 & 0.647(17) & 0.682(10) & 0.682(16) & \textbf{.701(6)}\\
-Mathematics & 87700 & .590(22) & \textbf{.685}(21) & .678(72) & .684\textbf{(6)}\\
+Mathematics & 87700 & 0.602(15) & 0.669(13) & 0.647(15) & .684\textbf{(6)}\\
 Quant. Bio & 11000 & .805\textbf{(5)} & 0.823(9) & 0.820(7) & \textbf{.841}(6)\\
  [1ex]\hline\end{tabular}\caption{Accuracy results on all datasets with proposed embedding training schemes.
  The numbers in parenthesis represent the number of epochs until the model converged.}
 \end{table}\end{center}
 
-We observe that the Flash-Freeze method achieves relatively faster convergence, with accuracy competent or better than
+We observe that the Flash-Freeze method achieves faster convergence, with accuracy competent or better than
 the accuracy of all other methods. We observed that when using the \textit{flash-freeze} embedding training method, we reached a
 good stopping point after a small number of epochs (e.g. 6). This is useful because it removes the need to use a validation split for early
 stopping. From here on, all our models are trained using the \textit{flash-freeze} technique for 6 epochs: 3 epochs training the embeddings and 3 epochs
@@ -74,7 +72,7 @@ and without any of the proposed augmentation techniques as the \textbf{baseline}
  \multicolumn{6}{|c|}{\textbf{Astrophysics Test Accuracy}}\\ \hline
   & No Change & Embedding PCA & Wrap Padding & PCA \& Padding & Sentence Split\\  \hline
   No Aug & 0.773 & 0.774 & 0.778 & 0.777 & 0.769 \\ \hline
-  Noise &  0.771 & 0.779 & 0.768 & 0.777 & 0.765  \\  \hline
+  Noise &  0.771 & \textbf{0.779} & 0.768 & 0.777 & 0.765  \\  \hline
   Shuffle & 0.772 & 0.768 & 0.770 & 0.764 & 0.766 \\      \hline
   Ensemble & 0.771 & 0.777 &  0.770 & 0.777 & 0.770 \\      \hline
   \multicolumn{6}{|c|}{Baseline: 0.765}\\ \hline
@@ -99,8 +97,10 @@ and without any of the proposed augmentation techniques as the \textbf{baseline}
     \caption{Test accuracy on the physics dataset.}
     \end{table}
     \end{center}
+
 %\section{Mathematics}
 %\begin{center}
+%\begin{table}[H]
 % \begin{tabular}{|c||c|c|c|c|c|c|}
 %  \hline
 %  \multicolumn{6}{|c|}{\textbf{Mathematics Test Accuracy}}\\ \hline
@@ -111,6 +111,8 @@ and without any of the proposed augmentation techniques as the \textbf{baseline}
 %   Ensemble & 1 & 2 & 3 & 1 & 2 \\      \hline
 %   \multicolumn{6}{|c|}{Baseline: }\\ \hline
 %   \end{tabular}
+%   \caption{Test accuracy on the mathematics dataset.}
+%   \end{table}
 %  \end{center}
 
 \section{Computer Science}
@@ -120,10 +122,10 @@ and without any of the proposed augmentation techniques as the \textbf{baseline}
   \hline
   \multicolumn{6}{|c|}{\textbf{Computer Science Test Accuracy}}\\ \hline
    & No Change & Embedding PCA & Wrap Padding & PCA \& Padding & Sentence Split\\  \hline
-   No Aug & 0.703 & 0.690 & 0.701 & 0.699 & 2 \\      \hline
-   Noise & 0.655 & 0.665 &  &  0.675 & 2  \\      \hline
-   Shuffle & 0.682 & 0.663 & 3 & 0.685 & 2 \\  \hline
-   Ensemble & 0.678 & 0.680 & 3 & 0.689 & 2 \\      \hline
+   No Aug & \textbf{0.703} & 0.690 & 0.701 & 0.699 & 0.701 \\      \hline
+   Noise & 0.655 & 0.665 & 0.688 & 0.675 &  0.655 \\      \hline
+   Shuffle & 0.682 & 0.663 & 0.701 & 0.685 & 0.685 \\  \hline
+   Ensemble & 0.678 & 0.680 & 0.696 & 0.689 & 0.687 \\      \hline
    \multicolumn{6}{|c|}{Baseline: 0.682}\\ \hline
  \end{tabular}
  \caption{Test accuracy on the computer science dataset.}
