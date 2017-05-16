@@ -16,8 +16,10 @@ We expected that the \textit{freeze-unfreeze} method would achieve faster conver
 With this scheme, we hoped the model would converge then increase accuracy by allowing the embeddings to be trainable until convergeance determined by
 a stopping criterion. Although the model test accuracy did increase with this scheme, the \textit{flash-freeze} method outperformed all others.
 By allowing the embeddings to be fine-tuned for a small number of iterations (three in our tests), then allowing the model to rely
-only on its weights (frozen embeddings), we observed we could finish training after a constant number of epochs and remove the need for a validation set.
-For our task, three epochs were enough to finish training. This increased, albeit by not much, the amount of data available for training purposes.
+only on its weights (frozen embeddings), we observed we could finish training after a constant number of epochs.
+For our task, three epochs were enough to finish training. Not only did the \textit{flash-freeze} method achieve the highest overall performance, but it also
+removed the need for a validation set to use for early termination.
+This increased, albeit by not much, the amount of data available for training purposes since we could stop training after a constant number of epochs.
 A validation set for early stopping was crucial before we incorporated the \textit{freeze-flash} stopping mechanism; the model would quickly overfit and test accuracy
 would decrease.
 

@@ -34,13 +34,19 @@
 \contentsline {section}{\numberline {4.5}Reducing Data Granularity: From Abstract to Sentences}{27}
 \contentsline {chapter}{\numberline {5}Experimental Results}{28}
 \contentsline {section}{\numberline {5.1}Dataset Descriptions}{28}
-\contentsline {section}{\numberline {5.2}Freezing the Embeddings: Results}{29}
-\contentsline {section}{\numberline {5.3}Data Augmentation Results}{30}
-\contentsline {section}{\numberline {5.4}Astrophysics}{30}
-\contentsline {section}{\numberline {5.5}Physics}{31}
-\contentsline {section}{\numberline {5.6}Computer Science}{31}
-\contentsline {section}{\numberline {5.7}Quantitative Biology}{32}
-\contentsline {chapter}{\numberline {6}Conclusions}{33}
-\contentsline {section}{\numberline {6.1}Future Work}{35}
-\contentsline {chapter}{References}{36}
-\contentsline {chapter}{Curriculum Vitae}{40}
+\contentsline {paragraph}{Astrophysics}{28}
+\contentsline {paragraph}{Quantitative Biology}{28}
+\contentsline {paragraph}{Physics}{29}
+\contentsline {paragraph}{Computer Science}{29}
+\contentsline {paragraph}{Mathematics}{30}
+\contentsline {section}{\numberline {5.2}Freezing the Embeddings: Results}{32}
+\contentsline {section}{\numberline {5.3}Data Augmentation Results}{33}
+\contentsline {section}{\numberline {5.4}Astrophysics}{34}
+\contentsline {section}{\numberline {5.5}Physics}{34}
+\contentsline {section}{\numberline {5.6}Mathematics}{35}
+\contentsline {section}{\numberline {5.7}Computer Science}{35}
+\contentsline {section}{\numberline {5.8}Quantitative Biology}{36}
+\contentsline {chapter}{\numberline {6}Conclusions}{37}
+\contentsline {section}{\numberline {6.1}Future Work}{39}
+\contentsline {chapter}{References}{40}
+\contentsline {chapter}{Curriculum Vitae}{44}

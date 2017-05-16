@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2017.4.19)  12 MAY 2017 19:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/W32TeX) (preloaded format=pdflatex 2017.4.19)  15 MAY 2017 21:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -420,21 +420,21 @@ Package pdftex.def Info: Diagrams/ConvText.png used on input line 9.
 
 
  <./Diagrams/ConvText.png>]
-<Diagrams/EmbeddingLayer.png, id=102, 1028.34187pt x 578.16pt>
+<Diagrams/EmbeddingLayer.png, id=102, 855.94781pt x 424.58624pt>
 File: Diagrams/EmbeddingLayer.png Graphic file (type png)
 
 <use Diagrams/EmbeddingLayer.png>
 Package pdftex.def Info: Diagrams/EmbeddingLayer.png used on input line 37.
-(pdftex.def)             Requested size: 231.26378pt x 130.01863pt.
+(pdftex.def)             Requested size: 231.26378pt x 114.71756pt.
  [15] [16 <./Diagrams/EmbeddingLayer.png>]
-<Diagrams/RecurrentNet.png, id=110, 858.20625pt x 489.32813pt>
+<Diagrams/RecurrentNet.png, id=111, 858.20625pt x 489.32813pt>
 File: Diagrams/RecurrentNet.png Graphic file (type png)
 
 <use Diagrams/RecurrentNet.png>
 Package pdftex.def Info: Diagrams/RecurrentNet.png used on input line 75.
 (pdftex.def)             Requested size: 231.26378pt x 131.85902pt.
  [17 <./Diagrams/RecurrentNet.png>] [18]
-<Diagrams/ModelPipeline.png, id=117, 975.645pt x 510.40688pt>
+<Diagrams/ModelPipeline.png, id=118, 975.645pt x 510.40688pt>
 File: Diagrams/ModelPipeline.png Graphic file (type png)
 
 <use Diagrams/ModelPipeline.png>
@@ -484,47 +484,52 @@ Chapter 5.
 
 
 
-]
-Overfull \hbox (43.37079pt too wide) in paragraph at lines 40--51
+] [29] [30] [31]
+Overfull \hbox (61.23148pt too wide) in paragraph at lines 144--157
 [][][] 
  []
 
-[29]
-Overfull \hbox (36.46252pt too wide) in paragraph at lines 70--81
+[32] [33]
+Overfull \hbox (36.46252pt too wide) in paragraph at lines 176--187
 [][]
  []
 
 
-Overfull \hbox (36.46252pt too wide) in paragraph at lines 87--98
-[][]
- []
-
-[30]
-Overfull \hbox (36.46252pt too wide) in paragraph at lines 121--132
+Overfull \hbox (36.46252pt too wide) in paragraph at lines 193--204
 [][]
  []
 
 
-Overfull \hbox (36.46252pt too wide) in paragraph at lines 138--149
+Overfull \hbox (36.46252pt too wide) in paragraph at lines 210--221
 [][]
  []
 
-[31]) [32]
+[34]
+Overfull \hbox (36.46252pt too wide) in paragraph at lines 227--238
+[][]
+ []
+
+
+Overfull \hbox (36.46252pt too wide) in paragraph at lines 244--255
+[][]
+ []
+
+[35]) [36]
 \openout2 = `chapter6.aux'.
 
  (./chapter6.tex
 Chapter 6.
-[33
+[37
 
 
 
-] [34]) [35] (./thesis.bbl [36
+] [38]) [39] (./thesis.bbl [40
 
 
-] [37] [38]) [39]
+] [41] [42]) [43]
 \openout2 = `vitae.aux'.
 
- (./vitae.tex) [40
+ (./vitae.tex) [44
 
 
 ]
@@ -556,10 +561,10 @@ onts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2016/texmf-dist/fonts/type1
 /public/amsfonts/cm/cmti12.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmti8.pfb><c:/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/sy
 mbols/msbm10.pfb>
-Output written on thesis.pdf (50 pages, 782252 bytes).
+Output written on thesis.pdf (54 pages, 783849 bytes).
 PDF statistics:
- 251 PDF objects out of 1000 (max. 8388607)
- 168 compressed objects within 2 object streams
+ 264 PDF objects out of 1000 (max. 8388607)
+ 176 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  46 words of extra memory for PDF output out of 10000 (max. 10000000)
 

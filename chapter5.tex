@@ -7,10 +7,99 @@
 We gathered a scientific publication abstract dataset from Arxiv.org. We obtained
 publications from the physics, mathematics, computer science, and quantitative biology disciplines.
 For each discipline, we considered each \textbf{topic} as a
-class. For example, when considering computer science publications, we considered the
-"computational complexity" topic as one class, "artificial intelligence" as another class. Each class has 5000 examples. Because of this class balance, it is appropriate to
+class. The topics for each discipline are listed as follows:
+\paragraph{Astrophysics}
+\begin{itemize}
+\setlength\itemsep{.0001em}
+\item Astrophysics of Galaxies
+\item Earth and Planetary Astrophysics
+\item High Energy Astrophysical Phenomena
+\item Instrumentation and Methods for Astrophysics
+\item Solar and Stellar Astrophysics
+\end{itemize}
+\paragraph{Quantitative Biology}
+\begin{itemize}
+\setlength\itemsep{.0001em}
+\item Biomolecules
+\item Neurons and Cognition
+\item Populations and Evolution
+\item Quantitative Methods
+\end{itemize}
+\paragraph{Physics}
+\begin{itemize}
+\setlength\itemsep{.0001em}
+\item Accelerator Physics
+\item Atomic Physics
+\item Biological Physics
+\item Chemical Physics
+\item Classical Physics
+\item Computational Physics
+\item Data Analysis, Statistics and Probability
+\item Fluid Dynamics
+\item General Physics
+\item Instrumentation and Detectors
+\item Optics
+\item Physics and Society
+\item Plasma Physics
+\end{itemize}
+\paragraph{Computer Science}
+\begin{itemize}
+\setlength\itemsep{.0001em}
+\item Artificial Intelligence
+\item Computation and Language
+\item Computational Complexity
+\item Game Theory
+\item Computer Vision
+\item Computers and Society
+\item Cryptography and Security
+\item Data Structures and Algorithms
+\item Databases
+\item Discrete Mathematics
+\item Distributed, Parallel, and Cluster Computing
+\item Information Retrieval
+\item Information Technology
+\item Machine Learning
+\item Logic in Computer Science
+\item Networking and Internet Architecture
+\item Neural and Evolutionary Computing
+\item Social and Information Networks
+\item Software Engineering
+\item Systems and Control
+\end{itemize}
+\paragraph{Mathematics}
+\begin{itemize}
+\setlength\itemsep{.0001em}
+\item Algebraic Geometry
+\item Algebraic Topology
+\item Analysis of Partial Differential Equations
+\item Category Theory
+\item Classical Analysis and Ordinary Differential Equations
+\item Combinatorics
+\item Commutative Algebra
+\item Complex Variables
+\item Dynamical Systems
+\item Functional Analysis
+\item Geometric Topology
+\item Group Theory
+\item  K-Theory and Homology
+\item Logic
+\item Mathematical Physics
+\item Metric Geometry
+\item Number Theory
+\item Numerical Analysis
+\item Operator Algebras
+\item Optimization and Control
+\item Probability
+\item Quantum Algebra
+\item Representation Theory
+\item Rings and Algebras
+\item Statistics Theory
+\item Symplectic Geometry
+\end{itemize}
+Each class has 5000 examples. Because of this class balance, it is appropriate to
 report the prediction accuracy on the test set rather than using precision, recall, and f-measure. We use a 70/30 split for training and testing. We apply simple preprocessing to the texts by removing non-alphanumeric
 characters, and converting to lower case characters. The dataset distribution is shown in the table below.
+
 
 \begin{center}
   \begin{table}\begin{tabular}{||c c c c||}
@@ -37,15 +126,32 @@ The third proposed approach is to train with the embeddings unfrozen for a small
 freeze the embeddings and retrain the model.
 The last approach is to simply train with the embeddings as trainable parameters from the beggining to the end.
 
-\begin{center}\begin{table}[H]\begin{tabular}{||c c c c c c ||}
+%\begin{center}\begin{table}[H]\begin{tabular}{||c c c c c c ||}
+% \hline
+% Dataset& Training Set Size & Frozen           & Not-Frozen & Freeze-Unfreeze & Flash-Freeze\\ [0.5ex]
+% \hline\hline
+%Astrophysics       & 17500  & 0.757(8)         & 0.765(6)  & 0.758(7)  & \textbf{0.775(6)}\\
+%Physics            &  45000 & 0.740(11)        & 0.774(13) & 0.767(27) & \textbf{0.789(6)}\\
+%Computer Science   & 63400  & 0.647(17)        & 0.682(10) & 0.682(16) & \textbf{0.701(6)}\\
+%Mathematics        & 87700  & 0.602(15)        & 0.669(13) & 0.647(15) & \textbf{0.684(6)}\\
+%Quant. Biology     & 11000  & .805\textbf{(5)} & 0.823(9)  & 0.820(7)  & \textbf{0.841(6)}\\
+%Average Accuracy   &        & 0.710            & 0.743     & 0.735     & \textbf{0.758}\\
+%Average Epochs     &        & 11.2             & 10.2      & 14.4      & \textbf{6}\\
+% [1ex]\hline\end{tabular}\caption{Accuracy results on all datasets with proposed embedding training schemes.
+% The numbers in parenthesis represent the number of epochs until the model converged.}
+%\end{table}\end{center}
+
+\begin{center}\begin{table}[H]\begin{tabular}{||c c c c c ||}
  \hline
- Dataset & Training Set Size & Frozen & Not-Frozen & Freeze-Unfreeze & Flash-Freeze\\ [0.5ex]
+ Dataset & Frozen           & Not-Frozen & Freeze-Unfreeze & Flash-Freeze\\ [0.5ex]
  \hline\hline
-Astrophysics & 17500 & 0.757(8) & 0.765(6) & 0.758(7) & \textbf{.775(6)}\\
-Physics &  45000 & 0.740(11) & 0.774(13) & 0.767(27) & \textbf{0.789(6)}\\
-Computer Science & 63400 & 0.647(17) & 0.682(10) & 0.682(16) & \textbf{.701(6)}\\
-Mathematics & 87700 & 0.602(15) & 0.669(13) & 0.647(15) & .684\textbf{(6)}\\
-Quant. Bio & 11000 & .805\textbf{(5)} & 0.823(9) & 0.820(7) & \textbf{.841}(6)\\
+Astrophysics       & 0.751$\pm$0.005(6.6)         & 0.765$\pm$0.003(7.1)  & 0.761$\pm$0.002(7.4)  & \textbf{0.773$\pm$.001(6)}\\
+Physics            & 0.735$\pm$0.007(9.7)         & 0.764$\pm$0.004(9.5)  & 0.767$\pm$0.002(9.8)  & \textbf{0.779$\pm$0.001(6)}\\
+Computer Science   & 0.644$\pm$0.005(12.0)        & 0.682$\pm$0.004(10.5) & 0.684$\pm$0.003(14.7) & \textbf{0.701$\pm$0.002(6)}\\
+Mathematics        & 0.609$\pm$0.006(15.3)        & 0.648$\pm$0.003(13.3) & 0.657$\pm$0.004(15.6) & \textbf{0.665$\pm$0.001(6)}\\
+Quant. Biology     & 0.812$\pm$0.006(7.2)         & 0.828$\pm$0.005(7.4)  & 0.820$\pm$0.003(7.8)  & \textbf{0.834$\pm$0.002(6)}\\
+Average Accuracy   & 0.710                        & 0.737                 & 0.738                 & \textbf{0.750}\\
+Average Epochs     & 10.2                         & 9.6                   & 11.1                  & \textbf{6}\\
  [1ex]\hline\end{tabular}\caption{Accuracy results on all datasets with proposed embedding training schemes.
  The numbers in parenthesis represent the number of epochs until the model converged.}
 \end{table}\end{center}
@@ -92,28 +198,28 @@ and without any of the proposed augmentation techniques as the \textbf{baseline}
     Noise &  0.774 & 0.757 & 0.783 & 0.782 & 0.743  \\  \hline
     Shuffle & 0.772 & 0.761 & 0.787 & 0.787 & 0.766 \\      \hline
     Ensemble & 0.783 & 0.775 &  0.789 & 0.789 & 0.765 \\      \hline
-    \multicolumn{6}{|c|}{Baseline: 0.774}\\ \hline
+    \multicolumn{6}{|c|}{Baseline: 0.764}\\ \hline
     \end{tabular}
     \caption{Test accuracy on the physics dataset.}
     \end{table}
     \end{center}
 
-%\section{Mathematics}
-%\begin{center}
-%\begin{table}[H]
-% \begin{tabular}{|c||c|c|c|c|c|c|}
-%  \hline
-%  \multicolumn{6}{|c|}{\textbf{Mathematics Test Accuracy}}\\ \hline
-%   & No Change & Embedding PCA & Wrap Padding & PCA \& Padding & Sentence Split\\  \hline
-%   No Aug & 1 & 2 & 3 & 1 & 2 \\      \hline
-%   Noise & 1 & 2 & 3 & 1 & 2  \\      \hline
-%   Shuffle & 1 & 2 & 3 & 1 & 2 \\      \hline
-%   Ensemble & 1 & 2 & 3 & 1 & 2 \\      \hline
-%   \multicolumn{6}{|c|}{Baseline: }\\ \hline
-%   \end{tabular}
-%   \caption{Test accuracy on the mathematics dataset.}
-%   \end{table}
-%  \end{center}
+\section{Mathematics}
+\begin{center}
+\begin{table}[H]
+ \begin{tabular}{|c||c|c|c|c|c|c|}
+  \hline
+  \multicolumn{6}{|c|}{\textbf{Mathematics Test Accuracy}}\\ \hline
+   & No Change & Embedding PCA & Wrap Padding & PCA \& Padding & Sentence Split\\  \hline
+   No Aug & 0.663 & 0.653 & \textbf{0.664} & 0.657 & 0.654\\      \hline
+   Noise & 0.616 & 0.612 & 0.618 & 0.624 & 0.618  \\      \hline
+   Shuffle & 0.625 & 0.643 & 0.640 & 0.646 & 0.636 \\      \hline
+   Ensemble & 0.638 & 0.631 & 0.635 & 0.639 & 0.641 \\      \hline
+   \multicolumn{6}{|c|}{Baseline: 0.648}\\ \hline
+   \end{tabular}
+   \caption{Test accuracy on the mathematics dataset.}
+   \end{table}
+  \end{center}
 
 \section{Computer Science}
 \begin{center}
@@ -148,3 +254,8 @@ and without any of the proposed augmentation techniques as the \textbf{baseline}
 \caption{Test accuracy on the quantitative biology dataset.}
 \end{table}
 \end{center}
+
+We conclude from our experiments that the incorporating of the embeddings as free parameters of the model helped achieve higher accuracy than without them.
+We expected that the \textit{Freeze-Unfreeze} would achieve the highest test accuracy. The \textit{Flash Freeze} embedding trainability scheme achieved the
+highest test accuracy in the least number of training epochs. It is not clear from our experiments if the data augmentation schemes proposed lead to improvements. In our tests, these techniques yielded slightly lower
+accuracy than models trained without them.
